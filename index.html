@@ -1,142 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js webgl - glTF loader</title>
+		<title>Story in a Box</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link type="text/css" rel="stylesheet" href="main.css">
+		<style>
+			body {
+				background-color: #bfe3dd;
+			}	
+		</style>
 	</head>
-
+	
 	<body>
-		<div id="info">
-			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - GLTFLoader<br />
-			Battle Damaged Sci-fi Helmet by
-			<a href="https://sketchfab.com/theblueturtle_" target="_blank" rel="noopener">theblueturtle_</a><br />
-			<a href="https://hdrihaven.com/hdri/?h=royal_esplanade" target="_blank" rel="noopener">Royal Esplanade</a> by <a href="https://hdrihaven.com/" target="_blank" rel="noopener">HDRI Haven</a>
+	
+		
+		
+		<div id="header" style="width:100%; height:50px; background-color:#ffffff; position:absolute;">			
+			<button id="btn3D" style="width:50px; height:50px; border:0px; padding:0px; background-color:#ffffff;"><img src="./icons/Anaglyph.png" alt="Anaglyph" style="width:100%; height:100%;"/></button>
+			<button onClick="alert('Facetrack')" style="width:50px; height:50px; border:0px; padding:0px; background-color:#ffffff;"><img src="./icons/Facetrack.png" alt="Facetrack" style="width:100%; height:100%;"/></button>
 		</div>
+		
+		
+		<div id="bottom" style="width:100%; height:50px; position:absolute; bottom:0; background-color:#ffffff ">		
+		</div>
+
+
+		<div id="next" style="width:50px; height:50px; position:absolute; right:50px; top:50%;">
+			<button id="nextbut" style="width:100%; height:100%; border:0px; padding:0px; text-align:center; vertical-align:middle; background-color:Transparent;"><img src="./icons/Next.png" alt="Next" style="width:100%; height:100%;"/></button>
+		</div>
+		
+		<div id="back" style="width:50px; height:50px; position:absolute; left:50px; top:50%;">
+			<button id="backbut" style="width:100%; height:100%; border:0px; padding:0px; text-align:center; vertical-align:middle; background-color:Transparent;"><img src="./icons/Back.png" alt="Back" style="width:100%; height:100%;"/></button>
+		</div>
+		
+		<div id="info" style ="color:black;">
+			<a href="https://threejs.org" target="_blank" rel="noopener" style ="color:blue;">three.js</a> - Story in a Box<br />
+		</div>
+
+		
 
 		<script type="module">
 
-			import * as THREE from './build/three.module.js';
+		import { init, loadGLTF } from './main.js';
 
-			import { OrbitControls } from './control/OrbitControls.js';
-			import { GLTFLoader } from './loader/GLTFLoader.js';
-			import { RGBELoader } from './loader/RGBELoader.js';
-			import { RoughnessMipmapper } from './effects/RoughnessMipmapper.js';
-			
-			import { AnaglyphEffect } from './effects/AnaglyphEffect.js';
 
-			let camera, scene, renderer, effect;
 
-			init();
-			render();
-
-			function init() {
-
-				const container = document.createElement( 'div' );
-				document.body.appendChild( container );
-
-				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 20 );
-				camera.position.set( - 1.8, 0.6, 2.7 );
-
-				scene = new THREE.Scene();
-
-				new RGBELoader()
-					.setDataType( THREE.UnsignedByteType )
-					.setPath( 'equirectangular/' )
-					.load( 'royal_esplanade_1k.hdr', function ( texture ) {
-
-						const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
-
-						scene.background = envMap;
-						scene.environment = envMap;
-
-						texture.dispose();
-						pmremGenerator.dispose();
-
-						render();
-
-						// model
-
-						// use of RoughnessMipmapper is optional
-						const roughnessMipmapper = new RoughnessMipmapper( renderer );
-
-						const loader = new GLTFLoader().setPath( 'glTF/' );
-						loader.load( 'DamagedHelmet.gltf', function ( gltf ) {
-
-							gltf.scene.traverse( function ( child ) {
-
-								if ( child.isMesh ) {
-
-									// TOFIX RoughnessMipmapper seems to be broken with WebGL 2.0
-									// roughnessMipmapper.generateMipmaps( child.material );
-
-								}
-
-							} );
-
-							scene.add( gltf.scene );
-
-							roughnessMipmapper.dispose();
-
-							render();
-
-						} );
-
-					} );
-
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
-				renderer.toneMapping = THREE.ACESFilmicToneMapping;
-				renderer.toneMappingExposure = 1;
-				renderer.outputEncoding = THREE.sRGBEncoding;
-				container.appendChild( renderer.domElement );
-
-				const pmremGenerator = new THREE.PMREMGenerator( renderer );
-				pmremGenerator.compileEquirectangularShader();
+		let modelindex = 1;
+		
+			let nextbut = document.querySelector('#nextbut');
+						nextbut.addEventListener('click',function() {
+							if (modelindex < 5){
+								modelindex ++;
+								console.log(modelindex);
+								loadGLTF('./models/gltf/Test/'+modelindex+'.gltf')
+							}
+						});
+						
+			let backbut = document.querySelector('#backbut');
+						backbut.addEventListener('click',function() {
+							if (modelindex > 1){
+								modelindex --;
+								console.log(modelindex);
+								loadGLTF('./models/gltf/Test/'+modelindex+'.gltf')
+							}
+						});
+					
 				
-				const width = window.innerWidth || 2;
-				const height = window.innerHeight || 2;
-
-				effect = new AnaglyphEffect( renderer );
-				effect.setSize( width, height );
-				
-				const controls = new OrbitControls( camera, renderer.domElement );
-				controls.addEventListener( 'change', render ); // use if there is no animation loop
-				controls.minDistance = 2;
-				controls.maxDistance = 10;
-				controls.target.set( 0, 0, - 0.2 );
-				controls.update();
-
-				window.addEventListener( 'resize', onWindowResize );
-				
-				
-
-			}
-
-			function onWindowResize() {
-
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-
-				
-				effect.setSize( window.innerWidth, window.innerHeight );
-				
-				render();
-
-			}
-
-			//
-
-			function render() {
-
-				renderer.render( scene, camera );
-				effect.render( scene, camera );
-
-			}
-
+		init();
+		
 		</script>
 
+
 	</body>
+
 </html>
