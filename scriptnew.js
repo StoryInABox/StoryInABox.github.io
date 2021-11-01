@@ -192,8 +192,8 @@ export function loadGLTF( pfad ) {
 			
 				
 			model = gltf.scene;
-			model.position.set( 0, .5, 0 );
-			model.scale.set( .5, .5, .5 );
+			model.position.set( 0, 2, 0 );
+			model.scale.set( 2, 2, 2 );
 			
 			markerRoot1.add(model);
 			//scene.add( model );
