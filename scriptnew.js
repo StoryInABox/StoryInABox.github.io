@@ -134,7 +134,7 @@ export function init() {
 					
 	dracoLoader = new DRACOLoader();
 	dracoLoader.setDecoderPath( 'js/draco/gltf/' );
-	loadGLTF('./models/1.gltf');
+	loadGLTF('./models/4.gltf');
 						
 	window.addEventListener('resize', onWindowResize, false)
 	
@@ -192,8 +192,8 @@ export function loadGLTF( pfad ) {
 			
 				
 			model = gltf.scene;
-			model.position.set( 0, 2, 0 );
-			model.scale.set( 2, 2, 2 );
+			model.position.set( 0, 0, 0 );
+			model.scale.set( .05, .05, .05 );
 			
 			markerRoot1.add(model);
 			//scene.add( model );
@@ -204,6 +204,27 @@ export function loadGLTF( pfad ) {
 			mixer.clipAction( gltf.animations[ 2 ] ).play();
 			mixer.clipAction( gltf.animations[ 3 ] ).play();
 			mixer.clipAction( gltf.animations[ 4 ] ).play();
+            mixer.clipAction( gltf.animations[ 5 ] ).play();
+			mixer.clipAction( gltf.animations[ 6 ] ).play();
+			mixer.clipAction( gltf.animations[ 7 ] ).play();
+			mixer.clipAction( gltf.animations[ 8 ] ).play();
+			mixer.clipAction( gltf.animations[ 9 ] ).play();
+            mixer.clipAction( gltf.animations[ 10 ] ).play();
+			mixer.clipAction( gltf.animations[ 11 ] ).play();
+			mixer.clipAction( gltf.animations[ 12 ] ).play();
+			mixer.clipAction( gltf.animations[ 13 ] ).play();
+			mixer.clipAction( gltf.animations[ 14 ] ).play();
+            mixer.clipAction( gltf.animations[ 15 ] ).play();
+			mixer.clipAction( gltf.animations[ 16 ] ).play();
+			mixer.clipAction( gltf.animations[ 17 ] ).play();
+			mixer.clipAction( gltf.animations[ 18 ] ).play();
+			mixer.clipAction( gltf.animations[ 19 ] ).play();
+            mixer.clipAction( gltf.animations[ 20 ] ).play();
+			mixer.clipAction( gltf.animations[ 21 ] ).play();
+			mixer.clipAction( gltf.animations[ 22 ] ).play();
+			mixer.clipAction( gltf.animations[ 23 ] ).play();
+			mixer.clipAction( gltf.animations[ 24 ] ).play();
+            
 
 			//animate();
 			timer();
