@@ -509,7 +509,8 @@ export function slidercontent(){
         sliderConverted = slider.value*Object.values(ClipDuration)[2]/100;           
         //console.log((slider.value)*Object.values(ClipDuration)[2]/100);
     }
-   slider.onmousedown = function() {
+   slider.onpointerdown = function() {
+       
     SLIDERon = !SLIDERon;
     showLabels = !showLabels;
     if (PlayOn == true){
@@ -526,7 +527,7 @@ export function slidercontent(){
 
     
    }
-   slider.onmouseup = function() {
+   slider.onpointerup= function() {
     SLIDERon = !SLIDERon;
     showLabels = !showLabels;
     
