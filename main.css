@@ -73,7 +73,7 @@ h1 {
 	right:5px;
 	top:5px;
 	border-radius: 50px;
-	text-align: center;
+	
 	background-color: darkslategray;
 	height: 50px;
 	width: 50px;
@@ -236,7 +236,7 @@ h1 {
 	right:60px;
 	top:5px;
 	border-radius: 50%;
-	text-align: center;
+	
 	background-color: darkslategray;
 	height: 50px;
 	width: 50px;
