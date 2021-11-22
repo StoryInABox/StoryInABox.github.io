@@ -278,11 +278,11 @@ for (i = 0; i < dropdown.length; i++) {
   }
   });
 }
-
+let urlname;
 function openModel() {
 	
 	loadModel();
-	
+	window.location.hash = ""+urlname+"";
 	setTimeout(function() {
 		document.getElementsByName('IFRAmE')[0].src = ""+url+"";
 	}, 1500);
@@ -299,7 +299,8 @@ function loadModel() {
 	//console.log(modelindex);
 	//console.log(dragThema.style.top);
 	let nameslist = document.getElementById("Thema");
-	
+	urlname = nameslist.children[modelindex-1].innerHTML;
+	console.log()
 	url = nameslist.children[modelindex-1].id;
 	//console.log(url)
 	
