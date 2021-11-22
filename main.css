@@ -504,7 +504,7 @@ h1 {
 	position: absolute;
 	
 	
-	width:259px;
+	width:250px;
 	
 	
 	top: -2px;
@@ -537,10 +537,7 @@ h1 {
 	transition-delay: 2.5s;
 }
 
-.Thema .themaBackground .menuSucher{
-	width:auto;
-	top: -2px;
-}
+
 
 .Thema {
 	
@@ -608,7 +605,7 @@ h1 {
 	
 	
 	text-align: left;
-	
+	width:250px;
 	color:#3f3f3f;
 	font-family: Georgia, 'Times New Roman', Times, serif;
 	font-size: 26px;
@@ -635,7 +632,7 @@ h1 {
 	//border-top: solid;
 	border-bottom: solid;
 	border-width: 2px;
-	
+	width:260px;
 	border-color:rgb(105, 117, 117);	
 	z-index: 1;
 	display: block;
