@@ -1,0 +1,15 @@
+
+
+index.html	--> Model1.html	--> load gltf; Frames; Zustände; AR-Button --> function AR() or NoAR();
+		--> Model2.html
+		-->  ...  .html
+
+
+
+
+Ar.js
+
+NoAR.js
+
+main.css
+
