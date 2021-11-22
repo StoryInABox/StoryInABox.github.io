@@ -508,7 +508,7 @@ h1 {
 	
 	
 	top: -2px;
-	left: -1px;
+	left: -2px;
 	z-index:0;
 	border-style: solid;
 	border-width: 2px ;
@@ -605,7 +605,7 @@ h1 {
 	
 	
 	text-align: left;
-	width:250px;
+	width:255px;
 	color:#3f3f3f;
 	font-family: Georgia, 'Times New Roman', Times, serif;
 	font-size: 26px;
@@ -632,7 +632,7 @@ h1 {
 	//border-top: solid;
 	border-bottom: solid;
 	border-width: 2px;
-	width:260px;
+	width:255px;
 	border-color:rgb(105, 117, 117);	
 	z-index: 1;
 	display: block;
