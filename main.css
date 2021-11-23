@@ -631,12 +631,14 @@ h1 {
 	margin: 8px 0px 8px 0px;
 	//border-top: solid;
 	border-bottom: solid;
+	//border-radius:25px;
 	border-width: 2px;
 	width:255px;
 	border-color:rgb(105, 117, 117);	
 	z-index: 1;
 	display: block;
 	scroll-snap-align: start;	
+	//background-color: darkslategray;
 }
 
 

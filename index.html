@@ -242,18 +242,22 @@ function toggleAR() {
 	for (let x = 0; x < ARbutton.length; x++) {
                 ARbutton[x].addEventListener('click',function() {
                     this.classList.toggle("checked");
-                    ARon = !ARon;
+                    let bild =document.getElementById("image3");
+					//console.log(ding.src)
+					ARon = !ARon;
                     if (ARon == false) {
                         //console.log("ARoff");
-                        ARbuttonContent.innerHTML = "AR";
+                        //ARbuttonContent.innerHTML = "AR";
+						bild.src = "Grafiks/AR.png";
 						loadModel();
 						document.getElementsByName('IFRAmE')[0].src = ""+url+"";
 						ARbuttonContent.setAttribute("name", "off");
                         //console.log(ARbuttonContent);
                       } 
 					  if (ARon == true) {
-                        ARbuttonContent.innerHTML = "3D";
-                        //console.log("ARon");  
+                        //ARbuttonContent.innerHTML = "3D";
+                        //console.log("ARon"); 
+						bild.src = "Grafiks/3D.png"; 
 						loadModel();
 						document.getElementsByName('IFRAmE')[0].src = ""+url+"";
 						ARbuttonContent.setAttribute("name", "on");
