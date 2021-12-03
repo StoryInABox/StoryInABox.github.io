@@ -217,7 +217,7 @@ let selectedObject;
                     isClickactive=true;
                     objecthover = model.children[j].name;
                     console.log(objecthover)
-                    renderer.domElement.addEventListener('click', clickobject);
+                    renderer.domElement.addEventListener('pointerdown', clickobject);
                 }
                 
             }
