@@ -17,7 +17,7 @@ var markerRoot1;
 
 var mesh1;
 
-
+let Framerate = 24;
 
 //container = document.getElementById( 'container' );
 
@@ -68,6 +68,13 @@ let newchildpos=new THREE.Vector3();
 
 let loadingStautus =  new THREE.LoadingManager();
 
+let stamps;
+let stampcount;
+let FramesTotal;
+let stampmark = [];
+let SliderCompare;
+let StampOn = false;
+let n=0;
 init();
 animate();
 
@@ -114,7 +121,7 @@ export function testAR(){
 
 export function init() {
 
-
+    
 			
 	clock = new THREE.Clock();
 	//deltaTime = 0;
@@ -383,7 +390,7 @@ export function loadGLTF( pfad ) {
              
 
 
-			
+            timestamps();	
 		
 		},
 		/*		
@@ -428,7 +435,7 @@ function onWindowResize() {
 
 
  function animate() {
-     
+   
 	if (typeof aktuelleAnimation !== 'undefined')
 	{
 	  cancelAnimationFrame(aktuelleAnimation)
@@ -456,7 +463,9 @@ function onWindowResize() {
 
 function timer()
 {
-    
+    ProofIfOnTimestamps(); 
+    //console.log(SliderCompare)
+    //console.log(PlayOn)
     onstopInfotext() ;
     //console.log(PlayOn);
   const delta = clock.getDelta();
@@ -484,6 +493,7 @@ function timer()
 
     if (SLIDERon == false && PlayOn == true) {
         
+        //console.log("läuft")
         mixer.update( delta );
         
         sliderpos.value = mixer.time/Object.values(ClipDuration)[2]*100;  
@@ -515,7 +525,7 @@ function update()
 export function slidercontent(){
 
     //console.log(Object.values(slider)[2]);
-   
+    //console.log(stampmark)
     slider.oninput = function() {
         Object.values(ClipDuration)[2]
         sliderConverted = slider.value*Object.values(ClipDuration)[2]/100;           
@@ -563,6 +573,7 @@ export function playpause (){
 
    
     sliderpos.value =0;
+
     for (let  p = 0; p < 1; p++) {
         PlayButton[p].addEventListener('click',function() {
             this.classList.toggle("checked");
@@ -589,12 +600,16 @@ export function playpause (){
             }
             if (PlayOn == true){
                 
-                   
-                
+                  
                 
             }
-            
-            
+            if (StampOn == true) {
+                setTimeout(function() {
+                    n=0;
+                }, 50);
+                
+            }
+           
         });
     }
     
@@ -751,4 +766,65 @@ export function onstopInfotext() {
 }
 
 
+export function timestamps() {
 
+stamps = document.getElementById("stamps");
+stampcount = stamps.children.length;
+FramesTotal = ClipDuration.duration*Framerate;
+//console.log(ClipDuration.duration*Framerate)
+
+    for (let o = 0; o < stampcount; o++){
+        let stampcurent = stamps.children[o].id;
+        console.log(stampcurent)
+        stamps.children[o].style.left = ""+(stampcurent*100/FramesTotal)+"%"; 
+        console.log(stampcurent/FramesTotal*ClipDuration.duration);
+        //stampmark.push(stampcurent/FramesTotal*ClipDuration.duration);
+        stampmark.push(Math.round(stampcurent*100/FramesTotal));
+        //console.log((slider.value)*Object.values(ClipDuration)[2]/100);
+    }
+}
+
+export function ProofIfOnTimestamps() {
+    //console.log(stampmark)
+    //console.log(Math.round(sliderpos.value))
+    
+    SliderCompare = Math.round(sliderpos.value);
+if (stampmark.includes(SliderCompare)) {
+   StampOn = true;
+   for (n; n<1;n++){
+    StopOnTimestamps();
+    n++;
+    }
+		          
+}
+else {
+    StampOn = false;
+}
+
+
+console.log(StampOn)
+}
+
+
+export function StopOnTimestamps() {
+    console.log("PlayOn")
+
+  
+    PlayButton[0].classList.toggle("checked");
+           
+       
+    for (let i=0; i < ChildCount; i++) {
+        allLabels[i].classList.toggle("hide");
+        //console.log(i);
+    }
+    showLabels = !showLabels;
+    PlayOn = !PlayOn;
+    if ( PlayOn == false){
+        
+    timeCapture = mixer.time;
+    
+                
+            }
+
+                
+}   

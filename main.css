@@ -349,6 +349,7 @@ h1 {
 		width:15px;
 		height: 15px;
 		border-radius: 50%; 
+		z-index: 3;
 		background:darkslategray;
 		cursor: pointer;
 	  }
@@ -648,3 +649,33 @@ h1 {
   }
 
 
+.stamps {
+	position: relative;
+	left:7px;
+	top:21px;
+	
+	margin-right:10px;
+	
+	z-index: -5;
+	
+	width: auto;
+	height: 10px;
+	
+	
+}
+
+.stamp {
+	position: absolute;
+	left:0%;
+	top:0%;
+	margin: 0px 0px 0px -5px;
+	width: 10px;
+	height: 10px;
+
+	border-radius: 50%;
+	z-index: 0;
+
+	background-color: #d3d3d3;
+	
+
+}
