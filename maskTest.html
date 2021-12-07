@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+    <head>
+    
+
+    </head>
+    <body style= "background: rgb(0,212,255);
+    background: radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(57,144,209,1) 100%);">
+
+        
+        
+       
+
+    <script type= "module">
+
+
+
+    import * as THREE from './build/three.module.js';
+  	import { OrbitControls } from './controls/OrbitControls.js';
+    import { GLTFLoader } from './js/GLTFLoader.js';
+    import { DRACOLoader } from './js/DRACOLoader.js';
+    import { RGBELoader } from './js/RGBELoader.js';
+
+    import { RenderPass } from './postprocessing/RenderPass.js';
+    import { EffectComposer } from './postprocessing/EffectComposer.js';
+    
+    import * as Nodes from './nodes/Nodes.js';
+
+    import {FresnelShader} from "./FresnelShader.js";
+    import { 	CustomMaterial,
+
+patchShader,
+extendMaterial,
+cloneUniforms,
+cloneUniform,
+mapShader } from './js/ExtendMaterial.module.js';
+
+
+    let renderer, clock, mixer, model, camera, pmremGenerator, controls, scene1, dracoLoader, loader;
+let scene2,model2;
+let renderPass, composer, fresnelPass;
+let nodepass;
+
+    init();
+    animate();
+
+    function init(){
+
+        clock = new THREE.Clock();
+
+    
+
+
+
+
+
+    scene1 = new THREE.Scene();
+    scene2 = new THREE.Scene();
+
+        camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 100 );
+        camera.position.set( 5, 2, 8 );
+       
+
+        
+        //scene.add(camera);
+
+       
+                
+        new RGBELoader()
+            .setDataType( THREE.UnsignedByteType )
+            .setPath( './textures/equirectangular/' )
+            .load( 'studio_small_08_4k.hdr', function ( texture ) {
+
+                const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
+
+                //scene1.background = envMap;
+                //scene2.background = envMap;
+                //scene1.background = new THREE.Color( 0x2ffffff );
+                scene1.environment = envMap;
+           
+                scene2.environment = envMap;
+                //scene2.background = null;
+
+
+            texture.dispose();
+            pmremGenerator.dispose();
+
+        });
+        
+        dracoLoader = new DRACOLoader();
+	    dracoLoader.setDecoderPath( 'js/draco/gltf/' );
+
+       
+
+    loader = new GLTFLoader()
+			
+	loader.setDRACOLoader( dracoLoader );
+	loader.load(
+				
+		"./models/materials.gltf",
+		function (gltf) {
+
+			model = gltf.scene;
+            
+			model.position.set( 0, 0, 0 );
+			model.scale.set( 1, 1, 1 );
+                    
+        });
+        
+        loader.load(
+				
+                "./models/materials.gltf",
+                function (gltf) {
+                    
+                    
+                    gltf.scene.traverse(function(child){
+                        let gltfmaterial = new THREE.ShaderMaterial(FresnelShader);
+                        //let gltfmaterial = extendMaterial(THREE.MeshStandardMaterial, {FresnelShader});
+                        //let gltfmaterial = new THREE.MeshPhysicalMaterial(FresnelShader);
+        
+                        if(child.isMesh === true){
+                            //gltfmaterial.transparent = true;
+                            //gltfmaterial.premultipliedAlpha = true;
+                            
+                            gltfmaterial.depthTest = true;
+                            gltfmaterial.depthWrite = false;
+                            gltfmaterial.transparent = true;
+                            gltfmaterial.blending = THREE.CustomBlending;
+                            
+                            gltfmaterial.blendEquation = THREE.AddEquation;
+                            gltfmaterial.blendSrc= THREE.OneMinusSrcAlphaFactor;
+                            gltfmaterial.blendDst= THREE.SrcAlphaFactor;
+
+                            gltfmaterial.transparent = true;
+
+                            child.material = gltfmaterial;
+                          
+                            
+                            //child.material.alphaMode = 'BLEND';
+                            //child.material.alphaToCoverage = true;
+                            //child.material.blendDstAlpha = 0;
+                            //child.material.blendSrc= 0;
+                            //child.material.blendEquationAlpha = 150;
+                            //child.material.clipIntersection = true;
+                            //child.material.clipShadows = true;
+                            //child.material.clipping = true;
+                            //child.material.colorWrite = true;
+                            //child.material.wireframe = true;
+                            
+                            //child.material.side = THREE.DoubleSide;
+                            //child.material.alphaMode = 'MASK';
+                            //child.material.alphaMode = 'OPAQUE';
+
+                           
+                            console.log(child.material)
+                            if(child.material.name == 'material_red' || 'material_red.001' || 'material_red.002'){
+                                
+                              
+        
+                            }
+                        } 
+                    });
+        
+                    model2 = gltf.scene;
+                    
+                    model2.position.set( 0, 0, 0 );
+                    model2.scale.set( 1, 1, 1 );
+        
+                    scene1.add(model);
+                    scene1.add( model2);
+                    
+                    //mixer = new THREE.AnimationMixer( scene );
+
+                   //let AnimationCount = Object.keys(gltf.animations).length;
+        
+                    
+                    
+                    //let ClipDuration = mixer.clipAction( gltf.animations[ 0 ] ).getClip();
+                   
+                   // for ( let ChildCountER = 0; ChildCountER < AnimationCount; ChildCountER++) {
+                   
+                        //model.children[ChildCountER].add(model2.children[ChildCountER]);
+                       
+                        //mixer.clipAction( gltf.animations[ ChildCountER] ).play();
+        
+                   // }
+                   //animate();
+        
+                
+                            
+                });
+
+
+    
+   /*     
+
+    renderPass = new RenderPass( scene1, camera );
+    renderPass.renderToScreen = true;
+    renderPass.clear = false;
+    renderPass.clearDepth = true;
+
+    fresnelPass = new RenderPass( scene2, camera );
+    fresnelPass.renderToScreen = true;
+    fresnelPass.clearAlpha = true;
+    fresnelPass.clear = false;
+    fresnelPass.clearDepth = true;
+
+*/
+
+    renderer = new THREE.WebGLRenderer({
+    antialias : true,
+    alpha: true
+	});
+	
+	renderer.setClearColor( 0xffffff, 0 );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.domElement.style.position = 'absolute';
+	renderer.domElement.style.top = '0px';
+    renderer.physicallyCorrectLights = true;
+
+	renderer.toneMapping = THREE.ACESFilmicToneMapping;
+	renderer.toneMappingExposure = .5;
+	renderer.outputEncoding = THREE.sRGBEncoding;
+	
+	renderer.autoClear = false;
+	
+	document.body.appendChild( renderer.domElement );
+
+    controls = new OrbitControls( camera, renderer.domElement );
+        controls.target.set( 0, 0, 0 );
+        controls.enablePan = false;
+        controls.enableDamping = true;
+       
+    pmremGenerator = new THREE.PMREMGenerator( renderer );
+        pmremGenerator.compileEquirectangularShader();
+
+
+    //composer = new EffectComposer( renderer );
+
+    //composer.addPass( renderPass, camera);
+    //composer.addPass( fresnelPass, camera); 
+
+
+
+
+
+
+    window.addEventListener('resize', onWindowResize, false)
+}
+
+
+function onWindowResize() {
+
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+
+				
+	renderer.setSize(window.innerWidth, window.innerHeight);
+ 
+				
+	animate();
+				
+				
+}
+
+
+
+function animate() {
+    
+    let aktuelleAnimation = requestAnimationFrame(animate);
+    //requestAnimationFrame(animate);
+    
+    if (typeof aktuelleAnimation !== 'undefined')
+	{
+	  setTimeout(function() {
+        const delta = clock.getDelta();
+        //mixer.update( delta );
+            }, 1500);
+	}
+	//renderer.clear()
+    renderer.render( scene1, camera );
+    //renderer.clearDepth();
+    //renderer.render( scene2, camera );
+    //composer.render();
+    
+}
+
+        </script>   
+    </body>
+</html>
+
+

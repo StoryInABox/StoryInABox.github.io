@@ -232,12 +232,12 @@ function toggleQR() {
 	imagescaletozero.classList.toggle("checked");
 }
 
-
+let ARon = false;
 function toggleAR() {
 
 	var ARbutton = document.getElementsByClassName("AR-btn");
 	let ARbuttonContent = document.getElementById("ARbtn");
-	let ARon = false;
+	
 
 	for (let x = 0; x < ARbutton.length; x++) {
                 ARbutton[x].addEventListener('click',function() {
