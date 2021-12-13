@@ -258,13 +258,13 @@ export function init() {
 	RGBE = new RGBELoader(loadingStautus)
 	RGBE.setDataType( THREE.UnsignedByteType )
 	RGBE.setPath( '../../textures/equirectangular/' )
-	RGBE.load( 'venice_sunset_1k.hdr', function ( texture ) {
+	RGBE.load( 'studio_small_08_1k.hdr', function ( texture ) {
 
 		envMap = pmremGenerator.fromEquirectangular( texture ).texture;
         
         if (ARon == false) {
             //scene.background = new THREE.Color( 0x2000000 );
-		    scene.background = envMap;
+		    //scene.background = envMap;
         }
 		scene.environment = envMap;
 
