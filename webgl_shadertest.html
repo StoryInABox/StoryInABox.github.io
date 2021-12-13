@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - shader [Monjori]</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
+   
+  </head>
+	<body>
+
+		<div id="container"></div>
+		<div id="info"><a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - shader demo. featuring <a href="http://www.pouet.net/prod.php?which=52761" target="_blank" rel="noopener">Monjori by Mic</a></div>
+
+
+
+		<script type="module">
+      import * as THREE from './build/three.module.js';
+  	  import { OrbitControls } from './controls/OrbitControls.js';
+      import { 	CustomMaterial,
+
+patchShader,
+extendMaterial,
+cloneUniforms,
+cloneUniform,
+mapShader } from './js/ExtendMaterial.module.js';
+import { RGBELoader } from './js/RGBELoader.js';
+      
+      var mesh, renderer, scene, camera, controls;
+      let pmremGenerator;
+
+
+// renderer
+renderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+document.body.appendChild( renderer.domElement );
+
+// scene
+scene = new THREE.Scene();
+
+// camera
+camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+camera.position.set( 2, 2, 4 );
+camera.lookAt(new THREE.Vector3(0,0,0));
+
+// controls
+controls = new OrbitControls( camera, document.body );
+
+
+
+
+
+pmremGenerator = new THREE.PMREMGenerator( renderer );
+    pmremGenerator.compileEquirectangularShader();
+			
+    new RGBELoader()
+        .setDataType( THREE.UnsignedByteType )
+        .setPath( 'textures/equirectangular/' )
+        .load( 'studio_small_08_4k.hdr', function ( texture ) {
+
+            const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
+
+            scene.background = envMap;
+            //scene.background = new THREE.Color( 0x2ffffff );
+            scene.environment = envMap;
+        
+
+
+		texture.dispose();
+		pmremGenerator.dispose();
+
+    });
+
+
+
+// ambient light
+scene.add( new THREE.AmbientLight( 0x222222));
+
+// directional light
+var light = new THREE.DirectionalLight( 0xffffff, 1 );
+light.position.set( 80, 80, 80 );
+scene.add( light );
+
+// axes
+scene.add( new THREE.AxesHelper( 20 ) );
+
+
+
+
+// geometry
+var geometry = new THREE.TorusKnotBufferGeometry( 1, 0.3, 128, 16 );
+
+
+// https://github.com/Fyrestar/THREE.extendMaterial
+
+var material = extendMaterial(THREE.MeshStandardMaterial, {
+
+
+  // Will be prepended to vertex and fragment code
+
+  header: 'varying vec3 vNN; varying vec3 vEye;',
+  fragmentHeader: 'uniform vec3 fresnelColor;',
+
+
+  // Insert code lines by hinting at a existing
+
+  vertex: {
+    // Inserts the line after #include <fog_vertex>
+    '#include <fog_vertex>': `
+
+
+      mat4 LM = modelMatrix;
+      LM[2][3] = 0.0;
+      LM[3][0] = 0.0;
+      LM[3][1] = 0.0;
+      LM[3][2] = 0.0;
+
+      vec4 GN = LM * vec4(objectNormal.xyz, 1.0);
+      vNN = normalize(GN.xyz);
+      vEye = normalize(GN.xyz-cameraPosition);`
+  },
+  fragment: {
+
+'vec4 diffuseColor = vec4( diffuse, opacity );': `
+
+diffuseColor.rgb +=  ( 1.0 - -min(dot(vEye, normalize(vNN) ), 0.0) ) * fresnelColor;`},
+
+// Uniforms (will be applied to existing or added)
+
+uniforms: {
+
+diffuse: new THREE.Color('black'),
+
+fresnelColor: new THREE.Color('red')
+
+}
+
+  
+});
+
+
+// mesh
+mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
+
+
+
+function animate() {
+
+mesh.rotateY(0.02);
+
+  requestAnimationFrame( animate );
+
+  renderer.render( scene, camera );
+
+}
+
+
+
+animate();
+		</script>
+
+	</body>
+</html>
