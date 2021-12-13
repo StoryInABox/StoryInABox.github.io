@@ -13,6 +13,7 @@ NoAR.js
 
 main.css
 
+<<<<<<< HEAD
 
 
 Todo:
@@ -24,3 +25,5 @@ typo/layout
 
 (bugfix)
 
+=======
+>>>>>>> 98ad86c87583d9339f48ae5bdbd541f883186323

@@ -5,10 +5,15 @@
 	<title>Hello, world!</title>	
 	
 </head>
+<<<<<<< HEAD
 
 <body onload="ModelsiteIndex()">
 
 	<div class= "background"></div>
+=======
+
+<body onload="ModelsiteIndex()">
+>>>>>>> 98ad86c87583d9339f48ae5bdbd541f883186323
 	
 	<div class="header">
 		
@@ -126,6 +131,44 @@ function ModelsiteIndex() {
 			if (mydata[f].class == "testThema"){
 				modelEntry.setAttribute("class", "testThema");	
 			}
+<<<<<<< HEAD
+
+			modelEntry.setAttribute("onclick", "openModel(modelindex="+ModelindexDefine+")");
+			ModelindexDefine++;
+			ThemaContainer.appendChild(modelEntry);
+			//console.log(JsonThemaCount);
+			//console.log(modelEntry);
+		}
+		
+		
+		
+	}
+	
+	/*
+	console.log()
+	for (t=0; t<15; t++){
+		ThemaContainer = document.getElementById("Thema");
+		modelEntry = document.createElement( 'div' );
+		modelEntry.appendChild(document.createTextNode("test"));
+		modelEntry.setAttribute("class", "testModel");
+		ThemaContainer.appendChild(modelEntry);
+		}
+	*/
+}
+
+/*
+let Press;
+let StartPos;
+let MoveVect=0;
+let ThemaPos=0;
+let newThemaPos=0;
+let e = 0;
+function setMousePos(){
+	StartPos=event.pageY;
+	//console.log(event.pageY)
+}
+
+=======
 
 			modelEntry.setAttribute("onclick", "openModel(modelindex="+ModelindexDefine+")");
 			ModelindexDefine++;
@@ -174,6 +217,29 @@ function MousePos(){
 		
 		
 	}
+>>>>>>> 98ad86c87583d9339f48ae5bdbd541f883186323
+
+}
+	if (newThemaPos > 0)  {
+		
+		newThemaPos = 0;
+	}
+	if (newThemaPos < -850)  {
+		
+		newThemaPos = -46.5*18;
+	}
+
+<<<<<<< HEAD
+function MousePos(){
+	
+	let dragThema = document.getElementById("Thema");
+	if (newThemaPos < 1){
+	if (Press==true){
+		MoveVect = event.pageY-StartPos;
+		newThemaPos = ThemaPos + MoveVect;
+		
+		
+	}
 
 }
 	if (newThemaPos > 0)  {
@@ -193,16 +259,33 @@ function MousePos(){
 
 
 
+=======
+	if (Press==false){
+		MoveVect=0;
+		ThemaPos=newThemaPos;
+		
+	}
+
+
+
+>>>>>>> 98ad86c87583d9339f48ae5bdbd541f883186323
 	dragThema.style.top = newThemaPos+"px";
 	//ThemaPos = MoveVect;
 	console.log(MoveVect)
 	
 	//console.log("test")
 	//console.log(dragThema.style.top)
+<<<<<<< HEAD
 
 }
 */
 
+=======
+
+}
+*/
+
+>>>>>>> 98ad86c87583d9339f48ae5bdbd541f883186323
 function toggleNavigationbar() {
 	var menuContainer = document.getElementById("menuContainer");
 	var menu = document.getElementById("menu");
