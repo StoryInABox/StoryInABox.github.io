@@ -3,12 +3,21 @@
     
 
     </head>
-    <body style= "background: rgb(0,212,255);
-    background: radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(57,144,209,1) 100%);">
+    <body>
+        
+        
+<div  style= "
+	position:absolute; 
+	top:0; 
+	left:0; 
+	width:100%; 
+	height:100%; 
+	border: none;
+	background: radial-gradient(circle, rgb(218, 1, 1) 0%, rgb(0, 0, 0) 100%);
 
-        
-        
-       
+
+"></div>
+
 
     <script type= "module">
 
@@ -73,7 +82,7 @@ let nodepass;
                 const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
 
                 //scene1.background = envMap;
-                //scene2.background = envMap;
+                scene2.background = envMap;
                 //scene1.background = new THREE.Color( 0x2ffffff );
                 scene1.environment = envMap;
            
@@ -96,7 +105,7 @@ let nodepass;
 	loader.setDRACOLoader( dracoLoader );
 	loader.load(
 				
-		"./models/materials.gltf",
+		"./models/materials_smolplus.gltf",
 		function (gltf) {
 
 			model = gltf.scene;
@@ -108,7 +117,7 @@ let nodepass;
         
         loader.load(
 				
-                "./models/materials.gltf",
+                "./models/materials_smolplus.gltf",
                 function (gltf) {
                     
                     
@@ -121,9 +130,9 @@ let nodepass;
                             //gltfmaterial.transparent = true;
                             //gltfmaterial.premultipliedAlpha = true;
                             
-                            gltfmaterial.depthTest = true;
-                            gltfmaterial.depthWrite = false;
-                            gltfmaterial.transparent = true;
+                            //gltfmaterial.depthTest = true;
+                            //gltfmaterial.depthWrite = false;
+                            //gltfmaterial.transparent = true;
                             gltfmaterial.blending = THREE.CustomBlending;
                             
                             gltfmaterial.blendEquation = THREE.AddEquation;

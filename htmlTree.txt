@@ -13,3 +13,14 @@ NoAR.js
 
 main.css
 
+
+
+Todo:
+
+qr-code
+animation ladebalken
+typo/layout
+
+
+(bugfix)
+

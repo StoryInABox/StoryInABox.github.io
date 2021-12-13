@@ -3,7 +3,29 @@ body {
 	padding: 0;
 	overscroll-behavior: none;
 	overflow: hidden;
+	background: radial-gradient(circle, rgb(90, 90, 90) 0%, rgb(0, 0, 0) 100%);
 }
+
+@font-face {
+    font-family: 'Alte-Haas-Grotesk';
+    src:url('Fonts/webfonts_Alte-Haas-Grotesk/Alte-Haas-Grotesk.ttf.woff') format('woff'),
+        url('Fonts/webfonts_Alte-Haas-Grotesk/Alte-Haas-Grotesk.ttf.svg#Alte-Haas-Grotesk') format('svg'),
+        url('Fonts/webfonts_Alte-Haas-Grotesk/Alte-Haas-Grotesk.ttf.eot'),
+        url('Fonts/webfonts_Alte-Haas-Grotesk/Alte-Haas-Grotesk.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+.background {
+	position:absolute; 
+	top:0; 
+	left:0; 
+	width:100%; 
+	height:100%; 
+	border: none;
+	background: radial-gradient(circle, rgb(90, 90, 90) 0%, rgb(0, 0, 0) 100%);
+}
+
 
 h1 {
 	font-size:10px;
@@ -70,11 +92,11 @@ h1 {
 	
 
 	position: absolute;
-	right:5px;
-	top:5px;
+	right:20px;
+	top:25px;
 	border-radius: 50px;
 	
-	background-color: darkslategray;
+	background-color: rgba(47, 79, 79, 0);
 	height: 50px;
 	width: 50px;
 	font-family: Georgia, 'Times New Roman', Times, serif;
@@ -128,8 +150,8 @@ h1 {
 
 .menuContainer {
 	position: absolute; 
-	top:5px;
-	left:5px;
+	top:25px;
+	left:20px;
 	height: 50px;
 
 	
@@ -233,11 +255,11 @@ h1 {
 
 .AR-btn {
 	position: absolute;
-	right:60px;
-	top:5px;
+	right:80px;
+	top:25px;
 	border-radius: 50%;
 	
-	background-color: darkslategray;
+	background-color: rgba(47, 79, 79, 0);
 	height: 50px;
 	width: 50px;
 	font-family: Arial, Helvetica, sans-serif;
@@ -252,18 +274,20 @@ h1 {
 
 .QRbtn {
 	position: absolute;
-	right:115px;
-	top:5px;
+	right:140px;
+	top:25px;
 	border-radius: 50%;
 	text-align: center;
-	background-color: darkslategray;
+	background-color: rgba(47, 49, 49, 0);
+	
+
 	height: 50px;
 	width: 50px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 20px;
 	display: block;
 	cursor: pointer;
-	color: white;
+
 	z-index: 5;
 	border: none;
 	transition: 0.5s; 
@@ -474,6 +498,7 @@ h1 {
 .label {
 	display: block;
 	background-color: darkslategray;
+	font-family: "Alte-Haas-Grotesk";
 	
 	border-radius: 10px;
 	padding: 1px 10px 1px 10px;
@@ -520,7 +545,8 @@ h1 {
 	text-align: left;
 	
 	color:#3f3f3f;
-	font-family: Georgia, 'Times New Roman', Times, serif;
+	//font-family: Georgia, 'Times New Roman', Times, serif;
+	font-family: "Alte-Haas-Grotesk";
 	font-size: 26px;
 	padding: 10px 60px 10px 60px;
 	
@@ -609,6 +635,7 @@ h1 {
 	width:255px;
 	color:#3f3f3f;
 	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-family: "Alte-Haas-Grotesk";
 	font-size: 26px;
 	padding: 10px 60px 10px 60px;
 	margin: 8px 0px 8px 0px;
@@ -625,6 +652,7 @@ h1 {
 	
 	color: darkslategray;
 	font-family: Georgia, 'Times New Roman', Times, serif;
+	//font-family: "Alte-Haas-Grotesk";
 	font-size: 26px;
 	//font-weight: bold;
 	padding: 10px 60px 8px 60px;
