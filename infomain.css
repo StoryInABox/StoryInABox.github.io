@@ -1,0 +1,273 @@
+body {
+	margin: 0;
+	padding: 0;
+	overscroll-behavior: none;
+	overflow: hidden;
+}
+
+.image1 {
+	position: absolute;
+	left:23%;
+	top:30%;
+	width: 20%;
+	height: auto;
+}
+
+.image2 {
+	position: absolute;
+	right:20%;
+	top:30%;
+	width: 20%;
+	height: auto;
+}
+
+
+
+.menuinfo {
+	position: absolute; 
+	top:5px;
+	left:5px;
+	border-radius: 50%;
+	height:50px;
+	width:50px;
+	background-color:transparent;
+	z-index: 2;
+	border: solid;
+	border-width: 1px;
+	color:white;
+	transition: 0.5s;
+	cursor: pointer;
+	box-shadow: 0px 0px 10px 10px darkslategray;	
+}
+
+.line { 
+	position: absolute; 
+	margin: auto;
+	top: 49%;
+	left: 20%;
+	height: 2%; 
+	width:60%;
+	background: white; 
+	display: block; 
+	transition: 0.5s; 
+}
+
+.line:nth-child(1) { top: 30%; }
+.line:nth-child(2) { top: 50%; }
+.line:nth-child(3) { top: 70%; }
+
+
+
+.bar {
+	position: absolute;
+	height:50px;
+}
+.bar a {
+	position: absolute; 
+	
+	text-align: center;
+	
+	color:white;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	
+	font-size: 26px;
+	padding: 10px 20px 10px 60px;
+
+
+	top:5px;
+	left:5px;
+	border-radius: 25px;
+	background-color:transparent;	
+	border: solid;
+	border-width: 1px;
+	z-index: 0;
+	box-shadow: 0px 0px 10px 10px darkslategray;
+
+}
+
+
+.AR-btn {
+	position: absolute;
+	right:60px;
+	top:5px;
+	border-radius: 50%;
+	text-align: center;
+	background-color: transparent;
+	height: 50px;
+	width: 50px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	display: block;
+	cursor: pointer;
+	color: white;
+	z-index: 5;
+	border: solid;
+	border-width: 1px;
+	box-shadow: 0px 0px 10px 10px darkslategray;
+	
+}
+
+
+.timeslider {
+	position: absolute;
+	bottom:2%;
+	left: 10%;
+	width:100%;
+	height:5%;
+	z-index: 5;	
+ } 
+.slider {
+	-webkit-appearance: none;
+	width: 80%;
+	height: 5%;
+	border-radius: 5px;  
+	background: #d3d3d3;
+	outline: none;
+	-webkit-transition: .2s;
+	transition: opacity .2s;
+	
+	
+}
+
+ .slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width:15px;
+	height: 15px;
+	border-radius: 50%; 
+	background:white;
+	cursor: pointer;
+	box-shadow: 0px 0px 10px 10px darkslategray;
+  }
+
+
+.playpause {
+	position: absolute;
+	bottom:4%;
+	left:5%;
+	box-sizing: border-box;
+	z-index: 0;
+	width: 0;
+	height: 14.8px;
+	border-style: solid;
+	border-width: 7.4px 0 7.4px 12px;
+	background-color: transparent;
+	border-color: darkslategray darkslategray darkslategray white;
+	border-radius: 10%;
+	cursor: pointer;
+	will-change: border-width;
+	transition: all .2s ease;
+	box-shadow: -1px 0px 10px 10px darkslategray;
+}
+
+
+
+
+.infotext {
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	font-size: small;
+	
+}
+
+
+.infomenu {
+	position: absolute;
+	z-index: 2;
+	border: solid;
+	border-radius: 15px;
+	width: 200px;
+	padding: 10px 10px 10px 10px;
+	border-width: 1px;
+	opacity: 0.05;
+
+	top: 80px;
+	left:20px;
+}
+
+.infomodelstatus {
+	position: absolute;
+	z-index: 2;
+	border: solid;
+	border-radius: 15px;
+	width: 200px;
+	padding: 10px 10px 10px 10px;
+	border-width: 1px;
+	opacity: 0.05;
+	
+	top: 5px;
+	left:350px;
+}
+.infoar {
+	position: absolute;
+	z-index: 2;
+	border: solid;
+	border-radius: 15px;
+	width: 200px;
+	padding: 10px 10px 10px 10px;
+	border-width: 1px;
+	opacity: 0.05;
+	
+	top: 80px;
+	right:20px;
+}
+
+.infoslider {
+	position: absolute;
+	z-index: 2;
+	border: solid;
+	border-radius: 15px;
+	width: 200px;
+	padding: 10px 10px 10px 10px;
+	border-width: 1px;
+	opacity: 0.05;
+
+	bottom: 50px;
+	left:50%;
+}
+
+.infoplay {
+	position: absolute;
+	z-index: 2;
+	border: solid;
+	border-radius: 15px;
+	width: 200px;
+	padding: 10px 10px 10px 10px;
+	border-width: 1px;
+	opacity: 0.05;
+	
+	bottom: 80px;
+	left:20px;
+}
+
+.infomenu.checked, .infomodelstatus.checked, .infoar.checked, .infoslider.checked, .infoplay.checked  {
+	opacity: 1;
+}
+
+.infonavigation1 {
+	position: absolute;
+	z-index: 2;
+	border: solid;
+	border-radius: 15px;
+	width: 200px;
+	padding: 10px 10px 10px 10px;
+	border-width: 1px;
+	opacity: 1;
+	
+	top:46%;
+	left:55px;
+}
+
+.infonavigation2 {
+	position: absolute;
+	z-index: 2;
+	border: solid;
+	border-radius: 15px;
+	width: 200px;
+	padding: 10px 10px 10px 10px;
+	border-width: 1px;
+	opacity: 1;
+	
+	top:47%;
+	right:55px;
+}

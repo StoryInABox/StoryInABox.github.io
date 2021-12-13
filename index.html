@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link type="text/css" rel="stylesheet" href="main.css">
+	<title>Hello, world!</title>	
+	
+</head>
+
+<body onload="ModelsiteIndex()">
+
+	<div class= "background"></div>
+	
+	<div class="header">
+		
+		<div class= "menuContainer" id="menuContainer" >
+
+			<div class= "menu" id="menu" onclick="toggleNavigationbar()">
+				<span class="line"></span>
+				<span class="line"></span>
+				<span class="line"></span>
+			</div>
+			<div class="menuSucher" id="menuSucher" onclick="toggleNavigationbar()">Orbitales-Model</div>
+			
+			
+			<div class="Thema" id="Thema" >
+				
+				
+			</div>
+		
+		</div>
+	
+	</div>
+	<div class="themaBackground" id="themaBackground"></div>
+	
+		
+		
+	
+	<!--
+	<div class="navigationbar" id="navigationbar">
+	
+		<button class="Thema-btn">Anorganische Chemie
+		</button>
+		<div class="Thema1-container">
+			<button class="model" onclick="openModel(modelindex=1)">Orbitales-Model</button>
+			<button class="model" onclick="openModel(modelindex=2)">Bohrsches-Model</button>
+			<button class="model" onclick="openModel(modelindex=3)">-Platzhalter-</button>
+
+		</div>
+		<span class="thema-line"></span>
+		
+		<button class="Thema-btn">Zellbiologie
+		</button>
+		<div class="Thema2-container">
+			<button class="model" onclick="openModel(modelindex=4)">Neuronen</button>
+			<button class="model" onclick="openModel(modelindex=5)">Synapse</button>
+			<button class="model" onclick="openModel(modelindex=6)">Blutbildung</button>
+		</div>
+		<span class="thema-line"></span>
+		
+		<button class="Thema-btn">Thema 3
+		</button>
+		<div class="Thema3-container">
+			<button class="model" onclick="openModel(modelindex=7)">Model 1</button>
+			<button class="model" onclick="openModel(modelindex=8)">Model 2</button>
+			<button class="model" onclick="openModel(modelindex=9)">Model 3</button>
+		</div>
+		<span class="thema-line"></span>
+	</div>
+-->
+	<button class="info" id="info-container" onclick="toggleInfo()">
+		<a>i</a>
+		<div>
+			<span class="line-info"></span>
+			<span class="line-info"></span>
+		</div>
+	</button>
+	
+	<button class="QRbtn" id="qrCode"onclick="toggleQR()"><img class="image4" id="image4check" src="Grafiks/print.png" alt="">
+		<div>
+			<span class="line-info"></span>
+			<span class="line-info"></span>
+		</div>
+	</button>
+
+	<button class="AR-btn" id="ARbtn" name="off" ><img class="image3" id="image3" src="Grafiks/AR.png" onclick="toggleAR()" ></button>
+	
+	<iframe class="infobox" id="info-box" src="Info.html"></iframe>
+
+	<iframe class="printQR" id="printQR" src="PrintQR.html"></iframe>
+
+	<iframe class="frame" src="./Model-Website/Thema1/Orbitales-Model.html" name = "IFRAmE">
+	</iframe>
+
+
+<script type="text/javascript" src="Syntax.json"></script>	
+<script>
+let modelEntry;
+let ThemaContainer;
+let JsonModelCount;
+let JsonThemaCount;
+let ThemaAnzahl = 4;
+let ModelindexDefine = 1;
+let modelindex = 2;
+let url;
+
+function ModelsiteIndex() {
+	
+	for (let u=1; u<ThemaAnzahl; u++) {
+	
+	if (u == 1) {JsonThemaCount=thema1;}
+	if (u == 2) {JsonThemaCount=thema2;}
+	if (u == 3) {JsonThemaCount=thema3;}
+
+	var mydata = JSON.parse(JsonThemaCount);
+	JsonModelCount = Object.entries(mydata).length;
+		
+		for (let f=0; f<JsonModelCount; f++) {
+			ThemaContainer = document.getElementById("Thema");
+			modelEntry = document.createElement( 'div' );
+			modelEntry.appendChild(document.createTextNode(mydata[f].Name));
+			if (mydata[f].class == "testModel"){
+				modelEntry.setAttribute("class", "testModel");
+				modelEntry.setAttribute("name", mydata[f].Name);
+				modelEntry.setAttribute("id", mydata[f].url);
+			}
+			if (mydata[f].class == "testThema"){
+				modelEntry.setAttribute("class", "testThema");	
+			}
+
+			modelEntry.setAttribute("onclick", "openModel(modelindex="+ModelindexDefine+")");
+			ModelindexDefine++;
+			ThemaContainer.appendChild(modelEntry);
+			//console.log(JsonThemaCount);
+			//console.log(modelEntry);
+		}
+		
+		
+		
+	}
+	
+	/*
+	console.log()
+	for (t=0; t<15; t++){
+		ThemaContainer = document.getElementById("Thema");
+		modelEntry = document.createElement( 'div' );
+		modelEntry.appendChild(document.createTextNode("test"));
+		modelEntry.setAttribute("class", "testModel");
+		ThemaContainer.appendChild(modelEntry);
+		}
+	*/
+}
+
+/*
+let Press;
+let StartPos;
+let MoveVect=0;
+let ThemaPos=0;
+let newThemaPos=0;
+let e = 0;
+function setMousePos(){
+	StartPos=event.pageY;
+	//console.log(event.pageY)
+}
+
+
+
+function MousePos(){
+	
+	let dragThema = document.getElementById("Thema");
+	if (newThemaPos < 1){
+	if (Press==true){
+		MoveVect = event.pageY-StartPos;
+		newThemaPos = ThemaPos + MoveVect;
+		
+		
+	}
+
+}
+	if (newThemaPos > 0)  {
+		
+		newThemaPos = 0;
+	}
+	if (newThemaPos < -850)  {
+		
+		newThemaPos = -46.5*18;
+	}
+
+	if (Press==false){
+		MoveVect=0;
+		ThemaPos=newThemaPos;
+		
+	}
+
+
+
+	dragThema.style.top = newThemaPos+"px";
+	//ThemaPos = MoveVect;
+	console.log(MoveVect)
+	
+	//console.log("test")
+	//console.log(dragThema.style.top)
+
+}
+*/
+
+function toggleNavigationbar() {
+	var menuContainer = document.getElementById("menuContainer");
+	var menu = document.getElementById("menu");
+	var backgr = document.getElementById("themaBackground");
+	var thema = document.getElementById("Thema");
+	var sucher = document.getElementById("menuSucher");
+	menuContainer.classList.toggle("checked");
+	menu.classList.toggle("checked");
+	backgr.classList.toggle("checked");
+	thema.classList.toggle("checked");
+	sucher.classList.toggle("checked");
+}
+
+function toggleInfo() {
+	var infoBox = document.getElementById("info-box");
+	var infoContainer = document.getElementById("info-container");
+	infoBox.classList.toggle("checked");
+	infoContainer.classList.toggle("checked");
+	
+}
+
+function toggleQR() {
+	var qrCodebtn = document.getElementById("qrCode");
+	var imagescaletozero = document.getElementById("image4check");
+	
+	var PrintqrcodePage = document.getElementById("printQR");
+	qrCodebtn.classList.toggle("checked");
+	PrintqrcodePage.classList.toggle("checked");
+	imagescaletozero.classList.toggle("checked");
+}
+
+let ARon = false;
+function toggleAR() {
+
+	var ARbutton = document.getElementsByClassName("AR-btn");
+	let ARbuttonContent = document.getElementById("ARbtn");
+	
+
+	for (let x = 0; x < ARbutton.length; x++) {
+                ARbutton[x].addEventListener('click',function() {
+                    this.classList.toggle("checked");
+                    let bild =document.getElementById("image3");
+					//console.log(ding.src)
+					ARon = !ARon;
+                    if (ARon == false) {
+                        //console.log("ARoff");
+                        //ARbuttonContent.innerHTML = "AR";
+						bild.src = "Grafiks/AR.png";
+						loadModel();
+						document.getElementsByName('IFRAmE')[0].src = ""+url+"";
+						ARbuttonContent.setAttribute("name", "off");
+                        //console.log(ARbuttonContent);
+                      } 
+					  if (ARon == true) {
+                        //ARbuttonContent.innerHTML = "3D";
+                        //console.log("ARon"); 
+						bild.src = "Grafiks/3D.png"; 
+						loadModel();
+						document.getElementsByName('IFRAmE')[0].src = ""+url+"";
+						ARbuttonContent.setAttribute("name", "on");
+						//console.log(ARbuttonContent);
+                     }
+                    
+                });
+            }
+}
+
+
+var dropdown = document.getElementsByClassName("Thema-btn");
+var i;
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display === "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });
+}
+let urlname;
+function openModel() {
+	
+	loadModel();
+	window.location.hash = ""+urlname+"";
+	setTimeout(function() {
+		document.getElementsByName('IFRAmE')[0].src = ""+url+"";
+	}, 1500);
+	
+
+	toggleNavigationbar();
+
+}
+
+function loadModel() {
+
+	let dragThema = document.getElementById("Thema");
+	dragThema.style.top= (modelindex*-58)+49.5+"px";
+	//console.log(modelindex);
+	//console.log(dragThema.style.top);
+	let nameslist = document.getElementById("Thema");
+	urlname = nameslist.children[modelindex-1].innerHTML;
+	console.log()
+	url = nameslist.children[modelindex-1].id;
+	//console.log(url)
+	
+	//var site = ;
+	//console.log(site);
+	
+
+	let SucherContent= document.getElementById("menuSucher");
+	SucherContent.innerHTML= nameslist.children[modelindex-1].innerHTML;
+
+}
+
+
+
+</script>
+</body>
+</html>
