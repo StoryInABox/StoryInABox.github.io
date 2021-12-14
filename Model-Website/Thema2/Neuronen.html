@@ -28,6 +28,13 @@
             
             <div class="timeslider">
             <input type="range" min="0" max="100" step="0.01" class="slider" id="sliderid" >
+
+            <div class="stamps"id="stamps">
+                <div id="30" class="stamp"></div>
+                <div id="60" class="stamp"></div>
+                <div id="120" class="stamp"></div>
+            </div>
+
             </div>
             
         </div>
@@ -38,7 +45,7 @@
             import {testAR, loadGLTF, slidercontent, playpause} from '../../SceneSetup.js';
             
             testAR();
-            loadGLTF('../../models/4.gltf');
+            loadGLTF('../../models/neuron_open_6.gltf');
             slidercontent();
             playpause();
            
