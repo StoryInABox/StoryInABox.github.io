@@ -6,7 +6,15 @@ body {
 	background: radial-gradient(circle, rgb(90, 90, 90) 0%, rgb(0, 0, 0) 100%);
 }
 
-
+@font-face {
+    font-family: 'Alte-Haas-Grotesk';
+    src:url('Fonts/webfonts_Alte-Haas-Grotesk/Alte-Haas-Grotesk.ttf.woff') format('woff'),
+        url('Fonts/webfonts_Alte-Haas-Grotesk/Alte-Haas-Grotesk.ttf.svg#Alte-Haas-Grotesk') format('svg'),
+        url('Fonts/webfonts_Alte-Haas-Grotesk/Alte-Haas-Grotesk.ttf.eot'),
+        url('Fonts/webfonts_Alte-Haas-Grotesk/Alte-Haas-Grotesk.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
 
 .background {
 	position:absolute; 
@@ -699,4 +707,3 @@ h1 {
 	
 
 }
-
