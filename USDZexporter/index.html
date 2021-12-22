@@ -28,7 +28,7 @@
 		
 
 		<a id="link" rel="ar" href="" download="asset.usdz">
-			<img id="button" width="100" src="files/arkit.png">
+			<img id="button" width="100" src="arkit.png">
 		</a>
 
 		<script type="module">
@@ -66,7 +66,9 @@
 
 				const loader = new GLTFLoader().setPath( 'models/' );
 				loader.load( 'test.gltf', async function ( gltf ) {
-
+                    gltf.scene.position.set( 0, -.75, 0 );
+                    gltf.scene.scale.set( .25, .25, .25 );
+                    
 					scene.add( gltf.scene );
 
 					const shadowMesh = createSpotShadowMesh();
