@@ -27,7 +27,7 @@ function init() {
 
 function animate() {
   
- 
+ /*
   if(controllers.length>0){ have_controller=true; }else{ have_controller=false;}
   readGamepadInput(); // read the button and axis input if there is any
 
@@ -43,7 +43,26 @@ function animate() {
         }
     }
 
-}
+
+*/
+
+document.onkeydown = function(e) {
+            switch (e.keyCode) {
+                case 37:
+                document.getElementById("color").style.backgroundColor = "red"; 
+                  break;
+                case 39:
+                document.getElementById("color").style.backgroundColor = "blue"; 
+                    
+              break;
+            }
+            console.log(document.getElementById("color").style.backgroundColor );
+
+        }
+        document.onkeyup = function(u) {
+            document.getElementById("color").style.backgroundColor = "white"; 
+        }
+        }
 
 
 
