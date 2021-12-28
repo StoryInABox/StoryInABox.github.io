@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    
+    <div class="color" id="color"></div>
+    
+    
+    <script src="gamepad_basic.js"></script>
+    <script>
+
+let touch1;
+let touch2;
+
+
+init();
+animate();
+
+function init() {
+  
+
+}
+
+function animate() {
+  
+ 
+  if(controllers.length>0){ have_controller=true; }else{ have_controller=false;}
+  readGamepadInput(); // read the button and axis input if there is any
+
+    if(touch1){
+        if(touch1.pressed){
+            document.getElementById("color").style.backgroundColor = "blue"; 
+        }
+    }
+
+    if(touch2){
+        if(touch2.pressed){
+            document.getElementById("color").style.backgroundColor = "red"; 
+        }
+    }
+
+}
+
+
+
+
+
+    </script>
+  </body>
+</html>
