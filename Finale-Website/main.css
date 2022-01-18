@@ -70,18 +70,7 @@ body {
 .burgerline:nth-child(1) { top: 40%; transform: rotate(45deg); }
 .burgerline:nth-child(2) { top: 60%; transform: rotate(-45deg);}
 
-/*
-.burgerline:nth-child(1){
-	left: 12px;
-	top:50%;
-	transform: rotate(45deg);
-}
-.burgerline:nth-child(2){
-	left: 12px;
-	top:50%;
-	transform: rotate(-45deg);
-}
-*/
+
 
 
 
@@ -104,7 +93,8 @@ body {
 	
 	border-radius: 10px 10px 10px 10px;
 	margin: 5px 5px 5px 5px;
-	box-shadow: 5px 5px 10px #949496;
+	box-shadow: 0px 0px 0px transparent;
+	transition:.5s;
 }
 
 .Thema {
@@ -119,25 +109,49 @@ body {
 	transition: .5s;
 }
 
+.searchbar{
+	position: relative;
+	
+	background-color: white;
+
+	font-weight: bold;
+
+	padding: 10px 10px 10px 10px;
+	
+	border-radius: 10px 10px 10px 10px;
+	transition: .5s;
+}
+
 
 .Model{
 	padding: 5px 10px 5px 10px;
 	
 	margin:0px  0px -30px 0px;
-	display: block;
-	
+	border-radius: 10px 10px 10px 10px;
+
+	opacity: 0;
 	transition: .5s;
 	
 	
 }
 
+.Model:hover{
+	background-color: #949496;
+}
+
 .Model.checked{
 	display: block;
-
+	opacity:1;
 	margin:0px  0px 0px 0px;
 	
 }
 
+.ThemaBox.checked {
+	
+	border-radius: 10px 10px 10px 10px;
+	margin: 5px 5px 5px 5px;
+	box-shadow: 5px 5px 10px #949496;
+}
 
 .Thema.checked {
 	

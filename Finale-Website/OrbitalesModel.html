@@ -18,7 +18,10 @@
             <div class="aktiveModel" id="aktiveModel">Orbitales-Model</div>
         </div>
 
-        <div class="ThemaContainer" id="ThemaContainer"></div>
+        <div class="ThemaContainer" id="ThemaContainer">
+        <input class="searchbar" placeholder=" &#128270; Suchen"></input>
+        </div>
+
         
     
    
@@ -204,21 +207,24 @@
         
         let modelcount=document.getElementsByClassName("Model").length;
         let themacount = document.getElementsByClassName("Thema").length;
-            for (let c = 0;  c<modelcount; c++){
-                let Model = document.getElementsByClassName("Model")[c];
-                let ClickedModel = document.getElementsByClassName("Model")[c].getAttribute("attribute")
+            for (let c = 0;  c<themacount; c++){
+                let Thema = document.getElementsByClassName("Thema")[c];
+                let ClickedThema = document.getElementsByClassName("Thema")[c].getAttribute("attribute")
                 
-                    if (ClickedModel == dings) {
+                    if (ClickedThema == dings) {
                       
-                        Model.classList.toggle("checked");
+                        Thema.classList.toggle("checked");
+                        let ThemaBox = document.getElementsByClassName("ThemaBox")[c]
+                        ThemaBox.classList.toggle("checked");
+                        console.log(document.getElementsByClassName("ThemaBox")[c])
                         
-                        for (let e = 0;  e<themacount; e++){
-                            let Thema = document.getElementsByClassName("Thema")[e];
-                            let ClickedThema = document.getElementsByClassName("Thema")[e].getAttribute("attribute")
+                        for (let e = 0;  e<modelcount; e++){
+                            let Model = document.getElementsByClassName("Model")[e];
+                            let ClickedModel = document.getElementsByClassName("Model")[e].getAttribute("attribute")
                             
-                            if (ClickedThema == dings) {
+                            if (ClickedModel == dings) {
                             console.log()
-                                Thema.classList.toggle("checked");
+                            Model.classList.toggle("checked");
                             }
                         
                         }
