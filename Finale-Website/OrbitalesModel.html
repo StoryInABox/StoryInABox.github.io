@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+<html lang="de">
 <head>
+    <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<link type="text/css" rel="stylesheet" href="main.css">
 	<title>Orbitales-Model</title>	
@@ -11,21 +13,31 @@
     
 
         <div class= "menu" id="menu" >
+            
             <div class="MenuBut" id="MenuBut" onclick="toggleNavigationbar()">
                 <span class="burgerline"></span>
                 <span class="burgerline"></span>
+                <span class="tooltiptexttop"><nobr>openclose</nobr></span>
             </div>
+            
             <div class="aktiveModel" id="aktiveModel">Orbitales-Model</div>
         </div>
 
         <div class="ThemaContainer" id="ThemaContainer">
-        <input class="searchbar" placeholder=" &#128270; Suchen"></input>
+            <span class="tooltiptexttop"><nobr>Searchbar</nobr></span>
+        <input class="searchbar" placeholder=" &#128270; Suchen">
         </div>
 
         
-    
-   
-    
+        <div class="ARBtn">
+            <img src="/Icons/cube_icon.svg">
+            <span class="tooltiptextrigth"><nobr>in AR-Modus wechseln</nobr></span></div>
+        <div class="InfoBtn" id="InfoBtn" onclick="showtooltips()">
+            <span class="tooltiptextrigth"><nobr>infoebene</nobr></span>
+            <img src="/Icons/info_icon.svg" ></div>
+        <div class="PrintBtn">
+            <img src="/Icons/printer_icon.svg">
+            <span class="tooltiptextrigth"><nobr>QR-Code drucken</nobr></span></div>
   
 
 	
@@ -34,6 +46,7 @@
     
     let themaEntry;
     let modelEntry;
+    let triangle;
     let themaindex=0;
     let ThemaContainer;
 
@@ -114,6 +127,10 @@
                             modelEntry.setAttribute("onclick", "ausklappen(dings="+themaindex+")");
                             ModelContainer.appendChild(modelEntry);
                             
+                            triangle = document.createElement( 'div' );
+                            triangle.setAttribute("class", "triangle");
+                            //triangle.setAttribute("style", "border-left-color: "+ mydata[p].color +"");
+                            modelEntry.appendChild(triangle);
                         }
 
                         if (mydata[p].class == "Model"){
@@ -123,6 +140,7 @@
                             modelEntry.setAttribute("id", "Model");
                             modelEntry.setAttribute("attribute", themaindex);
                             ModelContainer.appendChild(modelEntry);
+                            
                             
                         }
                         
@@ -215,7 +233,9 @@
                       
                         Thema.classList.toggle("checked");
                         let ThemaBox = document.getElementsByClassName("ThemaBox")[c]
+                        let triangle = document.getElementsByClassName("triangle")[c]
                         ThemaBox.classList.toggle("checked");
+                        triangle.classList.toggle("checked");
                         console.log(document.getElementsByClassName("ThemaBox")[c])
                         
                         for (let e = 0;  e<modelcount; e++){
@@ -253,7 +273,41 @@
 
 
 
+    function showtooltips() {
+       
+        let tooltipcountright = document.getElementsByClassName("tooltiptextrigth").length;
+        let tooltipcountleft = document.getElementsByClassName("tooltiptextleft").length;
+        let tooltipcounttop = document.getElementsByClassName("tooltiptexttop").length;
+        let tooltipcountbottom = document.getElementsByClassName("tooltiptextbottom").length;
 
+        //console.log(tooltipcount)
+        for (let g=0; g<tooltipcountright; g++) {
+            let tooltips= document.getElementsByClassName("tooltiptextrigth")[g];
+            //console.log(document.getElementsByClassName("tooltiptextrigth tooltiptextleft"))
+            tooltips.classList.toggle("checked");
+        }
+        for (let g=0; g<tooltipcountleft; g++) {
+            let tooltips= document.getElementsByClassName("tooltiptextleft")[g];
+            //console.log(document.getElementsByClassName("tooltiptextrigth tooltiptextleft"))
+            tooltips.classList.toggle("checked");
+        }
+        for (let g=0; g<tooltipcounttop; g++) {
+            let tooltips= document.getElementsByClassName("tooltiptexttop")[g];
+            //console.log(document.getElementsByClassName("tooltiptextrigth tooltiptextleft"))
+            tooltips.classList.toggle("checked");
+        }
+        for (let g=0; g<tooltipcountbottom; g++) {
+            let tooltips= document.getElementsByClassName("tooltiptextbottom")[g];
+            //console.log(document.getElementsByClassName("tooltiptextrigth tooltiptextleft"))
+            tooltips.classList.toggle("checked");
+        }
+        //let test= document.getElementById("tooltiptext")
+        //test.classList.toggle("checked");
+
+ console.log(document.querySelectorAll("[titles]"))
+ 
+
+    }
 </script>	
 </body>
 </html>

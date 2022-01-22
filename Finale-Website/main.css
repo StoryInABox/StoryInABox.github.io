@@ -1,3 +1,15 @@
+@font-face {
+    font-family: corbel;
+    src: url("Fonts/CORBEL.TTF") format("truetype");
+}
+
+@font-face {
+    font-family: DTLDocumenta;
+    src: url("Fonts/DTL Documenta ST Regular.otf") format("opentype");
+}
+
+
+
 body {
     margin: 0;
 	padding: 0;
@@ -79,9 +91,9 @@ body {
 	overflow: scroll;
 	position: absolute;
 	top: 0px;
-	left:-250px;
+	left:-270px;
 	padding: 0px 20px 0px 20px;
-	width: 200px;
+	width: 220px;
 	height:100%;
 	background-color: white;
 	box-shadow: 5px 5px 10px #949496;
@@ -99,11 +111,16 @@ body {
 
 .Thema {
 
-	padding: 10px 10px 10px 10px;
+	padding: 6px 20px;
 	position: relative;	
 	text-align: center;
+	font-family: DTLDocumenta;
+	font-size: 10pt;
+
 	color: white;
 	
+	
+
 	border-radius: 10px 10px 10px 10px;
 	cursor: pointer;
 	transition: .5s;
@@ -113,8 +130,8 @@ body {
 	position: relative;
 	
 	background-color: white;
-
-	font-weight: bold;
+	font-family: corbel;
+	font-size: 12pt;
 
 	padding: 10px 10px 10px 10px;
 	
@@ -128,7 +145,7 @@ body {
 	
 	margin:0px  0px -30px 0px;
 	border-radius: 10px 10px 10px 10px;
-
+	font-family: corbel;
 	opacity: 0;
 	transition: .5s;
 	
@@ -172,7 +189,7 @@ height: 20px;
 }
 
 .menu.checked {
-	left:50px;
+	left:70px;
 
 }
 
@@ -196,4 +213,136 @@ height: 20px;
 .ThemaContainer.checked {
 	left:0px;
 
+}
+
+
+.ARBtn{
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	right:20px;
+	top:20px;
+	cursor: pointer;
+}
+
+.InfoBtn{
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	right:20px;
+	top:80px;
+	cursor: pointer;
+}
+
+
+.tooltiptextrigth, .tooltiptextleft, .tooltiptexttop, .tooltiptextbottom {
+	visibility: hidden;
+	background-color: white;
+	color: black;
+	box-shadow: 5px 5px 10px #949496;
+	border-radius: 6px;
+	padding: 5px 5px;
+	position: absolute;
+	z-index: 1;
+	font-family: corbel;
+	opacity: 0;
+	transition-property: visibility;
+	transition-delay: 1s;
+	transition-property: opacity;
+	transition-delay: 0s;
+	transition-duration: 1s;
+  }
+
+  .tooltiptextrigth{
+	top: 5px;
+	right: 50px;
+
+  }
+
+  .tooltiptextleft {
+	top: 5px;
+	left: 50px;
+
+  }
+
+  .tooltiptexttop{
+	top: 50px;
+	left: 0px;
+
+  }
+
+  .tooltiptextbottom {
+	top: 5px;
+	left: 50px;
+
+  }
+  
+  .tooltiptextrigth::after, .tooltiptextleft::after, .tooltiptexttop::after, .tooltiptextbottom::after{
+	content: "";
+	position: absolute;
+	
+
+	margin-top: -5px;
+	border-width: 5px;
+	border-style: solid;
+
+  }
+  .tooltiptextrigth::after{
+	top: 50%;
+	left: 100%;
+	border-color: transparent transparent transparent white;
+  }
+
+  .tooltiptextleft::after {
+	top: 50%;
+	right: 100%;
+	border-color: transparent white transparent transparent;
+  }
+
+  .tooltiptexttop::after{
+	bottom: 100%;
+	left: 20%;
+	border-color: transparent transparent white transparent;
+  }
+
+  .tooltiptextbottom::after {
+	top: 50%;
+	right: 100%;
+	border-color: transparent white transparent transparent;
+  }
+
+
+  .tooltiptextrigth.checked, .tooltiptextleft.checked, .tooltiptexttop.checked, .tooltiptextbottom.checked {
+	visibility: visible;
+	opacity: 1;
+  }
+
+
+.PrintBtn{
+	position: absolute;
+	width:40px;
+	height: 40px;
+	right:20px;
+	top:140px;
+	cursor: pointer;
+}
+
+.triangle {
+	position:absolute;
+	top: 8px;
+	left:15px;
+	padding: auto;
+
+	width: 0;
+	height:0;
+	border-top: 5px solid transparent;
+	border-left: 8px solid white;
+	border-bottom: 5px solid transparent;
+	transition:0.5s;
+	
+}
+
+.triangle.checked {
+	transform: rotate(90deg);
+	
 }
