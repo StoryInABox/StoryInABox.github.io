@@ -10,7 +10,12 @@ let clock, renderer,scene, camera, controls, pmremGenerator, RGBE, dracoLoader, 
 let AnimationCount, ClipDuration;
 
 let Dateipfad = "./models/"+document.getElementById("title").innerHTML+".gltf"
+let Framerate = 24;
 
+
+
+let sliderpos = document.querySelector("input[type='range']");
+let PlayButton = document.getElementsByClassName("playpause");
 
 let loadingStautus =  new THREE.LoadingManager();
 
@@ -91,6 +96,8 @@ export function init(){
                 
                 mixer.clipAction( gltf.animations[y] ).play();
 
+                timestamps();
+
             }
             
     });
@@ -152,6 +159,8 @@ function onWindowResize() {
 
 function animate(){
     requestAnimationFrame( animate );
+    playpause();
+
     const delta = clock.getDelta();
     
     if (typeof mixer !== 'undefined'){
@@ -163,6 +172,69 @@ function animate(){
 
 
 
+export function timestamps() {
+    let stampmark = [];
+    let stamps = document.getElementById("stamps");
+    let stampcount = stamps.children.length;
+    let FramesTotal = ClipDuration.duration*Framerate;
+    //console.log(ClipDuration.duration*Framerate)
+    
+        for (let o = 0; o < stampcount; o++){
+            let stampcurent = stamps.children[o].id;
+            //console.log(stampcurent)
+            stamps.children[o].style.left = ""+(stampcurent*100/FramesTotal)+"%"; 
+            //console.log(stampcurent/FramesTotal*ClipDuration.duration);
+            //stampmark.push(stampcurent/FramesTotal*ClipDuration.duration);
+            stampmark.push(Math.round(stampcurent*100/FramesTotal));
+            //console.log((slider.value)*Object.values(ClipDuration)[2]/100);
+        }
+}
+
+export function playpause(){
+
+    
+    sliderpos.value =0;
+
+    for (let  p = 0; p < 1; p++) {
+        PlayButton[p].addEventListener('click',function() {
+            this.classList.toggle("checked");
+            
+            allLabels = document.getElementsByClassName("label");
+            
+            for (let i=0; i < ChildCount; i++) {
+                allLabels[i].classList.toggle("hide");
+                //console.log(i);
+            }
+            
+            //console.log(allLabels);
+            console.log(text);
+            
+            showLabels = !showLabels;
+
+            
+            PlayOn = !PlayOn;
+            if ( PlayOn == false){
+                
+                timeCapture = mixer.time;
+                
+                
+            }
+            if (PlayOn == true){
+                
+                  
+                
+            }
+            if (StampOn == true) {
+                setTimeout(function() {
+                    n=0;
+                }, 50);
+                
+            }
+           
+        });
+    }
+    
+}
 
 
 function getAnimationInfo() {

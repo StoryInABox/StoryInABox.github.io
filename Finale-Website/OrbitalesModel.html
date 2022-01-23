@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<link type="text/css" rel="stylesheet" href="main.css">
 
 
@@ -17,20 +17,23 @@
     <div class= "background"></div>
     
 
-        <div class= "menu" id="menu" >
+        <div class= "menu" id="menu" >    
             
+            <div class="aktiveModel" id="aktiveModel">Orbitales-Model</div>
+
             <div class="MenuBut" id="MenuBut" onclick="toggleNavigationbar()">
                 <span class="burgerline"></span>
                 <span class="burgerline"></span>
                 <span class="tooltiptexttop"><nobr>openclose</nobr></span>
             </div>
-            
-            <div class="aktiveModel" id="aktiveModel">Orbitales-Model</div>
-        </div>
 
-        <div class="ThemaContainer" id="ThemaContainer">
-            <span class="tooltiptexttop"><nobr>Searchbar</nobr></span>
-        <input class="searchbar" placeholder=" &#128270; Suchen">
+            <div class="ThemaContainer" id="ThemaContainer">
+
+                
+
+                <span class="tooltiptexttop"><nobr>Searchbar</nobr></span>
+            <input class="searchbar" placeholder=" &#128270; Suchen">
+            </div>
         </div>
 
         
@@ -97,7 +100,7 @@
     let JsonModelCount;
     let JsonThemaCount;
     let placeholder;
-    let ThemaAnzahl = 36;
+    let ThemaAnzahl = 35;
     let ModelindexDefine = 1;
     let modelindex = 2;
     let url;
@@ -168,6 +171,10 @@
                             modelEntry.setAttribute("style", "background-color: "+ mydata[p].color +"");
                             modelEntry.setAttribute("onclick", "ausklappen(dings="+themaindex+")");
                             ModelContainer.appendChild(modelEntry);
+
+                            
+
+
                             
                             triangle = document.createElement( 'div' );
                             triangle.setAttribute("class", "triangle");

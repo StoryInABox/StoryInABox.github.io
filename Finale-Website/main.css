@@ -35,43 +35,17 @@ body {
 /* ----------------- MenuHeader ----------------- */
 
 .menu{
-	position:fixed; 
-	top: 20px;
-	left: 0;
-	margin-left: -10px;
-	padding-left: 10px;
-	width: 250px;
-	height: 50px; 
-	background-color: white;
-	border-radius: 0px 15px 15px 0px;
-	box-shadow: 5px 5px 10px #949496;
-	transition: .5s;
+
+	position: absolute;
+	left:-350px;
+	min-width: 20%;
+	height:100%;
 	
+	transition: .5s;
 }
 
-.aktiveModel{
-	position:absolute;
-	left:100px;
-	top:25%;
-	color: black;
-	width: 100%;
-	height: 100%;
-	
-	font-size: 20px;
-	transition: .5s;
-	
-}
-.MenuBut{
-	position: absolute;
-	width: 40px;
-	height:40px;
-	top:5px;
-	left:30px;
-	background-color: #949496;
-	cursor: pointer;
-	border-radius: 50%;
-	transition: .5s;
-}
+
+
 
 .burgerline { 
 	position: absolute; 
@@ -89,24 +63,39 @@ body {
 .burgerline:nth-child(2) { top: 60%; transform: rotate(-45deg);}
 
 
+.aktiveModel{
+	position: absolute;	
+	top: 20px;
+	left: 0px;
+	width: 200px;
+	border-radius: 50px;
+	background-color: white;
+
+	padding: 12.5px 35px 12.5px 400px;
+
+	font-family:DTLDocumenta;
+	text-align: center;
+	font-size: 15pt;
+
+	box-shadow: 5px 5px 10px #949496;
+	transition: .5s;
+
+}
+
 .aktiveModel.checked{
 	
 	color: transparent;
-	left:350px;
+	left: -250px;
 	
 
 }
 
 .menu.checked {
-	left:70px;
+	left:0px;
 
 }
 
-.MenuBut.checked {
-	
-	left:210px;	
-	
-}
+
 
 .MenuBut.checked .burgerline:nth-child(1){
 	left: 12px;
@@ -120,6 +109,23 @@ body {
 }
 
 
+.MenuBut{
+	position:absolute;
+	width: 40px;
+	height:40px;
+	top:25px;
+	left:370px;
+	background-color: #949496;
+	cursor: pointer;
+	border-radius: 50%;
+	transition: .5s;
+	
+
+}
+.MenuBut.checked{
+	left:340px;
+
+}
 
 /* ----------------- MenuLeftSide ----------------- */
 
@@ -128,33 +134,34 @@ body {
 	overflow: scroll;
 	position: absolute;
 	top: 0px;
-	left:-270px;
-	padding: 0px 20px 0px 20px;
-	width: 220px;
-	height:100%;
+	left:0%;
+	padding:10px;
+	
+	width: 300px;
 	background-color: white;
 	box-shadow: 5px 5px 10px #949496;
 	transition: .5s;
-
+	z-index: 5;
 }
 
 .ThemaBox {
 	
 	border-radius: 10px 10px 10px 10px;
-	margin: 5px 5px 5px 5px;
+	margin: 10px 5px 10px 5px;
+	
 	box-shadow: 0px 0px 0px transparent;
 	transition:.5s;
 }
 
 .Thema {
 
-	padding: 10px 20px;
+	padding: 10px 40px;
 	margin: 0px;
 	position: relative;	
 	text-align: center;
 	font-family: DTLDocumenta;
-	font-size: 10pt;
-
+	font-size: 12pt;
+	top: 0px;
 	color: white;
 	
 	
@@ -166,21 +173,21 @@ body {
 
 .searchbar{
 	position: relative;
-	
+	width: 225px;
 	background-color: white;
 	font-family: corbel;
 	font-size: 10pt;
 	box-shadow: 0px 0px 5px #949496;
 	border-color: #949496;
 	padding: 10px 20px;
-	margin: 15px 10px;
+	margin: 0px 5px;
 	border-radius: 10px 10px 10px 10px;
 	transition: .5s;
 }
 
 .Model{
 	padding: 5px 10px 5px 10px;
-	
+	color: black;
 	margin:0px  0px -30px 0px;
 	border-radius: 10px 10px 10px 10px;
 	font-family: corbel;
@@ -209,24 +216,17 @@ body {
 
 .ThemaBox.checked {
 	
-	border-radius: 10px 10px 10px 10px;
-	margin: 5px 5px 5px 5px;
+	
 	box-shadow: 5px 5px 10px #949496;
 }
 
-.Thema.checked {
-	
-	border-radius: 10px 10px 0px 0px;
-}
+
 
 .placeholder{
 height: 20px;
 }
 
-.ThemaContainer.checked {
-	left:0px;
 
-}
 
 .triangle {
 	position:absolute;
@@ -376,7 +376,7 @@ height: 20px;
 	background-color: #3f3f3f;
 	transition: 1s;
 	display: block;
-	z-index: 3;
+	z-index: -1;
 	
 }
 
@@ -431,7 +431,7 @@ height: 20px;
 	height: 50px;
 	bottom:4%;
 	left:3%;
-	z-index: 2;
+	z-index: -2;
 }
 
 .playpausebtn {
@@ -480,7 +480,7 @@ height: 20px;
 		right: -3%;
 		width:97%;
 		height:100%;
-		z-index: 2;	
+		
 	 } 
 	.slider {
 		position: absolute;
@@ -501,7 +501,7 @@ height: 20px;
 		width:15px;
 		height: 15px;
 		border-radius: 50%; 
-		z-index: 3;
+	
 		background:#537272;
 		cursor: pointer;
 	  }
@@ -513,7 +513,7 @@ height: 20px;
 		
 		margin-right:10px;
 		
-		z-index: -5;
+	
 		
 		width: auto;
 		height: 10px;
@@ -526,11 +526,11 @@ height: 20px;
 		left:0%;
 		top:0%;
 		margin: 0px 0px 0px -5px;
-		width: 10px;
+		width: 2px;
 		height: 10px;
 	
-		border-radius: 50%;
-		z-index: 0;
+	
+		
 	
 		background-color: #d3d3d3;
 		
