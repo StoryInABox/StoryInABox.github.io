@@ -112,7 +112,7 @@ body {
 
 .Thema {
 
-	padding: 6px 20px;
+	padding: 10px 20px;
 	position: relative;	
 	text-align: center;
 	font-family: DTLDocumenta;
@@ -132,10 +132,10 @@ body {
 	
 	background-color: white;
 	font-family: corbel;
-	font-size: 12pt;
-
-	padding: 10px 10px 10px 10px;
-	
+	font-size: 10pt;
+	width: 145px;
+	padding: 10px 20px;
+	margin: 15px 10px;
 	border-radius: 10px 10px 10px 10px;
 	transition: .5s;
 }
@@ -336,7 +336,7 @@ height: 20px;
 
 .triangle {
 	position:absolute;
-	top: 8px;
+	top: 12px;
 	left:15px;
 	padding: auto;
 
