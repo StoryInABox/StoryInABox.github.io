@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<link type="text/css" rel="stylesheet" href="main.css">
-	<title>Orbitales-Model</title>	
+
+
+
+
+
+	<title id ="title">Orbitales-Model</title>	
 </head>
 
 <body onload="ModelsiteIndex()" >
@@ -30,14 +35,47 @@
 
         
         <div class="ARBtn">
-            <img src="/Icons/cube_icon.svg">
+            <img src="./Icons/cube_icon.svg">
             <span class="tooltiptextrigth"><nobr>in AR-Modus wechseln</nobr></span></div>
         <div class="InfoBtn" id="InfoBtn" onclick="showtooltips()">
             <span class="tooltiptextrigth"><nobr>infoebene</nobr></span>
-            <img src="/Icons/info_icon.svg" ></div>
+            <img src="./Icons/info_icon.svg" ></div>
         <div class="PrintBtn">
-            <img src="/Icons/printer_icon.svg">
+            <img src="./Icons/printer_icon.svg">
             <span class="tooltiptextrigth"><nobr>QR-Code drucken</nobr></span></div>
+
+
+
+
+
+
+
+            <div class="loading">
+                <div class="loadingcircle"></div>
+                <div class="loadingText"><a>lade 3D-Model...</a></div>
+                
+            </div>
+            <div id="container"></div>
+           
+            <div class="playsliderbar">
+    
+                <div class="playpausebtn" id="playpausebtn">
+                    <div class="playpause"></div>
+                </div>
+                
+                <div class="timeslider">
+                <input type="range" min="0" max="100" step="0.01" class="slider" id="sliderid" >
+                
+                <div class="stamps"id="stamps">
+                    <div id="30" class="stamp"></div>
+                    <div id="60" class="stamp"></div>
+                    <div id="120" class="stamp"></div>
+                </div>
+                </div>
+    
+                
+                
+            </div>
   
 
 	
@@ -134,11 +172,12 @@
                         }
 
                         if (mydata[p].class == "Model"){
-                            modelEntry = document.createElement( 'div' );
+                            modelEntry = document.createElement( 'a' );
                             modelEntry.appendChild(document.createTextNode(mydata[p].Name));
                             modelEntry.setAttribute("class", "Model");
                             modelEntry.setAttribute("id", "Model");
                             modelEntry.setAttribute("attribute", themaindex);
+                            modelEntry.setAttribute("href",  ""+mydata[p].url+"");
                             ModelContainer.appendChild(modelEntry);
                             
                             
@@ -265,7 +304,7 @@
 
     function openModel() {
         //console.log(href)
-        console.log(ThemaContainer.children[href])
+        console.log(url)
         //ThemaContainer.children[href].scrollIntoView({block: "start", behavior: "smooth"});
         //ThemaContainer.children[href];
 
@@ -308,6 +347,15 @@
  
 
     }
-</script>	
+</script>
+<script type = "module">
+
+import {init} from './model.js';
+            
+init();
+
+</script>
+
+
 </body>
 </html>

@@ -1,0 +1,134 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.6.16",
+        "version" : "2.0"
+    },
+    "extensionsUsed" : [
+        "KHR_materials_transmission"
+    ],
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Zelle Gelb",
+            "scale" : [
+                0.9898391366004944,
+                0.9898391366004944,
+                0.9898391366004944
+            ],
+            "translation" : [
+                3.6314125061035156,
+                -0.05108233913779259,
+                -0.2842727303504944
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "emissiveFactor" : [
+                0.6950322389602661,
+                0.4479523003101349,
+                0.021941283717751503
+            ],
+            "extensions" : {
+                "KHR_materials_transmission" : {
+                    "transmissionFactor" : 0.8045454025268555
+                }
+            },
+            "name" : "material_red",
+            "pbrMetallicRoughness" : {
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.1072729229927063
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Icosphere.002",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 174766,
+            "max" : [
+                1.096078872680664,
+                1.0963870286941528,
+                1.0891315937042236
+            ],
+            "min" : [
+                -1.0920264720916748,
+                -1.0975608825683594,
+                -1.0946053266525269
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 174766,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 174766,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5125,
+            "count" : 737280,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 2097192,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 2097192,
+            "byteOffset" : 2097192
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 1398128,
+            "byteOffset" : 4194384
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 2949120,
+            "byteOffset" : 5592512
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 8541632,
+            "uri" : "materials_test.bin"
+        }
+    ]
+}

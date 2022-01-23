@@ -1,4 +1,4 @@
-thema1 = '[{"Name":"Anorganische Chemie", "class":"Thema", "color":"#F6A731"},{ "Name":"Orbitales-Model", "class":"Model", "url":"./Model-Website/Thema1/Orbitales-Model.html"},{"Name":"Bohrsches-Model", "class":"Model", "url":"Bohrsches-Model.html"}]';
+thema1 = '[{"Name":"Anorganische Chemie", "class":"Thema", "color":"#F6A731"},{ "Name":"Orbitales-Model", "class":"Model", "url":"OrbitalesModel.html"},{"Name":"Bohrsches-Model", "class":"Model", "url":"BohrschesModel.html"}]';
 
 thema2 = '[{"Name":"Zellbiologie", "class":"Thema", "color":"#AE4728"},{ "Name":"Neuronen", "class":"Model", "url":"./Model-Website/Thema2/Neuronen.html"},{"Name":"Synapse", "class":"Model", "url":"./Model-Website/Thema2/Synapse.html"},{"Name":"Blutbildung", "class":"Model", "url":"./Model-Website/Thema2/Blutbildung.html" }]';
 
