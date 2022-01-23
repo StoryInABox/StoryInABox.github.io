@@ -16,8 +16,6 @@ let loadingStautus =  new THREE.LoadingManager();
 
 export function init(){
 
-    
-
     clock = new THREE.Clock();
 
     scene = new THREE.Scene();
