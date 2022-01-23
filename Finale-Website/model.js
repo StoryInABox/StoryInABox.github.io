@@ -17,12 +17,14 @@ let Framerate = 24;
 let sliderpos = document.querySelector("input[type='range']");
 let PlayButton = document.getElementsByClassName("playpause");
 
+let Playstate = false;
+
 let loadingStautus =  new THREE.LoadingManager();
 
 export function init(){
 
     clock = new THREE.Clock();
-
+    sliderpos.value = 0;
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 100 );
@@ -155,21 +157,65 @@ function onWindowResize() {
 }
             
 
-
+let timeCapture=0;
 
 function animate(){
-    requestAnimationFrame( animate );
-    playpause();
 
-    const delta = clock.getDelta();
+    requestAnimationFrame( animate );
+    sliderObserver();
+    playerObserver();
     
-    if (typeof mixer !== 'undefined'){
-        mixer.update( delta );
-    }
+    
+
 
     renderer.render( scene, camera );
 }
 
+
+
+function playerObserver(){
+    //timeCapture = mixer.time;
+    const delta = clock.getDelta();
+
+    if (typeof mixer !== 'undefined'){
+
+        if (Playstate == true) {
+
+            mixer.update( delta );
+            sliderpos.value = mixer.time/Object.values(ClipDuration)[2]*100;  
+            //console.log( sliderpos.value)
+
+            if (mixer.time > Object.values(ClipDuration)[2]) {
+                mixer.time = 0;
+            }    
+    
+            timeCapture = mixer.time;
+        }
+
+        if (Playstate == false) {
+            
+            mixer.setTime(timeCapture);
+
+        }
+    }
+    
+}
+
+function sliderObserver(){
+    let slider = document.getElementById("sliderid");
+    slider.oninput = function() {
+
+        if (Playstate==true){
+            Playstate=false;
+            PlayButton[0].classList.toggle("checked");
+        }
+        Object.values(ClipDuration)[2]
+        let sliderConverted = slider.value*Object.values(ClipDuration)[2]/100;           
+        //console.log(sliderConverted);
+        timeCapture = sliderConverted;
+    }
+    
+}
 
 
 export function timestamps() {
@@ -193,46 +239,14 @@ export function timestamps() {
 export function playpause(){
 
     
-    sliderpos.value =0;
+    PlayButton[0].addEventListener('click',function() {
+        
+        this.classList.toggle("checked");
+        Playstate = !Playstate;
+        
 
-    for (let  p = 0; p < 1; p++) {
-        PlayButton[p].addEventListener('click',function() {
-            this.classList.toggle("checked");
-            
-            allLabels = document.getElementsByClassName("label");
-            
-            for (let i=0; i < ChildCount; i++) {
-                allLabels[i].classList.toggle("hide");
-                //console.log(i);
-            }
-            
-            //console.log(allLabels);
-            console.log(text);
-            
-            showLabels = !showLabels;
+    });
 
-            
-            PlayOn = !PlayOn;
-            if ( PlayOn == false){
-                
-                timeCapture = mixer.time;
-                
-                
-            }
-            if (PlayOn == true){
-                
-                  
-                
-            }
-            if (StampOn == true) {
-                setTimeout(function() {
-                    n=0;
-                }, 50);
-                
-            }
-           
-        });
-    }
     
 }
 

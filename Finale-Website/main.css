@@ -141,16 +141,19 @@ body {
 	background-color: white;
 	box-shadow: 5px 5px 10px #949496;
 	transition: .5s;
+
 	z-index: 5;
+	
 }
 
 .ThemaBox {
 	
 	border-radius: 10px 10px 10px 10px;
 	margin: 10px 5px 10px 5px;
-	
+	padding: 0px;
 	box-shadow: 0px 0px 0px transparent;
-	transition:.5s;
+	transition: .5s;
+	
 }
 
 .Thema {
@@ -161,14 +164,15 @@ body {
 	text-align: center;
 	font-family: DTLDocumenta;
 	font-size: 12pt;
-	top: 0px;
+	top: -10px;
 	color: white;
-	
+	transition: .5s;
+
 	
 
 	border-radius: 10px 10px 10px 10px;
 	cursor: pointer;
-	transition: .5s;
+
 }
 
 .searchbar{
@@ -176,24 +180,28 @@ body {
 	width: 225px;
 	background-color: white;
 	font-family: corbel;
-	font-size: 10pt;
-	box-shadow: 0px 0px 5px #949496;
+	font-size: 15pt;
+	
 	border-color: #949496;
+	border-style: solid;
 	padding: 10px 20px;
-	margin: 0px 5px;
-	border-radius: 10px 10px 10px 10px;
+	margin: 10px 5px;
+	border-radius: 50px;
 	transition: .5s;
 }
 
 .Model{
 	padding: 5px 10px 5px 10px;
 	color: black;
-	margin:0px  0px -30px 0px;
+	margin:0px  10px -30px 10px;
 	border-radius: 10px 10px 10px 10px;
 	font-family: corbel;
-	opacity: 0;
+	
+	font-size: 12pt;
+	opacity: 1;
 	transition: .5s;
 	display: block;
+	
 	text-decoration: none;
 	
 }
@@ -208,19 +216,30 @@ body {
 }
 
 .Model.checked{
-	display: block;
+
 	opacity:1;
-	margin:0px  0px 0px 0px;
+	color: black;
+	margin:0px 10px 5px 10px;
+	
 	
 }
 
 .ThemaBox.checked {
-	
-	
+	margin:10px 5px 20px 5px;
+	padding: 0px 0px 5px 0px;
 	box-shadow: 5px 5px 10px #949496;
+	
 }
 
+.Thema.checked{
+	
+	
+	margin: 0px;
+	border-radius: 10px 10px 0px 0px;
+	
 
+
+}
 
 .placeholder{
 height: 20px;
@@ -431,7 +450,7 @@ height: 20px;
 	height: 50px;
 	bottom:4%;
 	left:3%;
-	z-index: -2;
+	z-index: 0;
 }
 
 .playpausebtn {
@@ -441,7 +460,7 @@ height: 20px;
 	height: 100%;
 	top: 0px;
 	left:-2%;
-
+	
 	
 	
 }
@@ -463,6 +482,10 @@ height: 20px;
 	cursor: pointer;
 	will-change: border-width;
 	transition: all .2s ease;
+	
+	
+	cursor: pointer;
+
 }
 .playpause.checked {
 	  border-style: double;
@@ -493,6 +516,7 @@ height: 20px;
 		outline: none;
 		-webkit-transition: .2s;
 		transition: opacity .2s;
+		z-index: 5;
 	}
 	
 	 .slider::-webkit-slider-thumb {
