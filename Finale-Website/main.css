@@ -290,6 +290,15 @@ height: 20px;
 	cursor: pointer;
 }
 
+.InfoIMG{position: absolute;opacity: 1; transition: .5s;}
+
+.CancelInfoIMG{position: absolute; box-shadow: 0px 0px 25px 5px white; border-radius: 50px; opacity: 0; transition: .5s;}
+ 
+.InfoIMG.checked{position: absolute;opacity: 0;}
+
+.CancelInfoIMG.checked{position: absolute;opacity: 1;}
+
+
 .PrintBtn{
 	position: absolute;
 	width:40px;
@@ -298,6 +307,15 @@ height: 20px;
 	top:140px;
 	cursor: pointer;
 }
+
+
+.PrintIMG{position: absolute;opacity: 1; transition: .5s;}
+
+.CancelPrintIMG{position: absolute; box-shadow: 0px 0px 25px 5px white; border-radius: 50px; opacity: 0; transition: .5s;}
+ 
+.PrintIMG.checked{position: absolute;opacity: 0;}
+
+.CancelPrintIMG.checked{position: absolute;opacity: 1;}
 
 /* ----------------- InfoLayer ----------------- */
 
@@ -586,12 +604,57 @@ height: 20px;
 	
 	/* ----------------- QR ----------------- */
 
-	.printCanvas {
+	.QRCanvas {
 		position: absolute;
-		width:100px;
-		height: 100px;
+		transform: translate(-50%, -50%);
+		padding: 25px 25px 100px 25px;
+		width:300px;
 		top:50%;
 		left:50%;
-		border-radius: 10px;
-background-color: red;
+		opacity: 0;
+		transition: .5s;
+		border-radius: 25px;
+		box-shadow: 5px 5px 10px #949496;
+		z-index:-10;
+		background-color: white;
+	}
+	.printCanvas {
+		position: relative;
+		width:100%;
+	
+		
+	}
+
+	.QRCanvas.checked {
+		opacity: 1;
+		z-index: 10;
+		
+	}
+
+
+
+	.Qrtypo {
+		position: absolute;
+		font-family: corbel;
+		text-align: center;
+		border-radius: 50px;
+		font-size: 15pt;
+		transform: translate(-50%, 0%);
+		padding: 12.5px 30px 12.5px 60px;
+		left:50%;
+		bottom: 25px;
+	
+		border-style: solid;
+		background-color: white;
+		cursor: pointer;
+		z-index: 11;
+	}
+	.downloadicon {
+		position: absolute;
+		top:10px;
+		left: 20px;
+		width: 30px;
+		height: 30px;
+	
+		cursor: pointer;
 	}

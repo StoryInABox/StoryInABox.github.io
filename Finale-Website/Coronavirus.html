@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<link type="text/css" rel="stylesheet" href="main.css">
-
-	<title id ="title">Coronavirus</title>	
+	<title id ="title"></title>	
 </head>
 
 <body onload="ModelsiteIndex()" >
@@ -36,13 +35,23 @@
         <div class="ARBtn">
             <img src="./Icons/cube_icon.svg">
             <span class="tooltiptextrigth"><nobr>in AR-Modus wechseln</nobr></span></div>
+
         <div class="InfoBtn" id="InfoBtn" onclick="showtooltips()">
             <span class="tooltiptextrigth"><nobr>infoebene</nobr></span>
-            <img src="./Icons/info_icon.svg" ></div>
-        <div class="PrintBtn">
-            <img src="./Icons/printer_icon.svg">
-            <span class="tooltiptextrigth"><nobr>QR-Code drucken</nobr></span></div>
+            <img class ="InfoIMG" src="./Icons/info_icon.svg" >
+            <img class ="CancelInfoIMG" src="./Icons/cancel_icon.svg">
+        </div>
+        
+        <div class="PrintBtn" onclick="QrButton()">
+            <img class ="PrintIMG" src="./Icons/printer_icon.svg">
+            <img class ="CancelPrintIMG" src="./Icons/cancel_icon.svg">
+            <span class="tooltiptextrigth"><nobr>QR-Code drucken</nobr></span>
+        </div>
 
+
+        <div id="QRCanvas" class="QRCanvas">
+            <button class="Qrtypo"><img class="downloadicon" src="./Icons/download_icon.svg">Download</button>
+        </div>
 
 
 
@@ -57,7 +66,6 @@
             <div id="container"></div>
            
             <div class="playsliderbar">
-                
     
                 <div class="playpausebtn" id="playpausebtn">
                     <span class="tooltiptexttop"><nobr>Play/Pause</nobr></span>
@@ -106,6 +114,17 @@
  
 
     function ModelsiteIndex() {
+
+        let getNameaktiveModel=document.getElementById("aktiveModel").innerHTML
+        let setNameaktiveModel=document.getElementById("title")
+        setNameaktiveModel.appendChild(document.createTextNode(getNameaktiveModel));
+
+        let QRCanvas = document.getElementById("QRCanvas") 
+        let QRimg = document.createElement( 'img' )
+        QRimg.setAttribute("class", "printCanvas");
+        QRimg.setAttribute("src", "/QR-Codes/"+getNameaktiveModel+".png");
+        QRCanvas.appendChild(QRimg);
+
         ThemaContainer = document.getElementById("ThemaContainer");
        
         
@@ -327,6 +346,9 @@
         let tooltipcounttop = document.getElementsByClassName("tooltiptexttop").length;
         let tooltipcountbottom = document.getElementsByClassName("tooltiptextbottom").length;
 
+        document.getElementsByClassName("InfoIMG")[0].classList.toggle("checked");;
+        document.getElementsByClassName("CancelInfoIMG")[0].classList.toggle("checked");;
+
         //console.log(tooltipcount)
         for (let g=0; g<tooltipcountright; g++) {
             let tooltips= document.getElementsByClassName("tooltiptextrigth")[g];
@@ -352,7 +374,15 @@
         //test.classList.toggle("checked");
 
  console.log(document.querySelectorAll("[titles]"))
+
+    }
  
+    function QrButton() {
+
+        document.getElementById("QRCanvas").classList.toggle("checked");
+        document.getElementsByClassName("PrintIMG")[0].classList.toggle("checked");;
+        document.getElementsByClassName("CancelPrintIMG")[0].classList.toggle("checked");;
+        
 
     }
 </script>

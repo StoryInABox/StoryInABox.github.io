@@ -9,7 +9,7 @@ let clock, renderer,scene, camera, controls, pmremGenerator, RGBE, dracoLoader, 
 
 let AnimationCount, ClipDuration;
 
-let Dateipfad = "./models/"+document.getElementById("title").innerHTML+".gltf"
+let Dateipfad = "./models/"+document.getElementById("aktiveModel").innerHTML+".gltf"
 let Framerate = 24;
 
 
