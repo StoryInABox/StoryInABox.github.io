@@ -39,9 +39,13 @@
         <div class="InfoBtn" id="InfoBtn" onclick="showtooltips()">
             <span class="tooltiptextrigth"><nobr>infoebene</nobr></span>
             <img src="./Icons/info_icon.svg" ></div>
-        <div class="PrintBtn">
+        <div class="PrintBtn" onclick="QrButton()">
             <img src="./Icons/printer_icon.svg">
-            <span class="tooltiptextrigth"><nobr>QR-Code drucken</nobr></span></div>
+            <span class="tooltiptextrigth"><nobr>QR-Code drucken</nobr></span>
+
+        <div class="printCanvas"></div>
+        
+        </div>
 
 
 
@@ -57,7 +61,6 @@
             <div id="container"></div>
            
             <div class="playsliderbar">
-                
     
                 <div class="playpausebtn" id="playpausebtn">
                     <span class="tooltiptexttop"><nobr>Play/Pause</nobr></span>
@@ -352,7 +355,12 @@
         //test.classList.toggle("checked");
 
  console.log(document.querySelectorAll("[titles]"))
+
+    }
  
+    function QrButton() {
+
+        console.log("test")
 
     }
 </script>
