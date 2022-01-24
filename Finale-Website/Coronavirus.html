@@ -50,10 +50,10 @@
 
 
         <div id="QRCanvas" class="QRCanvas">
-            <button class="Qrtypo"><img class="downloadicon" src="./Icons/download_icon.svg">Download</button>
+            <a class="Qrtypo" ><img class="downloadicon" src="./Icons/download_icon.svg">Download</a>
         </div>
 
-
+        <div class="LabelContainer"></div>
 
 
 
@@ -121,9 +121,14 @@
 
         let QRCanvas = document.getElementById("QRCanvas") 
         let QRimg = document.createElement( 'img' )
+
         QRimg.setAttribute("class", "printCanvas");
-        QRimg.setAttribute("src", "/QR-Codes/"+getNameaktiveModel+".png");
+        QRimg.setAttribute("src", "./QR-Codes/"+getNameaktiveModel+".png");
         QRCanvas.appendChild(QRimg);
+
+        let DownloadButton = document.getElementsByClassName("Qrtypo")[0];
+        DownloadButton.setAttribute("href", "./QR-Codes/"+getNameaktiveModel+".png");
+
 
         ThemaContainer = document.getElementById("ThemaContainer");
        
@@ -384,6 +389,10 @@
         document.getElementsByClassName("CancelPrintIMG")[0].classList.toggle("checked");;
         
 
+    }
+
+    function downloadQR() {
+        console.log("fdfslkj")
     }
 </script>
 <script type = "module">

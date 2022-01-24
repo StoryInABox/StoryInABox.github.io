@@ -85,24 +85,37 @@ export function init(){
             //getAnimationInfo(model);	
             scene.add( model );
 
+            
+           
 
-            AnimationCount = Object.keys(gltf.animations).length;
-
-            mixer = new THREE.AnimationMixer( scene );
             
-            ClipDuration = mixer.clipAction( gltf.animations[ 0 ] ).getClip();
-            
-            
-            for ( let y = 0; y < AnimationCount; y++) {
-            
+               
                 
-                mixer.clipAction( gltf.animations[y] ).play();
+                if (gltf.animations.length > 0){
 
-                timestamps();
+                
+                document.getElementsByClassName("playsliderbar")[0].classList.toggle("checked");
+                AnimationCount = Object.keys(gltf.animations).length;
+               
+                mixer = new THREE.AnimationMixer( scene );
 
-            }
+                
+
+               
+                ClipDuration = mixer.clipAction( gltf.animations[ 0 ] ).getClip();
+                
+                
+                for ( let y = 0; y < AnimationCount; y++) {
+                
+                    
+                    mixer.clipAction( gltf.animations[y] ).play();
+
+                    timestamps();
+
+                }
             
-    });
+            }
+        });
 
     renderer = new THREE.WebGLRenderer({
         antialias : true,
@@ -166,8 +179,6 @@ function animate(){
     playerObserver();
     
     
-
-
     renderer.render( scene, camera );
 }
 
@@ -176,6 +187,8 @@ function animate(){
 function playerObserver(){
     //timeCapture = mixer.time;
     const delta = clock.getDelta();
+
+    
 
     if (typeof mixer !== 'undefined'){
 
@@ -195,6 +208,7 @@ function playerObserver(){
         if (Playstate == false) {
             
             mixer.setTime(timeCapture);
+            //LabelPositionObserver();
 
         }
     }
@@ -249,11 +263,18 @@ export function playpause(){
 
     
 }
+let Labelcontainer = document.getElementsByClassName("LabelContainer")[0];
+let label;
+function LabelPositionObserver() {
 
+    for (let f=0; f<model.children.length; f++) {
 
-function getAnimationInfo() {
-
-    let ChildCount = Object.keys(model.children).length;
-    console.log(Object.keys(model.children).length);
+        //let testpos = model.children[f].position;
+        label = document.createElement("div");
+        
+        
+    }
+    Labelcontainer.appendChild(label);
 
 }
+
