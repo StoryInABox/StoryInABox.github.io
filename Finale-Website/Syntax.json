@@ -1,8 +1,11 @@
-thema1 = '[{"Name":"Zellbiologie", "class":"Thema", "color":"#AE4728"},{ "Name":"Neuronen", "class":"Model", "url":"./Model-Website/Thema2/Neuronen.html"},{"Name":"Synapse", "class":"Model", "url":"./Model-Website/Thema2/Synapse.html"},{"Name":"Blutbildung", "class":"Model", "url":"./Model-Website/Thema2/Blutbildung.html" }]';
+thema1 = '[{"Name":"Zellbiologie", "class":"Thema", "color":"#AE4728"},{ "Name":"Neuronen", "class":"Model", "url":"Neuronen.html"},{"Name":"Synapse", "class":"Model", "url":"Synapse.html"},{"Name":"Blutbildung", "class":"Model", "url":"Blutbildung.html" }]';
 
-thema2 = '[{"Name":"Anorganische Chemie", "class":"Thema", "color":"#F6A731"},{ "Name":"Orbitales-Model", "class":"Model", "url":"OrbitalesModel.html"},{"Name":"Bohrsches-Model", "class":"Model", "url":"BohrschesModel.html"}]';
+thema2 = '[{"Name":"Anorganische Chemie", "class":"Thema", "color":"#F6A731"},{ "Name":"Orbitales-Model", "class":"Model", "url":"OrbitalesModel.html"},{"Name":"Bohrsches-Model", "class":"Model", "url":"BohrschesModel.html"},{"Name":"Ciprofloxacin", "class":"Model", "url":"Ciprofloxacin.html"}]';
 
-thema3 = '[{"Name":"Organische Chemie", "class":"Thema", "color":"#7994C0"},{ "Name":"Neuronen", "class":"Model", "url":"./Model-Website/Thema2/Neuronen.html"},{"Name":"Synapse", "class":"Model", "url":"./Model-Website/Thema2/Synapse.html"},{"Name":"Blutbildung", "class":"Model", "url":"./Model-Website/Thema2/Blutbildung.html" }]';
+thema3 = '[{"Name":"Organische Chemie", "class":"Thema", "color":"#7994C0"},{ "Name":"Aldehydringe", "class":"Model", "url":"Aldehydringe.html"},{ "Name":"Aldehydringe", "class":"Model", "url":"Aldehydringe.html"}]';
 
-thema4 = '[{"Name":"Stoffwechsel", "class":"Thema", "color":"#669046"},{ "Name":"Neuronen", "class":"Model", "url":"./Model-Website/Thema2/Neuronen.html"},{"Name":"Synapse", "class":"Model", "url":"./Model-Website/Thema2/Synapse.html"},{"Name":"Blutbildung", "class":"Model", "url":"./Model-Website/Thema2/Blutbildung.html" }]';
+thema4 = '[{"Name":"Proteine", "class":"Thema", "color":"#669046"},{ "Name":"Spikeprotein", "class":"Model", "url":"Spikeprotein.html"},{"Name":"Hämoglobin", "class":"Model", "url":"Hämoglobin.html"}]';
 
+thema5 = '[{"Name":"Viren & Bakterien", "class":"Thema", "color":"#BB85E4"},{ "Name":"Coronavirus", "class":"Model", "url":"Coronavirus.html"}]';
+
+thema6 = '[{"Name":"noch Verfügbar", "class":"Thema", "color":"Grey"},{ "Name":"Hier könnte ihre Werbung stehen", "class":"Model", "url":"Empty.html"}]';
