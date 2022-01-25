@@ -27,8 +27,9 @@ export function init(){
     sliderpos.value = 0;
     scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 100 );
+    camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
     camera.position.set( 5, 2, 8 );
+    
     
 		
 	RGBE = new RGBELoader(loadingStautus)
