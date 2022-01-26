@@ -1,6 +1,6 @@
 thema1 = '[{"Name":"Zellbiologie", "class":"Thema", "color":"#AE4728"},{ "Name":"Neuronen", "class":"Model", "url":"Neuronen.html"},{"Name":"Synapse", "class":"Model", "url":"Synapse.html"},{"Name":"Blutbildung", "class":"Model", "url":"Blutbildung.html" }]';
 
-thema2 = '[{"Name":"Anorganische Chemie", "class":"Thema", "color":"#F6A731"},{ "Name":"Orbitales-Model", "class":"Model", "url":"OrbitalesModel.html"},{"Name":"Bohrsches-Model", "class":"Model", "url":"BohrschesModel.html"},{"Name":"Ciprofloxacin", "class":"Model", "url":"Ciprofloxacin.html"}]';
+thema2 = '[{"Name":"Anorganische Chemie", "class":"Thema", "color":"#F6A731"},{ "Name":"Orbitales-Model", "class":"Model", "url":"Orbitales-Model.html"},{"Name":"Bohrsches-Model", "class":"Model", "url":"Bohrsches-Model.html"},{"Name":"Ciprofloxacin", "class":"Model", "url":"Ciprofloxacin.html"}]';
 
 thema3 = '[{"Name":"Organische Chemie", "class":"Thema", "color":"#7994C0"},{ "Name":"Serotonin", "class":"Model", "url":"Serotonin.html"},{ "Name":"Aldehydringe", "class":"Model", "url":"Aldehydringe.html"}]';
 
