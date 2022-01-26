@@ -6,7 +6,7 @@ import { OrbitControls } from './controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from './js/CSS2DRenderer.js';
 
 let WebsiteName = window.location.pathname;
-WebsiteName = WebsiteName.replace("/", "");
+WebsiteName = WebsiteName.replace("/Finale-Website/", "");
 WebsiteName = WebsiteName.replace(".html", "");
 
 
