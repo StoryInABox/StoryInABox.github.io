@@ -1,11 +1,8 @@
-import * as THREE from '../build/three.module.js';
-
 
 var CSS2DObject = function ( element ) {
 
 	THREE.Object3D.call( this );
-	
-	
+
 	this.element = element || document.createElement( 'div' );
 
 	this.element.style.position = 'absolute';
@@ -13,7 +10,7 @@ var CSS2DObject = function ( element ) {
 	this.addEventListener( 'removed', function () {
 
 		this.traverse( function ( object ) {
-			
+
 			if ( object.element instanceof Element && object.element.parentNode !== null ) {
 
 				object.element.parentNode.removeChild( object.element );
@@ -27,7 +24,7 @@ var CSS2DObject = function ( element ) {
 };
 
 CSS2DObject.prototype = Object.assign( Object.create( THREE.Object3D.prototype ), {
-	
+
 	constructor: CSS2DObject,
 
 	copy: function ( source, recursive ) {
@@ -35,7 +32,7 @@ CSS2DObject.prototype = Object.assign( Object.create( THREE.Object3D.prototype )
 		Object3D.prototype.copy.call( this, source, recursive );
 
 		this.element = source.element.cloneNode( true );
-		
+
 		return this;
 
 	}
@@ -45,7 +42,7 @@ CSS2DObject.prototype = Object.assign( Object.create( THREE.Object3D.prototype )
 //
 
 var CSS2DRenderer = function () {
-	
+
 	var _this = this;
 
 	var _width, _height;
@@ -74,7 +71,7 @@ var CSS2DRenderer = function () {
 	};
 
 	this.setSize = function ( width, height ) {
-		
+
 		_width = width;
 		_height = height;
 
@@ -87,7 +84,7 @@ var CSS2DRenderer = function () {
 	};
 
 	var renderObject = function ( object, scene, camera ) {
-		
+
 		if ( object instanceof CSS2DObject ) {
 
 			object.onBeforeRender( _this, scene, camera );
@@ -125,7 +122,7 @@ var CSS2DRenderer = function () {
 	};
 
 	var getDistanceToSquared = function () {
-		
+
 		var a = new THREE.Vector3();
 		var b = new THREE.Vector3();
 
@@ -141,7 +138,7 @@ var CSS2DRenderer = function () {
 	}();
 
 	var filterAndFlatten = function ( scene ) {
-		
+
 		var result = [];
 
 		scene.traverse( function ( object ) {
@@ -155,7 +152,7 @@ var CSS2DRenderer = function () {
 	};
 
 	var zOrder = function ( scene ) {
-		
+
 		var sorted = filterAndFlatten( scene ).sort( function ( a, b ) {
 
 			var distanceA = cache.objects.get( a ).distanceToCameraSquared;
@@ -176,7 +173,7 @@ var CSS2DRenderer = function () {
 	};
 
 	this.render = function ( scene, camera ) {
-		
+
 		if ( scene.autoUpdate === true ) scene.updateMatrixWorld();
 		if ( camera.parent === null ) camera.updateMatrixWorld();
 

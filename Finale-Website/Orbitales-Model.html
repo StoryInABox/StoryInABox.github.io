@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<link type="text/css" rel="stylesheet" href="main.css">
+	<title id ="title"></title>	
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js'></script>
+<!--
+  <script src="../../jsartoolkit5/artoolkit.min.js"></script>
+    <script src="../../jsartoolkit5/artoolkit.api.js"></script>
+
+  <script src="../../threex/threex-artoolkitsource.js"></script>
+    <script src="../../threex/threex-artoolkitcontext.js"></script>
+    <script src="../../threex/threex-arbasecontrols.js"></script>
+    <script src="../../threex/threex-armarkercontrols.js"></script>	
+-->
+
+</head>
+
+<body onload="ModelsiteIndex()" >
+  
+    <div class= "background"></div>
+    
+
+        <div class= "menu" id="menu" >    
+            
+            <div class="aktiveModel" id="aktiveModel"></div>
+
+            <div class="MenuBut" id="MenuBut" onclick="toggleNavigationbar()">
+                <span class="burgerline"></span>
+                <span class="burgerline"></span>
+                <span class="tooltiptexttop"><nobr>openclose</nobr></span>
+            </div>
+
+            <div class="ThemaContainer" id="ThemaContainer">
+
+                
+
+                <span class="tooltiptexttop"><nobr>Searchbar</nobr></span>
+            <input class="searchbar" placeholder=" &#128270; Suchen">
+            </div>
+        </div>
+
+        
+        <div class="ARBtn">
+            <img src="./Icons/cube_icon.svg">
+            <span class="tooltiptextrigth"><nobr>in AR-Modus wechseln</nobr></span></div>
+
+        <div class="InfoBtn" id="InfoBtn" onclick="showtooltips()">
+            <span class="tooltiptextrigth"><nobr>infoebene</nobr></span>
+            <img class ="InfoIMG" src="./Icons/info_icon.svg" >
+            <img class ="CancelInfoIMG" src="./Icons/cancel_icon.svg">
+        </div>
+        
+        <div class="PrintBtn" onclick="QrButton()">
+            <img class ="PrintIMG" src="./Icons/printer_icon.svg">
+            <img class ="CancelPrintIMG" src="./Icons/cancel_icon.svg">
+            <span class="tooltiptextrigth"><nobr>QR-Code drucken</nobr></span>
+        </div>
+
+
+        <div id="QRCanvas" class="QRCanvas">
+            <a class="Qrtypo" ><img class="downloadicon" src="./Icons/download_icon.svg">Download</a>
+        </div>
+
+        <div class="LabelContainer"></div>
+
+
+
+
+            <div class="loading">
+                <div class="loadingcircle"></div>
+                <div class="loadingText"><a>3D-Model wird initialisiert...</a></div>
+                
+            </div>
+            <div id="container"></div>
+           
+            <div class="playsliderbar">
+    
+                <div class="playpausebtn" id="playpausebtn">
+                    <span class="tooltiptexttop"><nobr>Play/Pause</nobr></span>
+                    <div class="playpause"></div>
+                </div>
+                
+                <div class="timeslider">
+                    <span class="tooltiptextbottom"><nobr>Play/Pause</nobr></span>  
+                <input type="range" min="0" max="100" step="0.01" class="slider" id="sliderid" >
+                
+                <div class="stamps"id="stamps">
+                    
+                    <div id="0" class="stamp"></div>
+                    <div id="100" class="stamp"></div>
+                </div>
+                </div>
+    
+                
+                
+            </div>
+  
+
+	
+    <script type="text/javascript" src="Syntax.json"></script>	
+    <script>
+    
+    let themaEntry;
+    let modelEntry;
+    let triangle;
+    let themaindex=0;
+    let ThemaContainer;
+
+    let ModelContainer;
+
+    let JsonModelCount;
+    let JsonThemaCount;
+    let placeholder;
+    let ThemaAnzahl = 24;
+    let ModelindexDefine = 1;
+    let modelindex = 2;
+    let url;
+    let href;
+    
+
+ 
+
+    function ModelsiteIndex() {
+
+        WebsiteName = window.location.pathname;
+        WebsiteName = WebsiteName.replace("/", "");
+        WebsiteName = WebsiteName.replace(".html", "");
+        console.log( WebsiteName );
+
+
+
+      
+
+        let setNameaktiveModel=document.getElementById("aktiveModel")
+        setNameaktiveModel.appendChild(document.createTextNode(WebsiteName));
+
+        let setNameTitle=document.getElementById("title")
+        setNameTitle.appendChild(document.createTextNode(WebsiteName));
+
+        let QRCanvas = document.getElementById("QRCanvas") 
+        let QRimg = document.createElement( 'img' )
+
+        QRimg.setAttribute("class", "printCanvas");
+        QRimg.setAttribute("src", "./QR-Codes/"+WebsiteName+".png");
+        QRCanvas.appendChild(QRimg);
+
+        let DownloadButton = document.getElementsByClassName("Qrtypo")[0];
+        DownloadButton.setAttribute("href", "./QR-Codes/"+WebsiteName+".png");
+        DownloadButton.setAttribute("download", ""+WebsiteName+" QR-Code");
+
+
+        ThemaContainer = document.getElementById("ThemaContainer");
+       
+        
+                
+
+        for (let u=1; u<ThemaAnzahl+1; u++) {
+        
+        if (u == 1) {JsonThemaCount=thema1;}
+        if (u == 2) {JsonThemaCount=thema2;}
+        if (u == 3) {JsonThemaCount=thema3;}
+        if (u == 4) {JsonThemaCount=thema4;}
+        if (u == 5) {JsonThemaCount=thema5;}
+        if (u == 6) {JsonThemaCount=thema6;}
+     
+       
+       
+    
+        var mydata = JSON.parse(JsonThemaCount);
+        JsonModelCount = Object.entries(mydata).length;
+
+            for (let f=0; f<JsonModelCount; f++) {
+                
+/*
+                if (mydata[f].class == "Model"){
+                    modelEntry.setAttribute("class", "Model");
+                    modelEntry.setAttribute("id", "Model");
+                    modelEntry.setAttribute("name", mydata[f].Name);
+                    modelEntry.setAttribute("href", mydata[f].url);
+                   
+                    modelEntry.setAttribute("onclick", "openModel(href="+ModelindexDefine+")");
+                   
+                }
+*/
+                if (mydata[f].class == "Thema"){
+                    themaEntry = document.createElement( 'div' );
+                  
+                    
+                    
+                    themaEntry.appendChild(ModelContainer = document.createElement( 'div' ));
+                    ModelContainer.setAttribute("id", "ModelContainer");
+                    
+                    themaEntry.setAttribute("class", "ThemaBox");
+                    themaEntry.setAttribute("id", "ThemaBox");
+                    
+                   
+                    
+                    //ModelContainerEntry = document.createElement( 'div' );
+                    //ModelContainerEntry.setAttribute("id", "ModelContainer");
+
+                    
+                 
+                    for (let p=0; p<JsonModelCount; p++) {
+
+                        if (mydata[p].class == "Thema"){
+                            modelEntry = document.createElement( 'div' );
+                            modelEntry.appendChild(document.createTextNode(mydata[p].Name));
+                            modelEntry.setAttribute("class", "Thema");
+                            modelEntry.setAttribute("id", "Thema");
+                            modelEntry.setAttribute("attribute", themaindex);
+                            modelEntry.setAttribute("style", "background-color: "+ mydata[p].color +"");
+                            modelEntry.setAttribute("onclick", "ausklappen(dings="+themaindex+")");
+                            ModelContainer.appendChild(modelEntry);
+
+                            
+
+
+                            
+                            triangle = document.createElement( 'div' );
+                            triangle.setAttribute("class", "triangle");
+                            //triangle.setAttribute("style", "border-left-color: "+ mydata[p].color +"");
+                            modelEntry.appendChild(triangle);
+                        }
+
+                        if (mydata[p].class == "Model"){
+                            modelEntry = document.createElement( 'a' );
+                            modelEntry.appendChild(document.createTextNode(mydata[p].Name));
+                            modelEntry.setAttribute("class", "Model");
+                            modelEntry.setAttribute("id", "Model");
+                            modelEntry.setAttribute("attribute", themaindex);
+                            modelEntry.setAttribute("href",  ""+mydata[p].url+"");
+                            ModelContainer.appendChild(modelEntry);
+                            
+                            
+                        }
+                        
+
+                    }
+                    themaindex++;
+
+
+                }
+                ThemaContainer.appendChild(themaEntry);
+                
+                ModelindexDefine++;
+         
+                
+                    
+            
+   
+                //console.log(document.getElementById("ModelContainer"))
+                
+
+                
+                //ModelContainer.appendChild(ModelContainerEntry);
+              
+                //ThemaContainer.appendChild(ModelContainerEntry);
+                //ThemaContainer.appendChild(placeholder);
+                //console.log(JsonThemaCount);
+                //console.log(mydata[f].color);
+                //console.log(document.getElementsByClassName("Thema")[0].style);
+            }
+
+
+
+
+
+
+
+            
+        }
+
+        
+       
+
+        //SCROLLPOSITION
+
+            ThemaContainer.onscroll = function() {
+                //console.log(screen.availHeight)
+                //console.log(screen.availHeight-ThemaContainer.children[3].offsetTop)
+                //console.log(screen.availHeight-ThemaContainer.children[3].offsetTop+ThemaContainer.children[3].offsetHeight)
+                //console.log(ThemaContainer.scrollTop)
+                //console.log(ThemaContainer.children)
+
+                
+        
+                
+
+
+            };
+
+            console.log(document)
+    }
+
+
+    function toggleNavigationbar() {
+        let MenuBut = document.getElementById("MenuBut");
+        let aktiveModel = document.getElementById("aktiveModel");
+        let menu = document.getElementById("menu");
+        let backgr = document.getElementById("themaBackground");
+        let ThemaContainer = document.getElementById("ThemaContainer");
+     
+        //let thema = document.getElementById("Thema");
+      
+        //menuContainer.classList.toggle("checked");
+        aktiveModel.classList.toggle("checked");
+        MenuBut.classList.toggle("checked");
+        menu.classList.toggle("checked");
+        ThemaContainer.classList.toggle("checked");
+        //thema.classList.toggle("checked");
+        //sucher.classList.toggle("checked");
+    }
+
+    function ausklappen() {
+        
+        let modelcount=document.getElementsByClassName("Model").length;
+        let themacount = document.getElementsByClassName("Thema").length;
+            for (let c = 0;  c<themacount; c++){
+                let Thema = document.getElementsByClassName("Thema")[c];
+                let ClickedThema = document.getElementsByClassName("Thema")[c].getAttribute("attribute")
+                
+                    if (ClickedThema == dings) {
+                      
+                        Thema.classList.toggle("checked");
+                        let ThemaBox = document.getElementsByClassName("ThemaBox")[c]
+                        let triangle = document.getElementsByClassName("triangle")[c]
+                        ThemaBox.classList.toggle("checked");
+                        triangle.classList.toggle("checked");
+                        console.log(document.getElementsByClassName("ThemaBox")[c])
+                        
+                        for (let e = 0;  e<modelcount; e++){
+                            let Model = document.getElementsByClassName("Model")[e];
+                            let ClickedModel = document.getElementsByClassName("Model")[e].getAttribute("attribute")
+                            
+                            if (ClickedModel == dings) {
+                            console.log()
+                            Model.classList.toggle("checked");
+                            }
+                        
+                        }
+                    
+                    }
+                
+                //Model.classList.toggle("checked");
+            
+                
+            }
+            //Model=Model.getAttribute("attribute")
+            
+            //console.log(dings)
+            
+        }
+
+
+
+    function openModel() {
+        //console.log(href)
+        console.log(url)
+        //ThemaContainer.children[href].scrollIntoView({block: "start", behavior: "smooth"});
+        //ThemaContainer.children[href];
+
+    }
+
+
+
+    function showtooltips() {
+       
+        let tooltipcountright = document.getElementsByClassName("tooltiptextrigth").length;
+        let tooltipcountleft = document.getElementsByClassName("tooltiptextleft").length;
+        let tooltipcounttop = document.getElementsByClassName("tooltiptexttop").length;
+        let tooltipcountbottom = document.getElementsByClassName("tooltiptextbottom").length;
+
+        document.getElementsByClassName("InfoIMG")[0].classList.toggle("checked");;
+        document.getElementsByClassName("CancelInfoIMG")[0].classList.toggle("checked");;
+
+        //console.log(tooltipcount)
+        for (let g=0; g<tooltipcountright; g++) {
+            let tooltips= document.getElementsByClassName("tooltiptextrigth")[g];
+            //console.log(document.getElementsByClassName("tooltiptextrigth tooltiptextleft"))
+            tooltips.classList.toggle("checked");
+        }
+        for (let g=0; g<tooltipcountleft; g++) {
+            let tooltips= document.getElementsByClassName("tooltiptextleft")[g];
+            //console.log(document.getElementsByClassName("tooltiptextrigth tooltiptextleft"))
+            tooltips.classList.toggle("checked");
+        }
+        for (let g=0; g<tooltipcounttop; g++) {
+            let tooltips= document.getElementsByClassName("tooltiptexttop")[g];
+            //console.log(document.getElementsByClassName("tooltiptextrigth tooltiptextleft"))
+            tooltips.classList.toggle("checked");
+        }
+        for (let g=0; g<tooltipcountbottom; g++) {
+            let tooltips= document.getElementsByClassName("tooltiptextbottom")[g];
+            //console.log(document.getElementsByClassName("tooltiptextrigth tooltiptextleft"))
+            tooltips.classList.toggle("checked");
+        }
+        //let test= document.getElementById("tooltiptext")
+        //test.classList.toggle("checked");
+
+ console.log(document.querySelectorAll("[titles]"))
+
+    }
+ 
+    function QrButton() {
+
+        document.getElementById("QRCanvas").classList.toggle("checked");
+        document.getElementsByClassName("PrintIMG")[0].classList.toggle("checked");;
+        document.getElementsByClassName("CancelPrintIMG")[0].classList.toggle("checked");;
+        
+
+    }
+
+    function downloadQR() {
+        console.log("fdfslkj")
+    }
+</script>
+<script type = "module">
+
+import {init, playpause} from './model.js';
+            
+init();
+playpause();
+</script>
+
+
+</body>
+</html>
