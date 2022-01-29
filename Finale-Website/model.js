@@ -213,7 +213,7 @@ function init(){
             type : 'nft',
             descriptorsUrl : './dataNFT/Blutbildung',
             
-            /*
+            
             smooth: true,
             // number of matrices to smooth tracking over, more = smoother but slower follow
             smoothCount: 10,
@@ -221,7 +221,7 @@ function init(){
             smoothTolerance: 0.1,
             // threshold for smoothing, will keep still unless enough matrices are over tolerance
             smoothThreshold: 2,
-            */
+            
         })
 
         
@@ -332,9 +332,9 @@ function init(){
                 scene.visible = false 
                 //root.matrixAutoUpdate = false;
                 root.add(model);
-                model.position.set( 175, 175, -175 );
+                model.position.set( 0,0,0);
                 
-                model.scale.set( 25, 25, 25 );
+                model.scale.set( 50, 50, 50 );
             }
 
 
