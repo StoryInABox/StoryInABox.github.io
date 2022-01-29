@@ -337,7 +337,7 @@ function init(){
                 
                 model.scale.set(50, 50, 50 );
                 root.add(model);
-                model.position.z = -200;//zumir
+                model.position.z = 200;//zumir
                 model.position.x = 350;//nach rechts
                 model.position.y = 100;//nach oben
             }
