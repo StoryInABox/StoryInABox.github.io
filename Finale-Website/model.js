@@ -332,7 +332,7 @@ function init(){
                 scene.visible = false 
                 //root.matrixAutoUpdate = false;
                 root.add(model);
-                model.position.set( 0, 0, -175);
+                model.position.set( 0, 0, 0);
                 
                 model.scale.set(30, 30, 30 );
             }
