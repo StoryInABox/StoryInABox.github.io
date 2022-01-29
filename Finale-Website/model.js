@@ -183,13 +183,13 @@ function init(){
             cameraParametersUrl: './data/camera_para.dat',
 
             detectionMode: 'mono',
-            maxDetectionRate: 60,
-            canvasWidth: 480*2,
-            canvasHeight: 640*2,
+            //maxDetectionRate: 60,
+            canvasWidth: 480,
+            canvasHeight: 640,
             imageSmoothingEnabled : true,
         }, {
-            sourceWidth: 480*2,
-            sourceHeight: 640*2,
+            sourceWidth: 480,
+            sourceHeight: 640,
         })
         
         // copy projection matrix to camera when initialization complete
@@ -211,7 +211,7 @@ function init(){
             type : 'nft',
             descriptorsUrl : './dataNFT/Blutbildung',
             
-            
+            /*
             smooth: true,
             // number of matrices to smooth tracking over, more = smoother but slower follow
             smoothCount: 10,
@@ -219,7 +219,7 @@ function init(){
             smoothTolerance: 0.1,
             // threshold for smoothing, will keep still unless enough matrices are over tolerance
             smoothThreshold: 2,
-            
+            */
         })
 
         
