@@ -208,11 +208,11 @@ function init(){
         scene.add(markerRoot1);
         //markerRoot1.add(scene);
         scene.add(root);
-        let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, root, {
+        let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, camera, {
             //type: 'pattern', patternUrl: "../../data/Testmaker.patt",
             type : 'nft',
             descriptorsUrl : './dataNFT/Blutbildung',
-            
+            changeMatrixMode: 'cameraTransformMatrix',
             
             smooth: true,
             // number of matrices to smooth tracking over, more = smoother but slower follow
@@ -337,13 +337,13 @@ function init(){
                 
                 model.scale.set(50, 50, 50 );
                 root.add(model);
-                model.position.z = 200;//zumir
-                model.position.x = 250;//nach rechts
+                model.position.z = -200;//zumir
+                model.position.x = 350;//nach rechts
                 model.position.y = 100;//nach oben
             }
 
 
-            console.log("newtestlalaiiuouououzi")
+            console.log("change")
             
            
            
