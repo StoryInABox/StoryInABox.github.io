@@ -180,7 +180,7 @@ function init(){
         // create atToolkitContext
         arToolkitContext = new THREEx.ArToolkitContext({
             
-            cameraParametersUrl: './camera_para.dat',
+            cameraParametersUrl: './data/camera_para.dat',
 
             detectionMode: 'mono',
             maxDetectionRate: 60,
