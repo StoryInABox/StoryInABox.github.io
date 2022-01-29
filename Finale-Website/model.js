@@ -338,12 +338,12 @@ function init(){
                 model.scale.set(50, 50, 50 );
                 root.add(model);
                 model.position.z = 200;//zumir
-                model.position.x = 350;//nach rechts
+                model.position.x = 250;//nach rechts
                 model.position.y = 100;//nach oben
             }
 
 
-            console.log("newtestlalaiuzi")
+            console.log("newtestlalaiiuouououzi")
             
            
            
