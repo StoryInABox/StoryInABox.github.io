@@ -1,21 +1,26 @@
 import * as THREE from './build/three.module.js';
+
 import { GLTFLoader } from './js/GLTFLoader.js';
 import { DRACOLoader } from './js/DRACOLoader.js';
 import { RGBELoader } from './js/RGBELoader.js';
 import { OrbitControls } from './controls/OrbitControls.js';
-import { CSS2DRenderer, CSS2DObject } from './js/CSS2DRenderer.js';
+//import { CSS2DRenderer, CSS2DObject } from './js/CSS2DRenderer.js';
+import { CSS2DRenderer, CSS2DObject } from './js/CSS2DRendererAlt.js';
+
+
 
 let WebsiteName = window.location.pathname;
 WebsiteName = WebsiteName.replace("/Finale-Website/", "");
+WebsiteName = WebsiteName.replace("/", "");
 WebsiteName = WebsiteName.replace(".html", "");
 
-
+console.log(WebsiteName)
 let Dateipfad = "./models/"+WebsiteName+".gltf"
 let Framerate = 24;
-let FilterLabelBy= "";
+let FilterLabelBy= "label";
 
 
-let clock, renderer,scene, camera, controls, pmremGenerator, RGBE, dracoLoader, loader, model, mixer;
+
 
 let labelRenderer;
 let label;
@@ -41,6 +46,7 @@ let AnimationCount, ClipDuration;
 let Objectcounter;
 
 
+
 let sliderpos = document.querySelector("input[type='range']");
 let PlayButton = document.getElementsByClassName("playpause");
 
@@ -48,33 +54,207 @@ let Playstate = false;
 
 let loadingStautus =  new THREE.LoadingManager();
 
-export function init(){
+let clock, renderer,scene, camera, controls, pmremGenerator, RGBE, dracoLoader, loader, model, mixer;
+
+
+
+let ARState=false;
+
+let ARButton = document.getElementsByClassName("ARBtn")[0];
+
+export function ARcheckup(){
+
+    if (ARState== true) {
+        
+        init();
+        animate();
+
+        
+    } 
+
+    if (ARState == false) {
+       
+        init();
+        animate();
+
+
+    }
+}
+
+ARButton.addEventListener("click", () => {
+        
+    if (ARButton.className == "ARBtn checked"){
+        document.getElementsByClassName("loading")[0].classList.toggle("checked");
+        //console.log("AR on")
+        ARState = true;
+        ARcheckup();
+        //init();
+        //playpause();
+        
+    }
+
+    if (ARButton.className == "ARBtn"){
+        document.getElementsByClassName("loading")[0].classList.toggle("checked");
+        console.log("3D on")
+        ARState = false;
+        ARcheckup();
+        //init();
+        //playpause();
+        
+    }
+
+});  
+
+
+let arToolkitSource;
+let arToolkitContext;
+var markerRoot1;
+let root = new THREE.Object3D();
+
+
+
+function init(){
+
+
+
+   
+
+
+
+
+    if (typeof renderer !== 'undefined')
+	{
+       
+		document.body.removeChild(renderer.domElement)
+       
+	}
+    if (typeof labelRenderer !== 'undefined')
+	{
+    
+        document.body.removeChild(labelRenderer.domElement)
+	}
+    
+
+    if (ARState == true) {
+        while(root.children.length > 0){ 
+            root.remove(root.children[0]); 
+        }
+    }
 
     clock = new THREE.Clock();
     sliderpos.value = 0;
     scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
-    camera.position.set( 5, 2, 8 );
-    
-    
-		
-	RGBE = new RGBELoader(loadingStautus)
-	RGBE.setDataType( THREE.UnsignedByteType )
-	RGBE.setPath( './textures/equirectangular/' )
-	RGBE.load( 'studio_small_08_1k.hdr', function ( texture ) {
+    if (ARState == true) {
 
-		const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
+
+        camera = new THREE.Camera();
+        
+        scene.add(camera);
+        console.log()
+        
+        ////////////////////////////////////////////////////////////
+        // setup arToolkitSource
+        ////////////////////////////////////////////////////////////
+
+        arToolkitSource = new THREEx.ArToolkitSource({
+            sourceType : 'webcam',
+        });
+        
+
+        
+
+        arToolkitSource.init(function onReady(){
+            onResize()
+        });
+        
+        // handle resize event
+        window.addEventListener('resize', function(){
+            onResize()
+        });
+        
+        ////////////////////////////////////////////////////////////
+        // setup arToolkitContext
+        ////////////////////////////////////////////////////////////	
+
+        // create atToolkitContext
+        arToolkitContext = new THREEx.ArToolkitContext({
+            
+            cameraParametersUrl: './camera_para.dat',
+
+            detectionMode: 'mono',
+            maxDetectionRate: 60,
+            canvasWidth: 480*2,
+            canvasHeight: 640*2,
+            imageSmoothingEnabled : true,
+        }, {
+            sourceWidth: 480*2,
+            sourceHeight: 640*2,
+        })
+        
+        // copy projection matrix to camera when initialization complete
+        arToolkitContext.init( function onCompleted(){
+            camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+        });
+
+        ////////////////////////////////////////////////////////////
+        // setup markerRoots
+        ////////////////////////////////////////////////////////////
+
+        // build markerControls
+        markerRoot1 = new THREE.Group();
+        scene.add(markerRoot1);
+        //markerRoot1.add(scene);
+        scene.add(root);
+        let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, root, {
+            //type: 'pattern', patternUrl: "../../data/Testmaker.patt",
+            type : 'nft',
+            descriptorsUrl : './dataNFT/Blutbildung',
+            
+            
+            smooth: true,
+            // number of matrices to smooth tracking over, more = smoother but slower follow
+            smoothCount: 10,
+            // distance tolerance for smoothing, if smoothThreshold # of matrices are under tolerance, tracking will stay still
+            smoothTolerance: 0.1,
+            // threshold for smoothing, will keep still unless enough matrices are over tolerance
+            smoothThreshold: 2,
+            
+        })
+
+        
+        
+
+    }
+
+
+    if (ARState == false) {
+        camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        camera.position.set( 5, 2, 8 );
+        
+        scene.add(camera)
+        console.log(camera)   
+   
+    }
+        
+    RGBE = new RGBELoader(loadingStautus)
+    RGBE.setDataType( THREE.UnsignedByteType )
+    RGBE.setPath( './textures/equirectangular/' )
+    RGBE.load( 'studio_small_08_1k.hdr', function ( texture ) {
+
+        const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
         
         
         scene.environment = envMap;
         //scene.background = envMap;
        
 
-		texture.dispose();
-		pmremGenerator.dispose();
+        texture.dispose();
+        pmremGenerator.dispose();
 
-	});
+    });
+
+    
 
 
 
@@ -90,44 +270,85 @@ export function init(){
 
         console.log( 'Loading complete!');
         //console.log(loadingCanvas[0].classList.toggle("checked"))
-        setTimeout(function() {
-            let loadingCanvas = document.getElementsByClassName("loading");
-            loadingCanvas[0].classList.toggle("checked");
-        }, 50);
+       
+       if (ARState == true) {
+            setTimeout(function() {
+                let loadingCanvas = document.getElementsByClassName("loading");
+                loadingCanvas[0].classList.toggle("checked");
+                console.log(loadingCanvas[0])
+                
+            }, 7500);
+       } 
+
+       if (ARState == false) {
+            setTimeout(function() {
+                let loadingCanvas = document.getElementsByClassName("loading");
+                loadingCanvas[0].classList.toggle("checked");
+                console.log(loadingCanvas[0])
+                
+            }, 50);
+        } 
+        
         
     };
+
 
 
     dracoLoader = new DRACOLoader(loadingStautus);
 	dracoLoader.setDecoderPath( 'js/draco/gltf/' );
 
+    
+
+
     loader = new GLTFLoader(loadingStautus)
-        
+    
     loader.setDRACOLoader( dracoLoader );
     loader.load(
 
         
         Dateipfad,
         function (gltf) {
-                            
+                         
             model = gltf.scene;
-            model.position.set( 0, 0, 0 );
-            model.scale.set( 1, 1, 1 );
 
-            //getAnimationInfo(model);	
-            scene.add( model );
-            
-
-            Objectcounter = model.children.length;
+            Objectcounter = model.children.length;  
             labelinit();
 
+            if(ARState == false){
+                
+            model.position.set( 0, 0, 0 );
+            model.scale.set( .5, .5, .5 );
+            scene.add( model );
+            }
+            
+
+            
+
+            //
+            
+            if (ARState == true) {
+                scene.visible = false 
+                //root.matrixAutoUpdate = false;
+                root.add(model);
+                model.position.set( 175, 175, -175 );
+                
+                model.scale.set( 25, 25, 25 );
+            }
+
+
+            
+            
+           
+           
+            
             
             
                 
                 if (gltf.animations.length > 0){
 
-                
+                if (ARState == false){
                 document.getElementsByClassName("playsliderbar")[0].classList.toggle("checked");
+                }
                 AnimationCount = Object.keys(gltf.animations).length;
                
                 mixer = new THREE.AnimationMixer( scene );
@@ -171,7 +392,9 @@ export function init(){
 
     renderer = new THREE.WebGLRenderer({
         antialias : true,
-        alpha: true
+        alpha: true,
+        logarithmicDepthBuffer: true,
+        
     });
         
     renderer.setClearColor(new THREE.Color('lightgrey'), 0)
@@ -181,6 +404,7 @@ export function init(){
     renderer.domElement.style.position = 'absolute';
     renderer.domElement.style.zIndex = '-1';
     renderer.domElement.style.top = '0px';
+    
     //renderer.domElement.style.left = '0px'
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = .5;
@@ -202,10 +426,11 @@ export function init(){
         
             
      
-            
+       
     window.addEventListener('resize', onWindowResize, false)
     
-    animate();
+    //animate();
+    
 
 }
 
@@ -213,34 +438,71 @@ export function init(){
 
 function onWindowResize() {
 
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        
+    
      
     labelRenderer.setSize(window.innerWidth, window.innerHeight);     
     renderer.setSize(window.innerWidth, window.innerHeight);
-    
-          
- 
-                
-                
+                  
 }
             
+function onResize()
+        {
+            arToolkitSource.onResizeElement()	
+            arToolkitSource.copyElementSizeTo(renderer.domElement)	
+            if ( arToolkitContext.arController !== null )
+            {
+                arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)	
+            }	
+        }
+
 
 let timeCapture=0;
 
 function animate(){
 
-    requestAnimationFrame( animate );
-    sliderObserver();
-    playerObserver();
+//console.log(document)
 
+    if (ARState == true) {
+        
 
+        update(); 
+      
+        requestAnimationFrame( animate );
+        sliderObserver();
+        playerObserver();
     
-    renderer.render( scene, camera );
-    labelRenderer.render( scene, camera );
+    }
+    if (ARState == false) {
+        
+        controls.update();
+        requestAnimationFrame( animate );
+        sliderObserver();
+        playerObserver();
+        
+       
+    }
+
+    arObserver();
+
+
+renderer.render( scene, camera );
+labelRenderer.render( scene, camera );
+
 }
 
 
+function update()
+{
+	// update artoolkit on every frame
+	if ( arToolkitSource.ready !== false )
+		arToolkitContext.update( arToolkitSource.domElement );	
+        onResize();
+        scene.visible = camera.visible;  
+
+}
 
 function playerObserver(){
     //timeCapture = mixer.time;
@@ -320,7 +582,7 @@ function sliderObserver(){
 }
 
 
-export function timestamps() {
+function timestamps() {
     let stampmark = [];
     let stamps = document.getElementById("stamps");
     let stampcount = stamps.children.length;
@@ -330,7 +592,7 @@ export function timestamps() {
     
         for (let o = 0; o < stampcount; o++){
             let stampcurent = stamps.children[o].id;
-            console.log(stampcurent)
+            //console.log(stampcurent)
             //console.log(stampcurent)
             stamps.children[o].style.left = ""+(stampcurent)+"%"; 
             //console.log(stampcurent/FramesTotal*ClipDuration.duration);
@@ -362,16 +624,15 @@ export function playpause(){
 }
 
 function labelinit() {
-    
+    console.log (Objectcounter)
     for (let p = 0; p < Objectcounter; p++){
 
         console.log(model.children[p].userData.name)
 
         if (model.children[p].userData.name.includes(FilterLabelBy)) {
-            
             let text = document.createElement( 'div' );
             text.setAttribute("class", "label");
-        
+       
             let TextContent =  model.children[p].userData.name;
             let TextContentminusFilter = TextContent.replace(""+FilterLabelBy+"", ""); 
             text.textContent = TextContentminusFilter;
@@ -383,7 +644,14 @@ function labelinit() {
             label = new CSS2DObject( text );
             label.position.copy( LabelPos);
             //console.log(model.children[p].position)
-            scene.add(label, line);
+            if (ARState == false) {
+                model.add(label, line);
+            }
+            
+            if (ARState == true) {
+                model.add(label, line);
+                
+            }
 
 
         }
@@ -401,43 +669,51 @@ function labelinit() {
 
 
 function labelupdate() {
-    if (label !== "undefined") {
-        let x = 1;
-        let y = 2;
-        for (let p = 0; p < Objectcounter; p++) {
-
-            if (model.children[p].userData.name.includes(FilterLabelBy)) {
-
-                ObjectOrigin = model.children[p].position;
-                LabelPos.copy(ObjectOrigin).multiply(LabelVector);
-                
-                if (x < label.parent.children.length) {
-                    
-                    label.parent.children[x].position.copy(LabelPos);
-                    x= x+2;
-                }
-
-                if (y < label.parent.children.length) {
 
 
-
-                    Hideline();
-                    //console.log(label.parent.children[y])
-                    //points = [newObjectOrigin, newLabelPos];
-                    label.parent.children[y].geometry.setFromPoints( points );
-                    y= y+2;
+    
+    
 
 
+    if (typeof label !== "undefined") {
+        
+        let x = 0+Objectcounter;
+        let y = 1+Objectcounter;
+        
+       //console.log(model)
 
+        for (let p = 0; p < model.children.length; p++) {
+            
+            
+            if(typeof model.children[p].userData.name !== "undefined"){
+                if (model.children[p].userData.name.includes(FilterLabelBy)) {
 
+                    //console.log(model.children[p].userData.name) 
+                    ObjectOrigin = model.children[p].position;
+                    LabelPos.copy(ObjectOrigin).multiply(LabelVector);
 
+                    if (x < model.children.length){
+                        model.children[x].position.copy(LabelPos);
+                        x=x+2;
+                        //console.log(x)
+                    }
 
+                    if (y < model.children.length){
+                        Hideline();
+                        model.children[y].geometry.setFromPoints( points );
+                        y=y+2;
+                        //console.log(x)
+                    }
 
 
                 }
             }
+
         }
+        
     }
+
+   
 }
 
 
@@ -501,4 +777,18 @@ function Hideline() {
 }
 
 
+function arObserver() {
+
+    if (document.getElementById("arjs-video") !== null){
+        let videolayer = document.getElementById("arjs-video")
+        if (ARState == true){
+            videolayer.style.opacity = 1;
+        }
+        if (ARState == false){
+            videolayer.style.opacity = 0; 
+            
+        }
+
+    }
+}
     

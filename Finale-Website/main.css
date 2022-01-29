@@ -280,6 +280,7 @@ height: 20px;
 	right:20px;
 	top:20px;
 	cursor: pointer;
+	z-index: 100;
 }
 
 .InfoBtn{
@@ -454,7 +455,7 @@ height: 20px;
 .loading.checked{
 
 	opacity:0;
-	z-index: -2;
+	z-index: -5;
 
 }
 
@@ -468,14 +469,16 @@ height: 20px;
 	
 	width: 94%;
 	height: 50px;
-	bottom:-5%;
+	bottom:-20%;
 	left:3%;
 	z-index: 0;
+	
 }
 
 .playsliderbar.checked {
-	bottom:4%;
+	bottom:1.5%;
 }
+
 
 
 .playpausebtn {
@@ -679,3 +682,17 @@ height: 20px;
 	
 		cursor: pointer;
 	}
+
+
+	.startbuttan{
+
+
+	}
+
+	.labelcontainer{
+		opacity: 1;
+	}
+	.labelcontainer.checked{
+		opacity: 0;
+	}
+	
