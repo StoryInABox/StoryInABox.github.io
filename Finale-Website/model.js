@@ -337,13 +337,13 @@ function init(){
                 
                 model.scale.set(50, 50, 50 );
                 root.add(model);
-                model.position.z = -200;//zumir
-                model.position.x = 350;//nach rechts
-                model.position.y = 100;//nach oben
+                model.position.z = -175;//zumir
+                model.position.x = 175;//nach rechts
+                model.position.y = 175;//nach oben
             }
 
 
-            console.log("change")
+            console.log("changealot")
             
            
            
