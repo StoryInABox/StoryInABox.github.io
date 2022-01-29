@@ -321,6 +321,7 @@ function init(){
             model.position.set( 0, 0, 0 );
             model.scale.set( .5, .5, .5 );
             scene.add( model );
+            
             }
             
 
@@ -331,10 +332,14 @@ function init(){
             if (ARState == true) {
                 scene.visible = false 
                 //root.matrixAutoUpdate = false;
-                root.add(model);
-                model.position.set( 0, 0, 0);
                 
-                model.scale.set(30, 30, 30 );
+                
+                
+                model.scale.set(50, 50, 50 );
+                root.add(model);
+                model.position.z = -200;//zumir
+                model.position.x = 350;//nach rechts
+                model.position.y = 100;//nach oben
             }
 
 
