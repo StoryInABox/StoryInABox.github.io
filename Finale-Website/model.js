@@ -184,12 +184,14 @@ function init(){
 
             detectionMode: 'mono',
             //maxDetectionRate: 60,
+            /*
             canvasWidth: 480,
             canvasHeight: 640,
             imageSmoothingEnabled : true,
         }, {
             sourceWidth: 480,
             sourceHeight: 640,
+            */
         })
         
         // copy projection matrix to camera when initialization complete
