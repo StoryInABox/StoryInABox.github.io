@@ -343,7 +343,7 @@ function init(){
             }
 
 
-            
+            console.log("newtest")
             
            
            
