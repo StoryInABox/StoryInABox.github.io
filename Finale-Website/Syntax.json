@@ -1,4 +1,4 @@
-thema1 = '[{"Name":"Anorganische Chemie", "class":"Thema", "color":"#F6A731"},{"Name":"Bohrsches-Model", "class":"Model", "url":"Bohrsches-Model.html"},{"Name":"Ciprofloxacin", "class":"Model", "url":"Ciprofloxacin.html"},{ "Name":"Orbitales-Model", "class":"Model", "url":"Orbitales-Model.html"}]';
+thema1 = '[{"Name":"Anorganische Chemie", "class":"Thema", "color":"#F6A731"},{"Name":"Bohrsches-Model", "class":"Model", "url":"Bohrsches-Model.html"},{"Name":"Ciprofloxacin", "class":"Model", "url":"Ciprofloxacin.html"}]';
 
 thema2 = '[{"Name":"Organische Chemie", "class":"Thema", "color":"#7994C0"},{ "Name":"Serotonin", "class":"Model", "url":"Serotonin.html"}]';
 

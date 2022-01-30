@@ -5,6 +5,30 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<link type="text/css" rel="stylesheet" href="main.css">
 	<title id ="title"></title>	
+
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js'></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-nft.js"></script>
+    <!-- 
+    <script src="../../jsartoolkit5/artoolkit.min.js"></script>
+    <script src="../../jsartoolkit5/artoolkit.api.js"></script>
+    <script src="../../threex/threex-artoolkitsource.js"></script>
+    <script src="../../threex/threex-artoolkitcontext.js"></script>
+    <script src="../../threex/threex-arbasecontrols.js"></script>
+    <script src="../../threex/threex-armarkercontrols.js"></script>	
+   
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-nft.js"></script>
+<script src='./ARscripts/ar-nft.js'></script>
+    //<script src="./dist/mindar-image-three.prod.js"></script>
+  <script src="../../jsartoolkit5/artoolkit.min.js"></script>
+    <script src="../../jsartoolkit5/artoolkit.api.js"></script>
+
+ 
+    <script src="../../threex/threex-arbasecontrols.js"></script>
+    <script src="../../threex/threex-armarkercontrols.js"></script>	
+-->
+
 </head>
 
 <body onload="ModelsiteIndex()" >
@@ -14,7 +38,7 @@
 
         <div class= "menu" id="menu" >    
             
-            <div class="aktiveModel" id="aktiveModel">Bohrsches-Model</div>
+            <div class="aktiveModel" id="aktiveModel"></div>
 
             <div class="MenuBut" id="MenuBut" onclick="toggleNavigationbar()">
                 <span class="burgerline"></span>
@@ -32,7 +56,7 @@
         </div>
 
         
-        <div class="ARBtn">
+        <div class="ARBtn" id="ARButton" onclick="toggleAR()">
             <img src="./Icons/cube_icon.svg">
             <span class="tooltiptextrigth"><nobr>in AR-Modus wechseln</nobr></span></div>
 
@@ -57,13 +81,17 @@
 
 
 
+        
 
             <div class="loading">
                 <div class="loadingcircle"></div>
                 <div class="loadingText"><a>3D-Model wird initialisiert...</a></div>
                 
             </div>
-            <div id="container"></div>
+
+       
+
+
            
             <div class="playsliderbar">
     
@@ -78,9 +106,8 @@
                 
                 <div class="stamps"id="stamps">
                     
-                    <div id="30" class="stamp"></div>
-                    <div id="60" class="stamp"></div>
-                    <div id="120" class="stamp"></div>
+                    <div id="0" class="stamp"></div>
+                    <div id="100" class="stamp"></div>
                 </div>
                 </div>
     
@@ -88,7 +115,8 @@
                 
             </div>
   
-
+            
+    
 	
     <script type="text/javascript" src="Syntax.json"></script>	
     <script>
@@ -115,20 +143,34 @@
 
     function ModelsiteIndex() {
 
-        let getNameaktiveModel=document.getElementById("aktiveModel").innerHTML
-        let setNameaktiveModel=document.getElementById("title")
-        setNameaktiveModel.appendChild(document.createTextNode(getNameaktiveModel));
+        WebsiteName = window.location.pathname;
+        WebsiteName = WebsiteName.replace("Finale-Website", "");
+        WebsiteName = WebsiteName.replace("/", "");
+        WebsiteName = WebsiteName.replace("/", "");
+        WebsiteName = WebsiteName.replace(".html", "");
+        WebsiteName = decodeURI(WebsiteName);
+        console.log( WebsiteName );
+
+
+
+      
+
+        let setNameaktiveModel=document.getElementById("aktiveModel")
+        setNameaktiveModel.appendChild(document.createTextNode(WebsiteName));
+
+        let setNameTitle=document.getElementById("title")
+        setNameTitle.appendChild(document.createTextNode(WebsiteName));
 
         let QRCanvas = document.getElementById("QRCanvas") 
         let QRimg = document.createElement( 'img' )
 
         QRimg.setAttribute("class", "printCanvas");
-        QRimg.setAttribute("src", "./QR-Codes/"+getNameaktiveModel+".png");
+        QRimg.setAttribute("src", "./QR-Codes/"+WebsiteName+".png");
         QRCanvas.appendChild(QRimg);
 
         let DownloadButton = document.getElementsByClassName("Qrtypo")[0];
-        DownloadButton.setAttribute("href", "./QR-Codes/"+getNameaktiveModel+".png");
-        DownloadButton.setAttribute("download", ""+getNameaktiveModel+" QR-Code");
+        DownloadButton.setAttribute("href", "./QR-Codes/"+WebsiteName+".png");
+        DownloadButton.setAttribute("download", ""+WebsiteName+" QR-Code");
 
 
         ThemaContainer = document.getElementById("ThemaContainer");
@@ -392,16 +434,60 @@
 
     }
 
-    function downloadQR() {
-        console.log("fdfslkj")
-    }
-</script>
-<script type = "module">
 
+    function toggleAR() {
+        document.getElementsByClassName("ARBtn")[0].classList.toggle("checked");
+
+    }
+
+</script>
+
+
+
+<script type = "module">
+import {ARcheckup, playpause} from './model.js';
+ARcheckup();
+playpause();
+
+/*
 import {init, playpause} from './model.js';
-            
+import {initAR, playpauseAR} from './modelAR.js';
+
 init();
 playpause();
+
+
+
+let ARButton = document.getElementsByClassName("ARBtn")[0];
+
+    ARButton.addEventListener("click", () => {
+        
+        if (ARButton.className == "ARBtn checked"){
+            console.log(document.getElementsByTagName("canvas"))
+            document.getElementsByClassName("loading")[0].classList.toggle("checked");
+            console.log("AR on")
+
+            initAR();
+            playpauseAR();
+            console.log(document)
+        }
+
+        if (ARButton.className == "ARBtn"){
+            document.getElementsByClassName("loading")[0].classList.toggle("checked");
+            console.log("3D on")
+       
+            init();
+            playpause();
+            console.log(document)
+        }
+ 
+    });
+*/
+        
+
+
+
+
 </script>
 
 
