@@ -335,14 +335,14 @@ function init(){
                 //root.matrixAutoUpdate = false;
                 
                 
-                
-                
+                model.scale.set( .5, .5, .5 );
+                model.position.set( 0, 0, 0 );
                 root.add(model);
                 
             }
 
 
-            console.log("changeit")
+            console.log("changeitall")
             
            
            
