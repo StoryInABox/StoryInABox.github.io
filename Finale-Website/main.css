@@ -41,7 +41,7 @@ body {
 	left:-350px;
 	min-width: 20%;
 	height:100%;
-	
+	z-index: 2;
 	transition: .5s;
 }
 
@@ -280,7 +280,7 @@ height: 20px;
 	right:20px;
 	top:20px;
 	cursor: pointer;
-	z-index: 100;
+	z-index: 3;
 }
 
 .InfoBtn{
@@ -290,6 +290,7 @@ height: 20px;
 	right:20px;
 	top:80px;
 	cursor: pointer;
+	z-index: 3;
 }
 
 .InfoIMG{position: absolute;opacity: 1; transition: .5s;}
@@ -308,6 +309,7 @@ height: 20px;
 	right:20px;
 	top:140px;
 	cursor: pointer;
+	z-index: 3;
 }
 
 
@@ -471,7 +473,7 @@ height: 20px;
 	height: 50px;
 	bottom:-20%;
 	left:3%;
-	z-index: 0;
+	z-index: 1;
 	
 }
 

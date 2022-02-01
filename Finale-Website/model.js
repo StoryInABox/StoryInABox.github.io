@@ -169,7 +169,7 @@ renderer.setClearColor(new THREE.Color('lightgrey'), 0)
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.domElement.style.position = 'absolute';
-renderer.domElement.style.zIndex = '-1';
+renderer.domElement.style.zIndex = '0';
 renderer.domElement.style.top = '0px';
 
 //renderer.domElement.style.left = '0px'
@@ -256,7 +256,7 @@ pmremGenerator.compileEquirectangularShader();
             type : 'pattern',
             patternUrl : './data/Testmaker.patt',
             //changeMatrixMode: 'cameraTransformMatrix',
-            /*
+            
             smooth: true,
             // number of matrices to smooth tracking over, more = smoother but slower follow
             smoothCount: 5,
@@ -264,7 +264,7 @@ pmremGenerator.compileEquirectangularShader();
             smoothTolerance: 0.1,
             // threshold for smoothing, will keep still unless enough matrices are over tolerance
             smoothThreshold: 2,
-            */
+            
             
         })
 
