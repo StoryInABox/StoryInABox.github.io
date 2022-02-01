@@ -134,7 +134,11 @@ function init(){
 	}
     
 
-   
+    if (ARState == true) {
+        while(root.children.length > 0){ 
+            root.remove(root.children[0]); 
+        }
+    }
 
     clock = new THREE.Clock();
 
@@ -391,7 +395,7 @@ pmremGenerator.compileEquirectangularShader();
                
                 
                 root.add(model);
-                model.position.set( 0, 5, 0 );
+                model.position.set( 0, 2, 0 );
                 model.scale.set( .5, .5, .5 );
             }
 
