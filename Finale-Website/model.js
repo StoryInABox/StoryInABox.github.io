@@ -149,7 +149,7 @@ labelRenderer.setSize( window.innerWidth, window.innerHeight );
 
 labelRenderer.domElement.style.position = 'absolute';
 labelRenderer.domElement.style.top = '0px';
-labelRenderer.domElement.style.zIndex = '-1';
+
 labelRenderer.domElement.style.pointerEvents = 'none';
 document.body.appendChild( labelRenderer.domElement );
 
@@ -160,7 +160,7 @@ document.body.appendChild( labelRenderer.domElement );
 renderer = new THREE.WebGLRenderer({
     antialias : true,
     alpha: true,
-    logarithmicDepthBuffer: true,
+   
     
 });
     
@@ -169,7 +169,7 @@ renderer.setClearColor(new THREE.Color('lightgrey'), 0)
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setPixelRatio( window.devicePixelRatio );
 renderer.domElement.style.position = 'absolute';
-renderer.domElement.style.zIndex = '0';
+
 renderer.domElement.style.top = '0px';
 
 //renderer.domElement.style.left = '0px'
