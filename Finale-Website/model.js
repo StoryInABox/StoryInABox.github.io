@@ -134,50 +134,38 @@ function init(){
 	}
     
 
-    if (ARState == true) {
-        while(root.children.length > 0){ 
-            root.remove(root.children[0]); 
-        }
-    }
+   
 
     clock = new THREE.Clock();
 
 
-    
-labelRenderer = new CSS2DRenderer();
-labelRenderer.setSize( window.innerWidth, window.innerHeight );
+	renderer = new THREE.WebGLRenderer({
+		antialias : true,
+		alpha: true
+	});
+	
+	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+	//renderer.setSize( 640, 480 );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.domElement.style.position = 'absolute';
+	renderer.domElement.style.top = '0px';
+	//renderer.domElement.style.left = '0px'
+	renderer.toneMapping = THREE.ACESFilmicToneMapping;
+	renderer.toneMappingExposure = .5;
+	renderer.outputEncoding = THREE.sRGBEncoding;
+	
+	
+	
+	document.body.appendChild( renderer.domElement );
 
-labelRenderer.domElement.style.position = 'absolute';
-labelRenderer.domElement.style.top = '0px';
-
-labelRenderer.domElement.style.pointerEvents = 'none';
-document.body.appendChild( labelRenderer.domElement );
-
-
-
-
-
-renderer = new THREE.WebGLRenderer({
-    antialias : true,
-    alpha: true,
-   
-    
-});
-    
-renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-//renderer.setSize( 640, 480 );
-renderer.setSize( window.innerWidth, window.innerHeight );
-renderer.setPixelRatio( window.devicePixelRatio );
-renderer.domElement.style.position = 'absolute';
-
-renderer.domElement.style.top = '0px';
-
-//renderer.domElement.style.left = '0px'
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = .5;
-renderer.outputEncoding = THREE.sRGBEncoding;
-
-document.body.appendChild( renderer.domElement );   
+    labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize( window.innerWidth, window.innerHeight );
+    renderer.setPixelRatio( window.devicePixelRatio );
+    labelRenderer.domElement.style.position = 'absolute';
+    labelRenderer.domElement.style.top = '0px';
+    labelRenderer.domElement.style.pointerEvents = 'none';
+    document.body.appendChild( labelRenderer.domElement );
 
 
 
@@ -204,7 +192,15 @@ pmremGenerator.compileEquirectangularShader();
             sourceType : 'webcam',
         });
         
-
+        function onResize()
+        {
+            arToolkitSource.onResizeElement()	
+            arToolkitSource.copyElementSizeTo(renderer.domElement)	
+            if ( arToolkitContext.arController !== null )
+            {
+                arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)	
+            }	
+        }
         
 
         arToolkitSource.init(function onReady(){
@@ -235,7 +231,7 @@ pmremGenerator.compileEquirectangularShader();
             sourceWidth: 480,
             sourceHeight: 640,
             */
-        })
+        });
         
         // copy projection matrix to camera when initialization complete
         arToolkitContext.init( function onCompleted(){
@@ -280,18 +276,20 @@ pmremGenerator.compileEquirectangularShader();
         
 
 
-        scene.add(camera)
+       
         console.log(camera)   
    
 
         controls = new OrbitControls( camera, renderer.domElement );
         controls.target.set( 0, 0, 0 );
-        
+        controls.update();
         controls.enablePan = false;
         controls.enableDamping = true;
     
         controls.minDistance = 5;
         controls.maxDistance = 50;
+
+        scene.add(camera)
     }
         
     RGBE = new RGBELoader(loadingStautus)
@@ -301,7 +299,8 @@ pmremGenerator.compileEquirectangularShader();
 
         const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
         
-        
+       
+
         scene.environment = envMap;
         //scene.background = envMap;
        
