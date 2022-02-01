@@ -57,7 +57,6 @@ let loadingStautus =  new THREE.LoadingManager();
 let clock, renderer,scene, camera, controls, pmremGenerator, RGBE, dracoLoader, loader, model, mixer;
 
 
-
 let ARState=false;
 
 let ARButton = document.getElementsByClassName("ARBtn")[0];
@@ -142,6 +141,50 @@ function init(){
     }
 
     clock = new THREE.Clock();
+
+
+    
+labelRenderer = new CSS2DRenderer();
+labelRenderer.setSize( window.innerWidth, window.innerHeight );
+
+labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.top = '0px';
+labelRenderer.domElement.style.zIndex = '-1';
+labelRenderer.domElement.style.pointerEvents = 'none';
+document.body.appendChild( labelRenderer.domElement );
+
+
+
+
+
+renderer = new THREE.WebGLRenderer({
+    antialias : true,
+    alpha: true,
+    logarithmicDepthBuffer: true,
+    
+});
+    
+renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+//renderer.setSize( 640, 480 );
+renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setPixelRatio( window.devicePixelRatio );
+renderer.domElement.style.position = 'absolute';
+renderer.domElement.style.zIndex = '-1';
+renderer.domElement.style.top = '0px';
+
+//renderer.domElement.style.left = '0px'
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = .5;
+renderer.outputEncoding = THREE.sRGBEncoding;
+
+document.body.appendChild( renderer.domElement );   
+
+
+
+pmremGenerator = new THREE.PMREMGenerator( renderer );
+pmremGenerator.compileEquirectangularShader();
+
+
     sliderpos.value = 0;
     scene = new THREE.Scene();
 
@@ -235,9 +278,20 @@ function init(){
         camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 0.1, 1000 );
         camera.position.set( 5, 2, 8 );
         
+
+
         scene.add(camera)
         console.log(camera)   
    
+
+        controls = new OrbitControls( camera, renderer.domElement );
+        controls.target.set( 0, 0, 0 );
+        
+        controls.enablePan = false;
+        controls.enableDamping = true;
+    
+        controls.minDistance = 5;
+        controls.maxDistance = 50;
     }
         
     RGBE = new RGBELoader(loadingStautus)
@@ -384,52 +438,7 @@ function init(){
     
 
 
-    labelRenderer = new CSS2DRenderer();
-    labelRenderer.setSize( window.innerWidth, window.innerHeight );
-   
-    labelRenderer.domElement.style.position = 'absolute';
-    labelRenderer.domElement.style.top = '0px';
-    labelRenderer.domElement.style.zIndex = '-1';
-    labelRenderer.domElement.style.pointerEvents = 'none';
-    document.body.appendChild( labelRenderer.domElement );
-
-
-
-
-
-    renderer = new THREE.WebGLRenderer({
-        antialias : true,
-        alpha: true,
-        logarithmicDepthBuffer: true,
-        
-    });
-        
-    renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-    //renderer.setSize( 640, 480 );
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.domElement.style.position = 'absolute';
-    renderer.domElement.style.zIndex = '-1';
-    renderer.domElement.style.top = '0px';
     
-    //renderer.domElement.style.left = '0px'
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = .5;
-    renderer.outputEncoding = THREE.sRGBEncoding;
-    
-    document.body.appendChild( renderer.domElement );   
-
-    controls = new OrbitControls( camera, renderer.domElement );
-    controls.target.set( 0, 0, 0 );
-    
-    controls.enablePan = false;
-    controls.enableDamping = true;
-
-    controls.minDistance = 5;
-    controls.maxDistance = 50;
-
-    pmremGenerator = new THREE.PMREMGenerator( renderer );
-    pmremGenerator.compileEquirectangularShader();
         
             
      

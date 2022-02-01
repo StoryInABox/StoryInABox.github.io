@@ -352,7 +352,7 @@ height: 20px;
   }
 
   .tooltiptexttop{
-	top: 50px;
+	top: 55px;
 	left: 0px;
 
   }
@@ -387,7 +387,7 @@ height: 20px;
 
   .tooltiptexttop::after{
 	bottom: 100%;
-	left: 20%;
+	left: 10%;
 	border-color: transparent transparent white transparent;
   }
 
