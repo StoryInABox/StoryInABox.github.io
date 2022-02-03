@@ -70,7 +70,7 @@ function init() {
         new RGBELoader()
             .setDataType( THREE.UnsignedByteType )
             .setPath( '../textures/equirectangular/' )
-            .load( 'studio_small_08_4k.hdr', function ( texture ) {
+            .load( 'studio_small_08_1k.hdr', function ( texture ) {
 
                 const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
 
