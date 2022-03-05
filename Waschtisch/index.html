@@ -65,7 +65,7 @@
 				scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
 
 				const loader = new GLTFLoader().setPath( 'models/' );
-				loader.load( 'testmodel.gltf', async function ( gltf ) {
+				loader.load( 'wcAr.gltf', async function ( gltf ) {
                     gltf.scene.position.set( 0, -.75, 0 );
                     gltf.scene.scale.set( .25, .25, .25 );
                     
