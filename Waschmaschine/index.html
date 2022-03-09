@@ -7,7 +7,7 @@
 		
 		<style>
 			body {
-				background-color: #eee;
+				background: linear-gradient(-45deg, #3f3f3f, #000000 100%);
 			}
 			#info {
 				color: #222;
@@ -53,12 +53,15 @@
 
 			import { OrbitControls } from './controls/OrbitControls.js';
 			import { RoomEnvironment } from './js/RoomEnvironment.js';
-
+			import { RGBELoader } from './js/RGBELoader.js';
 			import { GLTFLoader } from './js/GLTFLoader.js';
+			import { DRACOLoader } from './js/DRACOLoader.js';
 			import { USDZExporter } from './js/USDZExporter.js';
 
-			let camera, scene, renderer, clock, mixer, controls,ClipDuration;
-			let FramesTotal;
+			let camera, scene, renderer, clock, mixer, controls;
+			let pmremGenerator;
+			let loader, dracoLoader;
+			let FramesTotal, ClipDuration;
 			let Framerate=24;
 			let aktuelleAnimation;
 			
@@ -70,7 +73,12 @@
 
 				clock = new THREE.Clock();
 
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer = new THREE.WebGLRenderer({
+					antialias : true,
+					alpha: true
+				});
+
+				
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -78,25 +86,52 @@
 				document.body.appendChild( renderer.domElement );
 				scene = new THREE.Scene();
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 20 );
-				camera.position.set( - 2.5, 0.6, 3.0 );
+				camera.position.set(  2, 3,6 );
 				
 				controls = new OrbitControls( camera, renderer.domElement );
 				//controls.addEventListener( 'change', render ); // use if there is no animation loop
 				controls.minDistance = 2;
 				controls.maxDistance = 10;
-				controls.target.set( 0, - 0.15, - 0.2 );
+				controls.target.set( 0, 1.5, 0 );
 				
 				
 				scene.add(camera);
+/*
 				const pmremGenerator = new THREE.PMREMGenerator( renderer );
 
 				
-				scene.background = new THREE.Color( 0xf0f0f0 );
+				//scene.background = new THREE.Color( 0xf0f0f0 );
 				scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
+				scene.background = pmremGenerator.fromScene( new RoomEnvironment() ).texture;
+*/
+				pmremGenerator = new THREE.PMREMGenerator( renderer );
+				pmremGenerator.compileEquirectangularShader();
+						
+				new RGBELoader()
+					.setDataType( THREE.UnsignedByteType )
+					.setPath( 'textures/' )
+					.load( 'studio_small_08_1k.hdr', function ( texture ) {
 
-				const loader = new GLTFLoader().setPath( 'models/' );
-				loader.load( 'protecforweb.gltf', async function ( gltf ) {
-                    gltf.scene.position.set( 0, -.75, 0 );
+						const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
+
+						//scene.background = envMap;
+						//scene.background = new THREE.Color( 0x2ffffff );
+						scene.environment = envMap;
+					
+
+
+					texture.dispose();
+					pmremGenerator.dispose();
+
+				});
+
+				dracoLoader = new DRACOLoader();
+				dracoLoader.setDecoderPath( 'js/draco/' );
+
+				loader = new GLTFLoader();
+				loader.setDRACOLoader( dracoLoader );
+				loader.load( './models/protecforweb.gltf', async function ( gltf ) {
+                    gltf.scene.position.set( 0, 0, 0 );
                     gltf.scene.scale.set( .25, .25, .25 );
                     
 					scene.add( gltf.scene );
@@ -107,12 +142,12 @@
 
 					
 					mixer.clipAction( gltf.animations[0] ).play();
+				
 					
-					aktuelleAnimation
 					const shadowMesh = createSpotShadowMesh();
-					shadowMesh.position.y = - 1.1;
-					shadowMesh.position.z = - 0.25;
-					shadowMesh.scale.setScalar( 2 );
+					shadowMesh.position.y = - 0;
+					shadowMesh.position.z = - 0
+					shadowMesh.scale.setScalar( 5 );
 					scene.add( shadowMesh );
 					
 					//render();
@@ -180,6 +215,11 @@
 
 			//
 
+			function playanimation() {
+				document.getElementById("playbutton").classList.toggle("checked");
+			
+			}
+
 			function render() {
 				//controls.update();
 				renderer.render( scene, camera );
@@ -207,10 +247,7 @@
 
 		</script>
 		<script>
-			function playanimation() {
-				document.getElementById("playbutton").classList.toggle("checked");
 			
-			}
 		
 		</script>
 
