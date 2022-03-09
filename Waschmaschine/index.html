@@ -21,15 +21,31 @@
 				left: calc(50% - 40px);
 
 			}
+
+			.playbutton {
+				position: absolute;
+				bottom: 15px;
+				height:20px;
+				width:20px;
+				left: 10%;
+				background-color: white;
+			}
+
+			.playbutton.checked {
+				background-color: aquamarine;
+			}
 		</style>
 	</head>
 
 	<body>
+
 		
 
 		<a id="link" rel="ar" href="" download="asset.usdz">
 			<img id="button" width="100" src="arkit.png">
 		</a>
+
+		<button id="playbutton" class="playbutton" onclick="playanimation()">
 
 		<script type="module">
 
@@ -41,12 +57,18 @@
 			import { GLTFLoader } from './js/GLTFLoader.js';
 			import { USDZExporter } from './js/USDZExporter.js';
 
-			let camera, scene, renderer;
-
+			let camera, scene, renderer, clock, mixer, controls,ClipDuration;
+			let FramesTotal;
+			let Framerate=24;
+			let aktuelleAnimation;
+			
 			init();
-			render();
+			animate();
+
 
 			function init() {
+
+				clock = new THREE.Clock();
 
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -54,13 +76,21 @@
 				renderer.toneMapping = THREE.ACESFilmicToneMapping;
 				renderer.outputEncoding = THREE.sRGBEncoding;
 				document.body.appendChild( renderer.domElement );
-
+				scene = new THREE.Scene();
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 20 );
 				camera.position.set( - 2.5, 0.6, 3.0 );
-
+				
+				controls = new OrbitControls( camera, renderer.domElement );
+				//controls.addEventListener( 'change', render ); // use if there is no animation loop
+				controls.minDistance = 2;
+				controls.maxDistance = 10;
+				controls.target.set( 0, - 0.15, - 0.2 );
+				
+				
+				scene.add(camera);
 				const pmremGenerator = new THREE.PMREMGenerator( renderer );
 
-				scene = new THREE.Scene();
+				
 				scene.background = new THREE.Color( 0xf0f0f0 );
 				scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
 
@@ -71,13 +101,23 @@
                     
 					scene.add( gltf.scene );
 
+					mixer = new THREE.AnimationMixer( scene );
+					ClipDuration = mixer.clipAction( gltf.animations[ 0 ] ).getClip();
+					FramesTotal = Math.round(ClipDuration.duration*Framerate);
+
+					
+					mixer.clipAction( gltf.animations[0] ).play();
+					
+					aktuelleAnimation
 					const shadowMesh = createSpotShadowMesh();
 					shadowMesh.position.y = - 1.1;
 					shadowMesh.position.z = - 0.25;
-					shadowMesh.scale.setScalar( 5 );
+					shadowMesh.scale.setScalar( 2 );
 					scene.add( shadowMesh );
-
-					render();
+					
+					//render();
+					
+					
 
 					// USDZ
 
@@ -88,15 +128,13 @@
 					const link = document.getElementById( 'link' );
 					link.href = URL.createObjectURL( blob );
 
+					requestAnimationFrame(animate);
+
 				} );
 
-				const controls = new OrbitControls( camera, renderer.domElement );
-				controls.addEventListener( 'change', render ); // use if there is no animation loop
-				controls.minDistance = 2;
-				controls.maxDistance = 10;
-				controls.target.set( 0, - 0.15, - 0.2 );
-				controls.update();
+				
 
+				
 				window.addEventListener( 'resize', onWindowResize );
 
 			}
@@ -136,18 +174,44 @@
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
-				render();
+				animate();
 
 			}
 
 			//
 
 			function render() {
-
+				//controls.update();
 				renderer.render( scene, camera );
-
+				controls.update();
+			
+				
 			}
 
+			//console.log(document.getElementsByClassName("playbutton"))
+			export function animate() {
+				const delta = clock.getDelta();
+
+				if (typeof mixer !== 'undefined'){
+					aktuelleAnimation = requestAnimationFrame(animate);
+					mixer.update(delta);
+					render();
+				}
+				
+				console.log("tese")	
+				
+				
+			}
+			
+
+
+		</script>
+		<script>
+			function playanimation() {
+				document.getElementById("playbutton").classList.toggle("checked");
+			
+			}
+		
 		</script>
 
 	</body>
