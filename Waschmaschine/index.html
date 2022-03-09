@@ -22,18 +22,41 @@
 
 			}
 
-			.playbutton {
+			#waschbutton{
+				bottom: 25px;
+			}
+			#doorbutton{
+				bottom: 100px;
+			}
+			.button{
 				position: absolute;
-				bottom: 15px;
-				height:20px;
-				width:20px;
-				left: 10%;
+				border-radius: 10px;
+				border-style:solid;
+				border-color:white;
+				font-weight: bold;
+				padding: 15px;
+				height:auto;
+				width:auto;
+				right: 25px;
 				background-color: white;
+				
+				transition-duration: 0.4s;
 			}
+			
+			.button.checked {
+				background-color: #FF6600;
+				color:white;
+				border-color:#FF6600;
+				
+			}
+			.button:hover{
+				background-color: transparent;
+				border-color:#FF6600;
+				color:#FF6600;
+			}
+			
+			
 
-			.playbutton.checked {
-				background-color: aquamarine;
-			}
 		</style>
 	</head>
 
@@ -45,8 +68,8 @@
 			<img id="button" width="100" src="arkit.png">
 		</a>
 
-		<button id="playbutton" class="playbutton" onclick="playanimation()">
-
+		<button id="waschbutton" value=false class="button" onclick="waschanimation()">Waschen</button>
+		<button id="doorbutton" value=false class="button" onclick="tueranimation()">Tür öffnen</button>
 		<script type="module">
 
 			import * as THREE from '../build/three.module.js';
@@ -64,6 +87,8 @@
 			let FramesTotal, ClipDuration;
 			let Framerate=24;
 			let aktuelleAnimation;
+
+			let Animation1, Animation2;
 			
 			init();
 			animate();
@@ -140,8 +165,11 @@
 					ClipDuration = mixer.clipAction( gltf.animations[ 0 ] ).getClip();
 					FramesTotal = Math.round(ClipDuration.duration*Framerate);
 
+					Animation1 =  mixer.clipAction( gltf.animations[ 0 ] ).getClip();
+					Animation2 =  mixer.clipAction( gltf.animations[ 1 ] ).getClip();
+
 					
-					mixer.clipAction( gltf.animations[0] ).play();
+					//animation1 = mixer.clipAction( gltf.animations[0] ).play();
 				
 					
 					const shadowMesh = createSpotShadowMesh();
@@ -215,10 +243,7 @@
 
 			//
 
-			function playanimation() {
-				document.getElementById("playbutton").classList.toggle("checked");
 			
-			}
 
 			function render() {
 				//controls.update();
@@ -228,28 +253,63 @@
 				
 			}
 
-			//console.log(document.getElementsByClassName("playbutton"))
-			export function animate() {
+			
+			function animate() {
 				const delta = clock.getDelta();
 
 				if (typeof mixer !== 'undefined'){
 					aktuelleAnimation = requestAnimationFrame(animate);
-					mixer.update(delta);
+					//mixer.update(delta);
 					render();
+				
+					
+					if (document.getElementById("waschbutton").value == "true"){
+						mixer.clipAction(Animation1).play();
+						mixer.update(delta);	
+					}
+					if (document.getElementById("waschbutton").value == "false"){
+						mixer.clipAction(Animation1).stop();	
+					}
+
+					if (document.getElementById("doorbutton").value == "true"){
+						mixer.clipAction(Animation2).play();
+						mixer.update(delta);		
+					}
+					if (document.getElementById("doorbutton").value == "false"){
+						mixer.clipAction(Animation2).stop();	
+					}
+
 				}
 				
-				console.log("tese")	
-				
-				
 			}
+
+
+
+			
+
 			
 
 
 		</script>
 		<script>
+			let playstate_wash = false;
+			function waschanimation() {
+				playstate_wash =! playstate_wash;
+				document.getElementById("waschbutton").classList.toggle("checked");
+				document.getElementById("waschbutton").value = playstate_wash;
+				//console.log(document.getElementById("playbutton").value)
+			}
+			let playstate_door = false;
+			function tueranimation() {
+				playstate_door =! playstate_door;
+				document.getElementById("doorbutton").classList.toggle("checked");
+				document.getElementById("doorbutton").value = playstate_door;
+				//console.log(document.getElementById("playbutton").value)
+			}
+
 			
-		
 		</script>
+		
 
 	</body>
 </html>
