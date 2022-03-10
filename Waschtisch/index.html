@@ -7,7 +7,12 @@
 		
 		<style>
 			body {
-				background-color: #eee;
+				background: linear-gradient(-45deg, #3f3f3f, #000000 100%);
+				overflow: hidden;
+				width: 100%;
+				height: 100%;
+				padding: 0%;
+				margin: 0%;
 			}
 			#info {
 				color: #222;
@@ -21,63 +26,187 @@
 				left: calc(50% - 40px);
 
 			}
+
+			#color1_button{
+				
+				bottom: 145px;
+				background: linear-gradient(-45deg, #3481b8, #a1c8e4 100%);
+				
+			}
+			#color2_button{
+				bottom: 85px;
+				background: linear-gradient(-45deg, #6c7156, #b6bd97 100%);			
+			}
+
+			#color3_button{
+				bottom: 25px;
+				background: linear-gradient(-45deg, #797068, #b8a99c 100%);
+			}
+
+			.button{
+				position: absolute;
+				border-radius: 10px;
+				border-style:solid;
+				border-color:white;
+				font-weight: bold;
+				padding: 15px;
+				height:50px;
+				width:50px;
+				right: 25px;
+				
+				
+				transition-duration: 0.4s;
+			}
+			
+			.button.checked {
+				
+				color:#FF6600;
+				border-color:#FF6600;
+				
+			}
+			.button:hover{
+				background-color: linear-gradient(-45deg, #3481b8, #3481b8 100%);
+				border-color:#FF6600;
+				color:#FF6600;
+			}
+			
+			
+
 		</style>
 	</head>
 
 	<body>
+
 		
 
 		<a id="link" rel="ar" href="" download="asset.usdz">
 			<img id="button" width="100" src="arkit.png">
 		</a>
 
+		<button id="color1_button" value=false class="button" onclick="color1()"></button>
+		<button id="color2_button" value=false class="button" onclick="color2()"></button>
+		<button id="color3_button" value=false class="button" onclick="color3()"></button>
 		<script type="module">
 
 			import * as THREE from '../build/three.module.js';
 
 			import { OrbitControls } from './controls/OrbitControls.js';
 			import { RoomEnvironment } from './js/RoomEnvironment.js';
-
+			import { RGBELoader } from './js/RGBELoader.js';
 			import { GLTFLoader } from './js/GLTFLoader.js';
+			import { DRACOLoader } from './js/DRACOLoader.js';
 			import { USDZExporter } from './js/USDZExporter.js';
 
-			let camera, scene, renderer;
+			let camera, scene, renderer, clock, mixer, controls;
+			let pmremGenerator;
+			let loader, dracoLoader;
+			let FramesTotal, ClipDuration;
+			let Framerate=24;
+			let aktuelleAnimation;
 
+
+			let schrank;
+
+			let Animation1, Animation2;
+			
 			init();
-			render();
+			animate();
+
 
 			function init() {
 
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				clock = new THREE.Clock();
+
+				renderer = new THREE.WebGLRenderer({
+					antialias : true,
+					alpha: true
+				});
+
+				
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.toneMapping = THREE.ACESFilmicToneMapping;
 				renderer.outputEncoding = THREE.sRGBEncoding;
 				document.body.appendChild( renderer.domElement );
-
+				scene = new THREE.Scene();
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 20 );
-				camera.position.set( - 2.5, 0.6, 3.0 );
-
+				camera.position.set(  1, 1.5,3 );
+				
+				controls = new OrbitControls( camera, renderer.domElement );
+				//controls.addEventListener( 'change', render ); // use if there is no animation loop
+				controls.minDistance = 2;
+				controls.maxDistance = 10;
+				controls.target.set( 0, 0.5, 0 );
+				
+				
+				scene.add(camera);
+/*
 				const pmremGenerator = new THREE.PMREMGenerator( renderer );
 
-				scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xf0f0f0 );
+				
+				//scene.background = new THREE.Color( 0xf0f0f0 );
 				scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
+				scene.background = pmremGenerator.fromScene( new RoomEnvironment() ).texture;
+*/
+				pmremGenerator = new THREE.PMREMGenerator( renderer );
+				pmremGenerator.compileEquirectangularShader();
+						
+				new RGBELoader()
+					.setDataType( THREE.UnsignedByteType )
+					.setPath( 'textures/' )
+					.load( 'studio_small_08_1k.hdr', function ( texture ) {
 
-				const loader = new GLTFLoader().setPath( 'models/' );
-				loader.load( 'waschtischAr.gltf', async function ( gltf ) {
-                    gltf.scene.position.set( 0, -.75, 0 );
+						const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
+
+						//scene.background = envMap;
+						//scene.background = new THREE.Color( 0x2ffffff );
+						scene.environment = envMap;
+					
+
+
+					texture.dispose();
+					pmremGenerator.dispose();
+
+				});
+
+				dracoLoader = new DRACOLoader();
+				dracoLoader.setDecoderPath( 'js/draco/' );
+
+				loader = new GLTFLoader();
+				loader.setDRACOLoader( dracoLoader );
+				loader.load( './models/waschtischAr.gltf', async function ( gltf ) {
+                    gltf.scene.position.set( 0, 0, 0 );
                     gltf.scene.scale.set( .25, .25, .25 );
                     
 					scene.add( gltf.scene );
 
-					const shadowMesh = createSpotShadowMesh();
-					shadowMesh.position.y = - 1.1;
-					shadowMesh.position.z = - 0.25;
-					shadowMesh.scale.setScalar( 2 );
-					scene.add( shadowMesh );
+					schrank = gltf.scene.children[0].children[3];
+					//gltf.scene.children[0].children[3].material.color = {r: 0, g: 0, b: 0}
+					//console.log(gltf.scene.children[0].children[3].material.color)
 
-					render();
+					if (typeof mixer !== 'undefined'){
+						mixer = new THREE.AnimationMixer( scene );
+						ClipDuration = mixer.clipAction( gltf.animations[ 0 ] ).getClip();
+						FramesTotal = Math.round(ClipDuration.duration*Framerate);
+
+						Animation1 =  mixer.clipAction( gltf.animations[ 0 ] ).getClip();
+						Animation2 =  mixer.clipAction( gltf.animations[ 1 ] ).getClip();
+					}
+					
+
+					
+					//animation1 = mixer.clipAction( gltf.animations[0] ).play();
+				
+					
+					const shadowMesh = createSpotShadowMesh();
+					shadowMesh.position.y = - 0;
+					shadowMesh.position.z = - 0
+					shadowMesh.scale.setScalar( 5 );
+					scene.add( shadowMesh );
+					
+					//render();
+					
+					
 
 					// USDZ
 
@@ -88,15 +217,13 @@
 					const link = document.getElementById( 'link' );
 					link.href = URL.createObjectURL( blob );
 
+					requestAnimationFrame(animate);
+
 				} );
 
-				const controls = new OrbitControls( camera, renderer.domElement );
-				controls.addEventListener( 'change', render ); // use if there is no animation loop
-				controls.minDistance = 2;
-				controls.maxDistance = 10;
-				controls.target.set( 0, - 0.15, - 0.2 );
-				controls.update();
+				
 
+				
 				window.addEventListener( 'resize', onWindowResize );
 
 			}
@@ -136,19 +263,98 @@
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
-				render();
+				animate();
 
 			}
 
 			//
 
+			
+
 			function render() {
-
+				//controls.update();
 				renderer.render( scene, camera );
-
+				controls.update();
+			
+				
 			}
 
+			
+			function animate() {
+				const delta = clock.getDelta();
+				aktuelleAnimation = requestAnimationFrame(animate);
+				console.log(schrank)
+				if (document.getElementById("color1_button").value == "true"){
+					console.log(schrank)
+					schrank.material.color = {r: 0.142/2, g: 0.353/2, b: 0.504/2};
+					
+				}
+
+				if (document.getElementById("color2_button").value == "true"){
+					console.log(schrank)
+					schrank.material.color = {r: 0.352/2, g: 0.368/2, b: 0.280/2};
+					
+				}
+
+				if (document.getElementById("color3_button").value == "true"){
+					console.log(schrank)
+
+					schrank.material.color = {r: 0.19120171666145325, g: 0.16202937066555023, b: 0.1384316384792328};
+					
+				}
+				render();
+				
+			}
+
+
+
+			
+
+			
+
+
 		</script>
+		<script>
+			let color1_button_state = false;
+			function color1() {
+				color1_button_state =! color1_button_state;
+				document.getElementById("color1_button").classList.toggle("checked");
+				document.getElementById("color2_button").classList = "button";
+				document.getElementById("color3_button").classList = "button";
+				document.getElementById("color1_button").value = true;
+				document.getElementById("color2_button").value = false;
+				document.getElementById("color3_button").value = false;
+				//console.log(document.getElementById("playbutton").value)
+
+			}
+			let color2_button_state = false;
+			function color2() {
+				color2_button_state =! color2_button_state;
+				document.getElementById("color1_button").classList = "button";
+				document.getElementById("color2_button").classList.toggle("checked");
+				document.getElementById("color3_button").classList = "button";
+				document.getElementById("color1_button").value = false;
+				document.getElementById("color2_button").value = true;
+				document.getElementById("color3_button").value = false;
+				//console.log(document.getElementById("playbutton").value)
+			}
+
+			let color3_button_state = false;
+			function color3() {
+				color3_button_state =! color3_button_state;
+				document.getElementById("color1_button").classList = "button";
+				document.getElementById("color2_button").classList = "button";
+				document.getElementById("color3_button").classList.toggle("checked");
+				document.getElementById("color1_button").value = false;
+				document.getElementById("color2_button").value = false;
+				document.getElementById("color3_button").value = true;
+				//console.log(document.getElementById("playbutton").value)
+			}
+
+
+			
+		</script>
+		
 
 	</body>
 </html>
