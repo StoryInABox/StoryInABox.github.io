@@ -1,0 +1,69 @@
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+<!--<link type="text/css" rel="stylesheet" href="main.css">-->
+	<title id ="title"></title>	
+<style>
+    body {
+        background: white;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        padding: 0%;
+        margin: 0%;
+    }
+
+    h1,h2{
+        position:absolute;
+        font-family: 'nugget-medium', sans-serif;        
+        margin: auto;
+        font-size: 24pt;
+        top:50%;
+        left:50%;
+        color: black;
+        transform: translate(-125px, 0px);
+    }
+
+    h2{
+        
+        transform: translate(-45px, 0px) rotate(0deg);
+       
+    }
+
+
+
+
+
+
+    </style>
+
+</head>
+<body>
+
+    <h1>Bitte &nbsp;&nbsp;&nbsp;-rühren</h1>
+    <h2>B</h2>
+
+
+
+
+<script>
+
+    let Brur = document.getElementsByTagName("h2")[0];
+    console.log(Brur.offsetLeft) 
+
+    document.addEventListener('mousemove', function(e) {
+        let angle = Math.atan2(e.clientX-Brur.offsetLeft+0, e.clientY-Brur.offsetTop+0 )* -180 / Math.PI;
+        console.log(Brur) 
+        Brur.style.transform = 'translate(-45px, 0px) rotate(' + angle + 'deg)';
+      });  
+
+
+
+    
+        //Brur.style.transform = 'rotate(' + angle + 'deg)';
+
+    
+
+</script>
+</body>

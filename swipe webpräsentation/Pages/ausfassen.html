@@ -1,0 +1,61 @@
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+<!--<link type="text/css" rel="stylesheet" href="main.css">-->
+	<title id ="title"></title>	
+<style>
+    body {
+        background: white;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        padding: 0%;
+        margin: 0%;
+    }
+
+    h1{
+        position: relative;
+        text-align: center;
+        font-family: 'nugget-medium', sans-serif;        
+        margin: auto;
+        top:50%;
+        color: black;
+    }
+
+    h1.checked, body.checked{
+        color: white;
+        background:black;
+    }
+
+
+    </style>
+
+</head>
+<body onpointerdown="clicked()">
+
+    <h1>Nicht ausfassen!</h1>
+
+ 
+
+<script>
+    function clicked(){
+        console.log("test")
+        let Text = document.getElementsByTagName("h1");
+        let background = document.getElementsByTagName("body");
+        background[0].classList.toggle("checked");
+        Text[0].classList.toggle("checked");
+        
+        if (Text[0].innerHTML==="Nicht ausfassen!"){
+            Text[0].innerHTML= "Bitte wieder anfassen!"
+        }
+
+        else{
+            Text[0].innerHTML="Nicht ausfassen!"
+        }
+        console.log(Text[0].innerHTML)
+
+    }
+
+</script>
+</body>

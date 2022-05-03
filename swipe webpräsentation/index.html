@@ -1,0 +1,130 @@
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+<!--<link type="text/css" rel="stylesheet" href="main.css">-->
+	<title id ="title"></title>	
+	    <link href="https://www.dafontfree.net/embed/bnVnZ2V0LW1lZGl1bSZkYXRhLzIxL24vMTAwNDYzL051Z2dldE1lZC50dGY" rel="stylesheet" type="text/css"/>
+
+  <style>
+	  body {
+        background: linear-gradient(-45deg, #3f3f3f, #000000 100%);
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        padding: 0%;
+        margin: 0%;
+    }
+	  .iframe {
+		position: absolute;
+		overflow: hidden;
+		width: 100%;
+		height: 100%;
+		padding: 0%;
+        margin: 0%;
+		z-index: 1;
+	  }
+
+	  
+	  button{
+        position:absolute;
+        border:none;
+        background-color:transparent;
+        font: Arial;
+        font-size: 20pt;
+        color: lightgrey;
+        mix-blend-mode: difference;
+        width:50px;
+        height:50px;
+        top: 15px;
+
+        transition: 1s;
+        z-index:10;
+    }
+
+
+
+    .nextbutton{
+        right:10px;
+    }
+
+    .backbutton{
+        left:10px;
+    }
+
+  </style>
+
+</head>
+<body onload ="set_IFRAME()"> 
+
+	<!--<iframe id= "IFRAME"class="iframe" src="/Pages/intro.html" frameborder="0"></iframe>-->
+	<button class="nextbutton" onclick="NEXT()"> > </button>
+	<button class="backbutton" onclick="BACK()"> < </button>
+	
+
+
+
+<script>
+
+
+
+	let Page_index = 2;
+	let Page_Count = 10;
+
+	let IFRAME;
+
+let pageTable = 
+'{"pages":[' 	+ '{"index":"0","src":"/Pages/intro.html" },' 
+				+ '{"index":"1","src":"/Pages/ausfassen.html" },' 
+				+ '{"index":"2","src":"/Pages/b-ruehren.html" },' 
+				+ '{"index":"3","src":"/Pages/intro.html" },' 
+				+ '{"index":"4","src":"/Pages/intro.html" },' 
+				+ '{"index":"5","src":"/Pages/firsttry.html" }]}';
+
+	
+	
+
+	//let IFRAME = document.getElementById("IFRAME")
+
+	function set_IFRAME(){
+
+		IFRAME = document.createElement("iframe");
+		IFRAME.setAttribute("src",JSON.parse(pageTable).pages[Page_index].src)
+		IFRAME.setAttribute("class", "iframe");
+		document.body.appendChild(IFRAME);
+
+	}
+
+
+
+	function NEXT(){
+
+		
+
+		if (Page_index < Page_Count){
+			Page_index++;
+			console.log(IFRAME);
+			IFRAME.setAttribute("src",JSON.parse(pageTable).pages[Page_index].src)
+
+		}
+
+
+	}
+
+	function BACK(){
+		if (Page_index > 0){
+			Page_index--;
+			console.log(IFRAME);
+			IFRAME.setAttribute("src",JSON.parse(pageTable).pages[Page_index].src)
+
+		}
+
+	
+	}
+
+
+</script>
+
+</body>
+
+</html>
