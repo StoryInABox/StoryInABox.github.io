@@ -52,7 +52,7 @@
     let Brur = document.getElementsByTagName("h2")[0];
     console.log(Brur.offsetLeft) 
 
-    document.addEventListener('mousemove', function(e) {
+    document.addEventListener('pointermove', function(e) {
         let angle = Math.atan2(e.clientX-Brur.offsetLeft+0, e.clientY-Brur.offsetTop+0 )* -180 / Math.PI;
         console.log(Brur) 
         Brur.style.transform = 'translate(-45px, 0px) rotate(' + angle + 'deg)';
