@@ -126,10 +126,14 @@ function initialize()
 
         type : 'nft',
         descriptorsUrl : 'weddingtest/data/dataNFT/pinball',
+		smooth : true,
+		smoothCount: 10,
+		smoothThreshold: 2,
+		smoothTolerance: 0.001
         //changeMatrixMode: 'cameraTransformMatrix'
 	})
-
-	let geometry1	= new THREE.CubeGeometry(1,1,1);
+	console.log(markerControls1)
+	let geometry1	= new THREE.CubeGeometry(20,20,20);
 	let material1	= new THREE.MeshNormalMaterial({
 		transparent: true,
 		opacity: 0.5,
@@ -137,9 +141,10 @@ function initialize()
 	}); 
 	
 	mesh1 = new THREE.Mesh( geometry1, material1 );
-	mesh1.position.y = 0.5;
-	
+	mesh1.position.set(100, 0, -100);
 	markerRoot1.add( mesh1 );
+	
+
 }
 
 
@@ -154,6 +159,7 @@ function update()
 function render()
 {
 	renderer.render( scene, camera );
+	
 }
 
 
