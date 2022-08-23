@@ -2,11 +2,11 @@
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 <!-- three.js library -->
-<script src='vendor/three.js/build/three.min.js'></script>
+<script src='js/three.js'></script>
 <!-- three.js load GLTF -->
-<script src='vendor/three.js/GLTFLoader.js'></script>
+<script src='js/GLTFLoader.js'></script>
 <!-- ar.js -->
-<script src='../build/ar-threex.js'></script>
+<script src="threex/ar-threex.js"></script>
 
 <script>THREEx.ArToolkitContext.baseURL = '../'</script>
 
@@ -168,10 +168,11 @@
         //		add an object in the scene
         //////////////////////////////////////////////////////////////////////////////////
 
+        /*
         var threeGLTFLoader = new THREE.GLTFLoader();
         var model;
 
-        threeGLTFLoader.load("./resources/Flamingo.glb", function (gltf) {
+        threeGLTFLoader.load("Flamingo.glb", function (gltf) {
             model = gltf.scene.children[0];
             model.name = 'Flamingo';
 
@@ -217,5 +218,6 @@
             requestAnimationFrame(animate);
         }
     );
+    */
     </script>
 </body>
