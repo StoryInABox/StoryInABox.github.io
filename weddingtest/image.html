@@ -71,14 +71,19 @@ function initialize()
 	renderer = new THREE.WebGLRenderer({
 		antialias : true,
 		//logarithmicDepthBuffer: logDepthBuf,
+		//preserveDrawingBuffer:false,
 		alpha: true
+		
 	});
+	renderer.setPixelRatio(window.devicePixelRatio*2);
 	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	//renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.domElement.style.position = 'absolute'
 	renderer.domElement.style.top = '0px'
 	renderer.domElement.style.left = '0px'
+	//renderer.autoClearDepth = true;
+
 	document.body.appendChild( renderer.domElement );
 
 	clock = new THREE.Clock();
@@ -137,7 +142,9 @@ function initialize()
 	// create atToolkitContext
 	arToolkitContext = new THREEx.ArToolkitContext({
 		cameraParametersUrl: 'data/camera_para.dat',
-		detectionMode: 'mono'
+		detectionMode: 'mono',
+		maxDetectionRate: 30,
+		
 	});
 	
 	// copy projection matrix to camera when initialization complete
@@ -157,7 +164,7 @@ function initialize()
 
         type : 'nft',
         descriptorsUrl : './weddingtest/data/dingd/testonew',
-		smooth : false,
+		smooth : true,
 		smoothCount: 5,
 		smoothThreshold: 2,
 		smoothTolerance: 0.01
@@ -205,12 +212,12 @@ function initialize()
 
 				loader = new GLTFLoader();
 				loader.setDRACOLoader( dracoLoader );
-				loader.load( './model/2.gltf', async function ( gltf ) {
-                    //gltf.scene.position.set( 0, 0, 0 );
-                    gltf.scene.scale.set( 20, 20, 20 );
+				loader.load( './model/2.gltf',  function ( gltf ) {
+                    //gltf.scene.position.set( 0, 0, -5 );
+					//gltf.scene.rotation.set( 0.1, 0, 0 );
+                    gltf.scene.scale.set( 1, 1, 1 );
                     
-					//scene.add( gltf.scene );
-
+					
 					
 						mixer = new THREE.AnimationMixer( gltf.scene );
 			
@@ -222,12 +229,13 @@ function initialize()
 					
 
 					//console.log(mixer.clipAction( gltf.animations[0] ) )
-				
+					//scene.add( gltf.scene );
+					
 					markerRoot1.add( gltf.scene  );
 					requestAnimationFrame(animate);
 					//animate();
 					
-					console.log(gltf.scene)
+					console.log(arToolkitContext)
 				} );
 
 
@@ -255,7 +263,9 @@ function update()
 
 function render()
 {
+	
 	renderer.render( scene, camera );
+	
 	//console.log(arToolkitContext.arController.marker_transform_mat)
 }
 
@@ -270,12 +280,13 @@ function animate()
 	if (typeof mixer !== 'undefined'){
 		//console.log(mixer)
 		mixer.update(delta);
-		
+
 
 	}
-
+//console.log(scene.children[1].children[0].children[1].geometry.attributes.uv.normalized)
 	update();
 	render();
+	
 }
 
 </script>
