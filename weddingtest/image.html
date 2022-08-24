@@ -5,8 +5,7 @@
 	<!-- include three.js library -->
 	<script src='js/three.js'></script>
 	<!-- include jsartookit -->
-	<script src="jsartoolkit5/artoolkit.min.js"></script>
-	<script src="jsartoolkit5/artoolkit.api.js"></script>
+
 	<!-- include threex.artoolkit -->
 
     <!-- 
@@ -19,6 +18,14 @@
     -->
 
     <script src="threex/ar-threex.js"></script>
+	<style>
+		body {
+			position: absolute;
+			width: auto;
+			height: auto;
+		}
+		
+	</style>
 </head>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
@@ -30,7 +37,8 @@
   Based on the AR.js library and examples created by Jerome Etienne: https://github.com/jeromeetienne/AR.js/
 -->
 
-<script>
+<script type="module">
+	
 
 var scene, camera, renderer, clock, deltaTime, totalTime;
 
@@ -58,7 +66,7 @@ function initialize()
 		alpha: true
 	});
 	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-	renderer.setSize( 640, 480 );
+	renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.domElement.style.position = 'absolute'
 	renderer.domElement.style.top = '0px'
 	renderer.domElement.style.left = '0px'
@@ -74,29 +82,40 @@ function initialize()
 
 	arToolkitSource = new THREEx.ArToolkitSource({
 		sourceType : 'webcam',
+		
+		//sourceWidth:640,sourceHeight:480,displayWidth:window.innerWidth,displayHeight:window.innerHeight
 	});
 
 	function onResize()
 	{
 		//arToolkitSource.onResize()	
         arToolkitSource.onResizeElement()
-
+		console.log("test")
 		//arToolkitSource.copySizeTo(renderer.domElement)	
         arToolkitSource.copyElementSizeTo(renderer.domElement)	
 		if ( arToolkitContext.arController !== null )
 		{
+			
 			//arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
             arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)	
 		}	
 	}
 
 	arToolkitSource.init(function onReady(){
-		onResize()
+		setTimeout(function() {
+                onResize()
+            }, 50);
+		//onResize();
+		
+
+		
 	});
 	
 	// handle resize event
 	window.addEventListener('resize', function(){
-		onResize()
+		onResize();
+		//console.log("test")
+		
 	});
 	
 	////////////////////////////////////////////////////////////
@@ -125,14 +144,14 @@ function initialize()
 		//type: 'pattern', patternUrl: "data/hiro.patt",
 
         type : 'nft',
-        descriptorsUrl : 'weddingtest/data/dataNFT/pinball',
+        descriptorsUrl : './weddingtest/data/dataNFT/pinball',
 		smooth : true,
 		smoothCount: 10,
 		smoothThreshold: 2,
 		smoothTolerance: 0.001
         //changeMatrixMode: 'cameraTransformMatrix'
 	})
-	console.log(markerControls1)
+	
 	let geometry1	= new THREE.CubeGeometry(20,20,20);
 	let material1	= new THREE.MeshNormalMaterial({
 		transparent: true,
@@ -141,10 +160,10 @@ function initialize()
 	}); 
 	
 	mesh1 = new THREE.Mesh( geometry1, material1 );
-	mesh1.position.set(100, 0, -100);
+	//mesh1.position.set(100, 0, -100);
 	markerRoot1.add( mesh1 );
 	
-
+	console.log(document)
 }
 
 
@@ -152,7 +171,9 @@ function update()
 {
 	// update artoolkit on every frame
 	if ( arToolkitSource.ready !== false )
-		arToolkitContext.update( arToolkitSource.domElement );
+	{
+		arToolkitContext.update( arToolkitSource.domElement );	
+	}
 }
 
 
