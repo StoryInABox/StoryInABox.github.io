@@ -176,7 +176,7 @@ function initialize()
         //changeMatrixMode: 'cameraTransformMatrix'
 	})
 	
-/*	
+
 
 	let geometry1	= new THREE.BoxGeometry(20,20,20);
 	let material1	= new THREE.MeshNormalMaterial({
@@ -184,7 +184,7 @@ function initialize()
 		opacity: 1,
 		side: THREE.DoubleSide
 	}); 
-
+/*	
 	mesh1 = new THREE.Mesh( geometry1, material1 );
 	//mesh1.position.set(10, -5, -10);
 	markerRoot1.add( mesh1 );
@@ -217,26 +217,56 @@ function initialize()
 
 				loader = new GLTFLoader();
 				loader.setDRACOLoader( dracoLoader );
-				loader.load( './model/1.gltf',  function ( gltf ) {
+				loader.load( './model/5.gltf',  function ( gltf ) {
                     //gltf.scene.position.set( 0, 0, -5 );
 					//gltf.scene.rotation.set( 0.1, 0, 0 );
-                    gltf.scene.scale.set( 10,10,10 );
-                    
+                   //	gltf.scene.scale.set( 10,10,10 );
+                    //console.log(gltf.scene.children[0].children[0])
+					//console.log(gltf.scene.children[0].children[1])
+					console.log(gltf.scene.children)
 
-					gltf.scene.traverse((child) => {
-                        //if (child.isMesh) child.material = material1; // a material i created in the code earlier
-						//if (child.isMesh) child.material =gltf.scene.children[0].children[0].material
+/*
+					if (gltf.scene.children.length == 1){
+console.log("test")
+						for (let i=0; i<gltf.scene.children[0].children.length; i++) {
+							console.log(gltf.scene.children[0].children[i].material)
+							gltf.scene.children[0].children[i].material.transparent = true;
+						}
+					}
+
+					else{
+
+						for (let i=0; i<gltf.scene.children.length; i++) {
+							console.log(gltf.scene.children[i].material)
+							gltf.scene.children[i].material.transparent = true;
+						}
+					}
+*/
+					
+
+					gltf.scene.traverse((child) => {	
+                       if (child.isMesh) {
+						child.material.transparent = true; 
+						child.material.side = 0;
+						//child.material.blendSrcAlpha = THREE.MultiplyBlending; 						
+						console.log(child.material)
+						}			
                     });
                  
 					
-						mixer = new THREE.AnimationMixer( gltf.scene );
+					mixer = new THREE.AnimationMixer( gltf.scene );
 			
 					
-
-					
-					mixer.clipAction( gltf.animations[0] ).play();
-				
-					
+					for (let i=0; i<gltf.scene.children.length; i++) {	
+						
+						
+						if (typeof gltf.animations[i] !== "undefined"){
+							//console.log(gltf.animations[i])
+							mixer.clipAction( gltf.animations[i] ).play();
+						}
+						
+						
+					}
 
 					//console.log(mixer.clipAction( gltf.animations[0] ) )
 					//scene.add( gltf.scene );
@@ -246,7 +276,7 @@ function initialize()
 					//animate();
 					
 					//position.getPositionFromMatrix( markerRoot1.matrixWorld );
-					console.log(gltf.scene.children[0].children[0])
+					//console.log(gltf.scene.children[0].children[0])
 					//console.log(position.getPositionFromMatrix( markerRoot1.matrixWorld ))
 				} );
 
