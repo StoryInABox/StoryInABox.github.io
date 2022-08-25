@@ -143,13 +143,14 @@ function initialize()
 	arToolkitContext = new THREEx.ArToolkitContext({
 		cameraParametersUrl: 'data/camera_para.dat',
 		detectionMode: 'mono',
-		maxDetectionRate: 30,
+		maxDetectionRate: 60
 		
 	});
 	
 	// copy projection matrix to camera when initialization complete
 	arToolkitContext.init( function onCompleted(){
 		camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
+		
 	});
 
 	////////////////////////////////////////////////////////////
@@ -162,17 +163,17 @@ function initialize()
 	let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
 		//type: 'pattern', patternUrl: "data/hiro.patt",
 
-        type : 'nft',
-        descriptorsUrl : './weddingtest/data/dingd/testonew',
+        type : 'nft', descriptorsUrl : './weddingtest/data/dingd/testonew',
 		smooth : true,
-		smoothCount: 5,
-		smoothThreshold: 2,
-		smoothTolerance: 0.01
+		//minConfidence: 100000,
+		smoothCount: 20,
+		smoothThreshold: .1,
+		smoothTolerance: 2
         //changeMatrixMode: 'cameraTransformMatrix'
 	})
 	
-	/*
-	let geometry1	= new THREE.CubeGeometry(20,20,20);
+/*	
+	let geometry1	= new THREE.BoxGeometry(1,1,1);
 	let material1	= new THREE.MeshNormalMaterial({
 		transparent: true,
 		opacity: 0.5,
@@ -180,10 +181,10 @@ function initialize()
 	}); 
 	
 	mesh1 = new THREE.Mesh( geometry1, material1 );
-	//mesh1.position.set(100, 0, -100);
+	//mesh1.position.set(10, -5, -10);
 	markerRoot1.add( mesh1 );
-	*/
-
+	
+*/
 
 
 				pmremGenerator = new THREE.PMREMGenerator( renderer );
@@ -212,10 +213,10 @@ function initialize()
 
 				loader = new GLTFLoader();
 				loader.setDRACOLoader( dracoLoader );
-				loader.load( './model/2.gltf',  function ( gltf ) {
+				loader.load( './model/1.gltf',  function ( gltf ) {
                     //gltf.scene.position.set( 0, 0, -5 );
 					//gltf.scene.rotation.set( 0.1, 0, 0 );
-                    gltf.scene.scale.set( 1, 1, 1 );
+                    //gltf.scene.scale.set( 1, 1, 1 );
                     
 					
 					
@@ -235,7 +236,9 @@ function initialize()
 					requestAnimationFrame(animate);
 					//animate();
 					
+					//position.getPositionFromMatrix( markerRoot1.matrixWorld );
 					console.log(arToolkitContext)
+					//console.log(position.getPositionFromMatrix( markerRoot1.matrixWorld ))
 				} );
 
 
@@ -247,6 +250,8 @@ function initialize()
 
 	console.log(document)
 	console.log(scene)
+	console.log(markerControls1.context)
+	console.log(camera)
 	
 }
 
@@ -263,9 +268,25 @@ function update()
 
 function render()
 {
-	
 	renderer.render( scene, camera );
 	
+	//console.log(arToolkitContext.getProjectionMatrix().elements )
+	//console.log(scene.scale)
+	markerRoot1.children[0].scale.set(100,100,100)
+	
+	//console.log(markerRoot1.children[0].scale)
+	
+	//var position = new THREE.Vector3();
+	/*
+	scene.children[2].children[0].position.x =position.getPositionFromMatrix( markerRoot1.matrixWorld ).x
+	scene.children[2].children[0].position.y =position.getPositionFromMatrix( markerRoot1.matrixWorld ).y
+	scene.children[2].children[0].position.z =position.getPositionFromMatrix( markerRoot1.matrixWorld ).z
+	scene.children[2].children[0].scale.x = 10
+	scene.children[2].children[0].scale.y = 10
+	scene.children[2].children[0].scale.z = 10
+	*/
+	//console.log(scene.children[2].children[0].position.x)
+	//console.log(position.getPositionFromMatrix( markerRoot1.matrixWorld ).x)
 	//console.log(arToolkitContext.arController.marker_transform_mat)
 }
 
@@ -286,6 +307,7 @@ function animate()
 //console.log(scene.children[1].children[0].children[1].geometry.attributes.uv.normalized)
 	update();
 	render();
+	
 	
 }
 
