@@ -62,15 +62,19 @@ function initialize()
 {
 	scene = new THREE.Scene();
 /*
-	let ambientLight = new THREE.AmbientLight( 0xcccccc, 0.5 );
+	let ambientLight = new THREE.AmbientLight( 0xcccccc, 1 );
 	scene.add( ambientLight );
-		*/		
+	
+	let light = new THREE.PointLight( 0xff0000, 1,2000);
+	light.position.set( 0, -50, 0 );
+	scene.add( light );
+*/
 	camera = new THREE.Camera();
 	scene.add(camera);
 
 	renderer = new THREE.WebGLRenderer({
 		antialias : true,
-		//logarithmicDepthBuffer: logDepthBuf,
+		logarithmicDepthBuffer: true, 
 		//preserveDrawingBuffer:false,
 		alpha: true
 		
@@ -165,7 +169,7 @@ function initialize()
 
         type : 'nft', descriptorsUrl : './weddingtest/data/dingd/testonew',
 		smooth : true,
-		//minConfidence: 100000,
+	
 		smoothCount: 20,
 		smoothThreshold: .1,
 		smoothTolerance: 2
@@ -173,19 +177,20 @@ function initialize()
 	})
 	
 /*	
-	let geometry1	= new THREE.BoxGeometry(1,1,1);
+
+	let geometry1	= new THREE.BoxGeometry(20,20,20);
 	let material1	= new THREE.MeshNormalMaterial({
 		transparent: true,
-		opacity: 0.5,
+		opacity: 1,
 		side: THREE.DoubleSide
 	}); 
-	
+
 	mesh1 = new THREE.Mesh( geometry1, material1 );
 	//mesh1.position.set(10, -5, -10);
 	markerRoot1.add( mesh1 );
 	
 */
-
+	
 
 				pmremGenerator = new THREE.PMREMGenerator( renderer );
 				pmremGenerator.compileEquirectangularShader();
@@ -207,8 +212,7 @@ function initialize()
 					pmremGenerator.dispose();
 
 				});
-
-				dracoLoader = new DRACOLoader();
+			dracoLoader = new DRACOLoader();
 				dracoLoader.setDecoderPath( 'js/draco/' );
 
 				loader = new GLTFLoader();
@@ -216,9 +220,14 @@ function initialize()
 				loader.load( './model/1.gltf',  function ( gltf ) {
                     //gltf.scene.position.set( 0, 0, -5 );
 					//gltf.scene.rotation.set( 0.1, 0, 0 );
-                    //gltf.scene.scale.set( 1, 1, 1 );
+                    gltf.scene.scale.set( 10,10,10 );
                     
-					
+
+					gltf.scene.traverse((child) => {
+                        //if (child.isMesh) child.material = material1; // a material i created in the code earlier
+						//if (child.isMesh) child.material =gltf.scene.children[0].children[0].material
+                    });
+                 
 					
 						mixer = new THREE.AnimationMixer( gltf.scene );
 			
@@ -237,7 +246,7 @@ function initialize()
 					//animate();
 					
 					//position.getPositionFromMatrix( markerRoot1.matrixWorld );
-					console.log(arToolkitContext)
+					console.log(gltf.scene.children[0].children[0])
 					//console.log(position.getPositionFromMatrix( markerRoot1.matrixWorld ))
 				} );
 
@@ -272,7 +281,7 @@ function render()
 	
 	//console.log(arToolkitContext.getProjectionMatrix().elements )
 	//console.log(scene.scale)
-	markerRoot1.children[0].scale.set(100,100,100)
+	//markerRoot1.children[0].scale.set(10,10,10)
 	
 	//console.log(markerRoot1.children[0].scale)
 	
