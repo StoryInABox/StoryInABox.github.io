@@ -30,7 +30,7 @@
 	<body style='margin : 0px; overflow: hidden;'>
 		
 
-		<a id="link" rel="ar" href="" download="asset.usdz">
+		<a id="link" rel="ar" href="Download/Till_Dance_Finial.reality" download="Till_Dance_Finial.reality">
 			<img id="button" width="100" src="arkit.png">
 		</a>
 
@@ -42,7 +42,7 @@
 			import { RoomEnvironment } from './js/RoomEnvironment.js';
 
 			import { GLTFLoader } from './js/GLTFLoader.js';
-			import { USDZExporter } from './js/USDZExporter.js';
+			//import { USDZExporter } from './js/USDZExporter.js';
 			import { RGBELoader } from './js/RGBELoader.js';
 	
 
@@ -135,14 +135,14 @@
 					scene.add( gltf.scene );
 
 					// USDZ
-
+/*
 					const exporter = new USDZExporter();
 					const arraybuffer = await exporter.parse( gltf.scene );
 					const blob = new Blob( [ arraybuffer ], { type: 'application/octet-stream' } );
 
 					const link = document.getElementById( 'link' );
 					link.href = URL.createObjectURL( blob );
-
+*/
 				} );
 
 				const controls = new OrbitControls( camera, renderer.domElement );
