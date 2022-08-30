@@ -92,9 +92,9 @@
 		<a id="link" rel="ar"  href="Download/Till_Dance_Finial.reality" download="Till_Dance_Finial.reality">
 			<img id="button"  width="100" src="button.png">
 		</a>
-		<audio id="music" controls autoplay ="true" >
+		<audio id="music" controls autoplay >
 			<source src="happy.mp3" type="audio/mpeg">
-		  </audio>
+		</audio>
 
 		<script type="module">
 
@@ -174,9 +174,19 @@
 				loadingStautus.onLoad = function ( ) {
 
 				console.log( 'Loading complete!');
-				console.log(loadingCanvas[0].classList.toggle("checked"))
+				let loadingCanvas = document.getElementsByClassName("loading");
+                //loadingCanvas[0].classList.toggle("checked");
+				//console.log(loadingCanvas[0].classList.toggle("checked"))
+				//console.log(document.getElementById("music"));
+				//document.getElementById("music").play();
 				};
+				
 
+				
+				document.getElementById("music").onloadstart = function() {
+   				 
+					console.log("test")
+				};
 
 				const loader = new GLTFLoader(loadingStautus).setPath( 'models/' );
 				loader.load( 'Till_pose_final.gltf', async function ( gltf ) {
