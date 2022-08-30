@@ -92,7 +92,7 @@
 		<a id="link" rel="ar"  href="Download/Till_Dance_Finial.reality" download="Till_Dance_Finial.reality">
 			<img id="button"  height="50" width="50" src="button.png">
 		</a>
-		<audio id="music" controls>
+		<audio id="music" controls preload muted>
 			<source src="happy.mp3" type="audio/mpeg">
 		</audio>
 
@@ -113,6 +113,7 @@
 			let aktuelleAnimation;
 
 			let loadingStautus =  new THREE.LoadingManager();
+
 			let music = document.getElementById("music");
 			init();
 			animate();
@@ -179,17 +180,25 @@
 				//console.log(loadingCanvas[0].classList.toggle("checked"))
 				//console.log(document.getElementById("music"));
 				
+				//console.log(music.src)
+				music.autoplay = true;
 				music.load();
+
+
 				};
 				
 
 				
-				music.onloadstart = function() {
+				music.oncanplaythrough = function() {
    				 
 					
-					music.autoplay = true;
-					//music.play()
+					
+					
+					
+					//music.play();
 					console.log(document.getElementById("music"));
+					music.muted= false;
+					//music.play = true
 				};
 
 				const loader = new GLTFLoader(loadingStautus).setPath( 'models/' );
