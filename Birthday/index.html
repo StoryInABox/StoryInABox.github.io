@@ -92,7 +92,7 @@
 		<a id="link" rel="ar"  href="Download/Till_Dance_Finial.reality" download="Till_Dance_Finial.reality">
 			<img id="button"  width="100" src="button.png">
 		</a>
-		<audio id="music" controls autoplay >
+		<audio id="music" controls>
 			<source src="happy.mp3" type="audio/mpeg">
 		</audio>
 
@@ -113,7 +113,7 @@
 			let aktuelleAnimation;
 
 			let loadingStautus =  new THREE.LoadingManager();
-
+			let music = document.getElementById("music");
 			init();
 			animate();
 
@@ -167,25 +167,29 @@
 				loadingStautus.onStart = function ( url, itemsLoaded, itemsTotal ) {
 
 				console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
-				document.getElementsByClassName("loading")[0].classList.toggle("checked");
+				//document.getElementsByClassName("loading")[0].classList.toggle("checked");
 
 				};
 
 				loadingStautus.onLoad = function ( ) {
 
 				console.log( 'Loading complete!');
-				let loadingCanvas = document.getElementsByClassName("loading");
-                //loadingCanvas[0].classList.toggle("checked");
+				//let loadingCanvas = document.getElementsByClassName("loading");
+                document.getElementsByClassName("loading")[0].classList.toggle("checked");
 				//console.log(loadingCanvas[0].classList.toggle("checked"))
 				//console.log(document.getElementById("music"));
-				//document.getElementById("music").play();
+				
+				music.load();
 				};
 				
 
 				
-				document.getElementById("music").onloadstart = function() {
+				music.onloadstart = function() {
    				 
-					console.log("test")
+					
+					music.autoplay = true;
+					//music.play()
+					console.log(document.getElementById("music"));
 				};
 
 				const loader = new GLTFLoader(loadingStautus).setPath( 'models/' );
