@@ -83,17 +83,17 @@ function onRequestBluetoothDeviceButtonClick() {
  // filters: [...] <- Prefer filters to save energy & show relevant devices.
     acceptAllDevices: true
   })
-  
+   */
   .then(device => {
     log('> Requested ' + device.name);
 
     device.addEventListener('advertisementreceived', (event) => {
       log('> Received advertisement from "' + device.name + '"...');
       log('RSSI: ' + event.rssi);
-      console.log(10**((-69-(event.rssi))/(10 * 2)))
+      
     });
 
-    device.watchAdvertisements()
+    addListenerToBluetoothDevice(device);
   
   })
   .catch(error => {
@@ -101,16 +101,16 @@ function onRequestBluetoothDeviceButtonClick() {
   });
 
 
-  */
-
-  navigator.bluetooth.getDevices()
+ 
+/*
+  //navigator.bluetooth.getDevices()
   .then(devices => {
     log('> Got ' + devices.length + ' Bluetooth devices.');
     for (const device of devices) {
       addListenerToBluetoothDevice(device);
     }
   })
-
+*/
 
 
 
