@@ -7,7 +7,7 @@
 <button onclick="onRequestBluetoothDeviceButtonClick()"style="width:100px;height:50px;"></button>
 
 <audio id="audio" controls loop>
-  <source src="/Audio/2020-12-13_-_Jazzy_Rudolph_-_www.FesliyanStudios.com_David_Renda.mp3" >
+  <source src="/BLETEST/Audio/2020-12-13_-_Jazzy_Rudolph_-_www.FesliyanStudios.com_David_Renda.mp3" >
 </audio>
 
 <h3>Live Output</h3>
@@ -77,7 +77,7 @@ function onRequestBluetoothDeviceButtonClick() {
 
   //log('Requesting any Bluetooth device...');
   
-  //navigator.bluetooth.requestDevice(options)
+  navigator.bluetooth.requestDevice(options)
 /*
   navigator.bluetooth.requestDevice({
  // filters: [...] <- Prefer filters to save energy & show relevant devices.
