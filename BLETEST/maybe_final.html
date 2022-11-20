@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body{
+                overflow: hidden;
+                margin: 0%;
+            }
+            h2{
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                text-align: center;
+                text-decoration: underline;
+                
+            }
+            .device_one{
+                color: firebrick;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size:medium;
+            }
+            .device_two{
+                color: olivedrab;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+                font-size: medium;
+            }
+            #container{
+                display: flex;
+            }
+            .column {
+                border: 1px solid grey;
+                padding: 1%;
+                
+                flex-basis: 100%;
+                height: auto; 
+            }
+
+            .range-wrap {
+            position: relative;
+            margin: 0 auto 3rem;
+            }
+            .range {
+            width: 100%;
+            }
+            .bubble {
+            background: red;
+            color: white;
+            padding: 4px 12px;
+            position: absolute;
+            border-radius: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            }
+            .bubble::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: red;
+            top: -1px;
+            left: 50%;
+            }
+
+
+        </style>
+    </head>
+<body onload="setVal()">
+<div id="container">
+    <div class="column">
+        <h2>Devices</h2>
+        <h3 id="device_1" class="device_one">Device1</h3>
+        <h3 id="device_2"class="device_two">Device2</h3>
+    </div>
+    <div class="column">
+        <h2>Rssi</h2>
+        <h3 id="Rssi_1"class="device_one">Device1</h3>
+        <h3 id="Rssi_2"class="device_two">Device2</h3>
+    </div>
+    <div class="column">
+        <h2>remap in %</h2>
+        <h3 id="percent_1"class="device_one">%</h3>
+        <h3 id="percent_2"class="device_two">%</h3>
+    </div>
+    <div class="column">
+        <h2>Volume</h2>
+        <h3 id="Volume_1"class="device_one">%</h3>
+        <h3 id="Volume_2"class="device_two">%</h3>
+    </div>
+    <div id="Slinput"class="column">
+        <h2>params</h2>
+        <div class="range-wrap">
+            <label for="fname">Rssi-minDistance</label>
+            <input type="range" min="-90" max="-30" value="-50" class="range" id="myRange"onchange="updateVar(val=1)">
+            <output class="bubble"></output> 
+        </div>
+          <div class="range-wrap">
+            <label for="lname">Rssi-maxDistance</label>
+            <input type="range" min="-90" max="-30" value="-70" class="range" id="myRange"onchange="updateVar(val=2)">
+            <output class="bubble"></output>  
+        </div>
+          <div class="range-wrap">
+            <label for="lname">VolumeFaktor</label>
+            <input type="range" min="1" max="10" value="2.0" class="range" id="myRange" onchange="updateVar(val=3)">
+            <output class="bubble"></output>  
+        </div>
+        
+       
+
+    </div>
+</div>
+
+
+
+<button onclick="onConnectToBluetoothDevicesButtonClick()"style="width:100px;height:50px;">Start</button>
+<button onclick="onRequestBluetoothDeviceButtonClick()"style="width:100px;height:50px;">set_devices</button>
+<div>
+    <audio id="audio_1"  preload="auto" controls loop>
+        <source src="/BLETEST/Audio/2020-12-13_-_Jazzy_Rudolph_-_www.FesliyanStudios.com_David_Renda.mp3" >
+      </audio>
+      <audio id="audio_2" preload="auto"controls loop>
+          <source src="/BLETEST/Audio/2020-11-20_-_Preparing_For_Santa_-_www.FesliyanStudios.com_Steve_Oxen.mp3" >
+        </audio>         
+</div>
+
+
+<h3>Live Output</h3>
+<div id="output" class="output">
+  <div id="content"></div>
+  <div id="status"></div>
+  <pre id="log"></pre>
+</div>
+
+
+
+<script>
+   
+
+  var ChromeSamples = {
+    log: function() {
+      var line = Array.prototype.slice.call(arguments).map(function(argument) {
+        return typeof argument === 'string' ? argument : JSON.stringify(argument);
+      }).join(' ');
+
+      document.querySelector('#log').textContent += line + '\n';
+    },
+
+    clearLog: function() {
+      document.querySelector('#log').textContent = '';
+    },
+
+    setStatus: function(status) {
+      document.querySelector('#status').textContent = status;
+    },
+
+    setContent: function(newContent) {
+      var content = document.querySelector('#content');
+      while(content.hasChildNodes()) {
+        content.removeChild(content.lastChild);
+      }
+      content.appendChild(newContent);
+    }
+  };
+</script>
+
+<script>
+  log = ChromeSamples.log;
+
+  function isWebBluetoothEnabled() {
+    if (navigator.bluetooth) {
+      return true;
+    } else {
+      ChromeSamples.setStatus('Web Bluetooth API is not available.\n' +
+          'Please make sure the "Experimental Web Platform features" flag is enabled.');
+      return false;
+    }
+  }
+</script>
+
+<script>
+//-----------------VALUES---------------
+    let minDist = -60;
+    let maxDist = -75;
+    
+    let VolumeFakt = 1;
+
+//---------------------------------
+
+
+let audio_1=document.getElementById("audio_1");
+let audio_2 =document.getElementById("audio_2");
+
+let percentVal_1;
+let percentVal_2;
+let Valold_1=0;
+let Valnew_1=0;
+let ValtoUse_1=0;
+let isittwice_1=0;
+
+let Valold_2=0;
+let Valnew_2=0;
+let ValtoUse_2=0;
+let isittwice_2=0;
+
+function setVal(){
+     
+    
+    for (let i=0; i<document.getElementsByClassName("range").length; i++){
+        if (document.getElementsByClassName("range")[i].parentElement.children[0].innerHTML=="Rssi-minDistance"){
+            document.getElementsByClassName("range")[i].parentElement.children[1].value=minDist
+        }
+        if (document.getElementsByClassName("range")[i].parentElement.children[0].innerHTML=="Rssi-maxDistance"){
+            document.getElementsByClassName("range")[i].parentElement.children[1].value=maxDist
+        }
+        if (document.getElementsByClassName("range")[i].parentElement.children[0].innerHTML=="VolumeFaktor"){
+            document.getElementsByClassName("range")[i].parentElement.children[1].value=VolumeFakt
+        } 
+    }
+    const allRanges = document.querySelectorAll(".range-wrap");
+allRanges.forEach(wrap => {
+  const range = wrap.querySelector(".range");
+  const bubble = wrap.querySelector(".bubble");
+
+  range.addEventListener("input", () => {
+    setBubble(range, bubble);
+  });
+  setBubble(range, bubble);
+});
+
+} 
+
+
+function setBubble(range, bubble) {
+    
+  const val = range.value;
+  const min = range.min ? range.min : 0;
+  const max = range.max ? range.max : 100;
+  const newVal = Number(((val - min) * 100) / (max - min));
+  bubble.innerHTML = val;
+
+  // Sorta magic numbers based on size of the native UI thumb
+  bubble.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
+}
+
+
+//-----------------------------------------------
+function onConnectToBluetoothDevicesButtonClick() {
+
+    
+    audio_1.play();
+    audio_1.volume = 0;
+    audio_2.play();
+    audio_2.volume = 0;
+
+  log('Getting existing permitted Bluetooth devices...');
+  navigator.bluetooth.getDevices()
+  .then(devices => {
+    
+    log('> Got ' + devices.length + ' Bluetooth devices.');
+    // These devices may not be powered on or in range, so scan for
+    // advertisement packets from them before connecting.
+    for (const device of devices) {
+      connectToBluetoothDevice(device);
+    }
+  })
+  .catch(error => {
+    log('Argh! ' + error);
+  });
+}
+
+
+let device_1 = "ESP32 SimpleBLE";
+let device_2 = "ESP32 SimpleBLE_2";
+function connectToBluetoothDevice(device) {
+
+
+  device.addEventListener('advertisementreceived', (event) => {
+        
+    
+    if(event.device.name==device_1){
+        document.getElementById("device_1").innerHTML=event.device.name;
+        document.getElementById("Rssi_1").innerHTML=event.rssi;
+        Valnew_1 = event.rssi
+        //console.log(Valnew_1,Valold_1)
+        isittwice_1++
+        if (isittwice_1==1){
+            ValtoUse_1=Valnew_1;
+        }
+        if (isittwice_1==2){
+            
+            setInterval (dolerp_1,1000/25)
+        }
+        
+    }
+    if(event.device.name==device_2){
+        document.getElementById("device_2").innerHTML=event.device.name;
+        document.getElementById("Rssi_2").innerHTML=event.rssi;
+        Valnew_2 = event.rssi
+        //console.log(Valnew_2,Valold_2)
+        isittwice_2++
+        if (isittwice_2==1){
+            ValtoUse_2=Valnew_2;
+        }
+        if (isittwice_2==2){
+            
+            setInterval (dolerp_2,1000/25)
+        }
+    }
+    
+      //console.log('Advertisement received.');
+    
+    });
+
+    //console.log('Watching advertisements from "' + device.name + '"...');
+    return device.watchAdvertisements();  
+  
+   
+}
+
+function onRequestBluetoothDeviceButtonClick() {
+
+
+  log('Requesting any Bluetooth device...');
+  navigator.bluetooth.requestDevice({
+ // filters: [...] <- Prefer filters to save energy & show relevant devices.
+    acceptAllDevices: true
+  })
+  .then(device => {
+    log('> Requested ' + device.name);
+  })
+  .catch(error => {
+    log('Argh! ' + error);
+  });
+}
+
+
+
+//console.log(document.getElementById("params").elements[0])
+
+
+
+function updateVar(){
+   if(document.getElementById("Slinput").children[val].children[0].innerHTML=="Rssi-minDistance"){minDist = document.getElementById("Slinput").children[val].children[1].value}
+   if(document.getElementById("Slinput").children[val].children[0].innerHTML=="Rssi-maxDistance"){maxDist = document.getElementById("Slinput").children[val].children[1].value}
+   if(document.getElementById("Slinput").children[val].children[0].innerHTML=="VolumeFaktor"){VolumeFakt = document.getElementById("Slinput").children[val].children[1].value }
+    //console.log(document.getElementById("Slinput").children[val].children[0].innerHTML )
+    //console.log(document.getElementById("Slinput").children[val].children[1].value )
+    //console.log(minDist, maxDist, VolumeFakt)
+}
+
+function dolerp_1(){
+    
+
+  if (ValtoUse_1<Valnew_1){
+    ValtoUse_1 =ValtoUse_1+0.1;
+  }
+  if(ValtoUse_1>Valnew_1){
+    ValtoUse_1 =ValtoUse_1-0.1;
+  }
+
+
+  ValtoUse_1 = Number((ValtoUse_1).toFixed(1));
+  percentVal_1 = map_range(ValtoUse_1, maxDist, minDist, 0, 100)
+  //console.log(percentVal)
+  document.getElementById("percent_1").innerHTML=""+Number((percentVal_1).toFixed(1))+"%";
+  document.getElementById("Volume_1").innerHTML=Number((percentVal_1/(VolumeFakt*100)).toFixed(1));
+  
+  if(percentVal_2/(VolumeFakt*100)>0){
+
+    audio_1.volume =Number((percentVal_1/(VolumeFakt*100)).toFixed(1));
+  }
+}
+function dolerp_2(){
+
+
+  if (ValtoUse_2<Valnew_2){
+    ValtoUse_2 =ValtoUse_2+0.1;
+  }
+  if(ValtoUse_2>Valnew_2){
+    ValtoUse_2 =ValtoUse_2-0.1;
+  }
+
+
+  ValtoUse_2 = Number((ValtoUse_2).toFixed(1));
+  percentVal_2 = map_range(ValtoUse_2, maxDist, minDist, 0, 100)
+  //console.log(percentVal)
+
+  //document.getElementById("audio").volume = percentVal/200;
+
+  document.getElementById("percent_2").innerHTML=""+Number((percentVal_2).toFixed(1))+"%";
+  document.getElementById("Volume_2").innerHTML=Number((percentVal_2/(VolumeFakt*100)).toFixed(1));
+  if(percentVal_2/(VolumeFakt*100)>0){
+
+    audio_2.volume = Number((percentVal_2/(VolumeFakt*100)).toFixed(1));
+  }
+
+}
+function map_range(value, low1, high1, low2, high2) {
+    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+}
+
+
+
+
+</script>
+
+</body>
+</html>
