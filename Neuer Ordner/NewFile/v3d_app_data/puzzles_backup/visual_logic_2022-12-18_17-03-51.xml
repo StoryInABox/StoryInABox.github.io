@@ -1,0 +1,55 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <tab name="init" type="InitTab" active="true" scrollx="20.000000000000455" scrolly="20" scale="0.9">
+    <block xmlns="https://developers.google.com/blockly/xml" type="addHTMLElement" id=";Mf8eg5ZIVB3f`ZE0`J|" x="330" y="230">
+      <field name="ELEMENT">div</field>
+      <field name="MODE">TO</field>
+      <field name="PARENT">FALSE</field>
+      <value name="ID">
+        <shadow type="text" id="74#Z8Kl|gv`sIxwh4VWZ">
+          <field name="TEXT">button</field>
+        </shadow>
+      </value>
+      <value name="TARGET_ID">
+        <shadow type="DOMObjectSelector" id="G@eFqI/oX}x)/QW+54S8">
+          <field name="DOM_OBJECT">WINDOW</field>
+        </shadow>
+      </value>
+      <next>
+        <block type="createCSSRule" id="D~}i=~|EaT~Sa5P,MzZ:">
+          <mutation xmlns="http://www.w3.org/1999/xhtml" mediaruleslot="false"></mutation>
+          <field name="PARENT">FALSE</field>
+          <value name="CSS_RULE">
+            <shadow type="text" id="`i~0JF{Vv1Zohhp6x|zh">
+              <field name="TEXT">#button</field>
+            </shadow>
+          </value>
+          <value name="CSS_RULE_CONT">
+            <shadow type="text" id="+]Fi8ab1g(qaIyA.52R#">
+              <field name="TEXT">color: red;</field>
+            </shadow>
+            <block type="textMultiline" id=",5cE%XbCw#f_@c;Y~_SW">
+              <field name="HIGHLIGHT_MODE">css</field>
+              <field name="TEXT" editor-height="3" editor-width="200">width:50px;&amp;#10;height:50px;&amp;#10;background-color:red;</field>
+            </block>
+          </value>
+        </block>
+      </next>
+    </block>
+  </tab>
+  <tab name="main" type="MainTab" active="false" scrollx="20" scrolly="20" scale="0.9">
+    <block xmlns="https://developers.google.com/blockly/xml" type="whenClicked" id="uU^:IJ^*+kkM(YmpM8Z?" inline="false" x="610" y="270">
+      <mutation xmlns="http://www.w3.org/1999/xhtml" adveventoptions="false" enableifmissed="false"></mutation>
+      <field name="X_RAY">FALSE</field>
+      <field name="DOUBLE_CLICK">FALSE</field>
+      <field name="LEFT_BUTTON">TRUE</field>
+      <field name="MIDDLE_BUTTON">TRUE</field>
+      <field name="RIGHT_BUTTON">TRUE</field>
+      <value name="VALUE">
+        <shadow type="objectList" id="AL.VaC3dAHLecYgW60Mc">
+          <field name="FIELDNAME">&lt;none&gt;</field>
+        </shadow>
+      </value>
+    </block>
+  </tab>
+  <editorsettings viewport-x="1518" viewport-y="28" viewport-w="1024" viewport-h="648.5" viewport-hidden="false" toolbox-library-mode="false" toolbox-minimized-mode="false"></editorsettings>
+</xml>

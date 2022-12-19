@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Babylon Template</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100vh;
+                margin: 0;
+                padding: 0;
+            }
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+
+            .play{
+                position: absolute;
+                right:0;
+                margin: 2vw;
+                padding: .25vw;
+                scale: 200%;
+                cursor: pointer;
+                z-index: 2;
+            }  
+        </style>
+        <script src="https://cdn.babylonjs.com/babylon.js"></script>
+        <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    </head>
+
+   <body>
+    <button class="play"><i class="material-icons">play_circle_outline</i></button>
+   
+	<canvas id="renderCanvas"></canvas>
+
+	<script>
+        const canvas = document.getElementById("renderCanvas"); 
+        const engine = new BABYLON.Engine(canvas, true); 
+            const scene = new BABYLON.Scene(engine);
+            var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, 
+                new BABYLON.Vector3(0, 0, 0), scene);            
+            camera.setPosition(new BABYLON.Vector3(0, 0, 10));
+            camera.attachControl(canvas, true);
+            const reflectionTexture = new BABYLON.HDRCubeTexture("/Textures/alps_field_1k.hdr", scene, 512, false, true, false, true);
+            //var hdrTexture = BABYLON.CubeTexture.CreateFromPrefilteredData("/Textures/alps_field_1k.hdr", scene);
+            var skybox = scene.createDefaultSkybox(reflectionTexture, true, 10000);
+            scene.environmentTexture = reflectionTexture;
+            const createScene = BABYLON.SceneLoader.Append("3Dmodel/", "alarm_clock_01_4k_new.gltf", scene, function (scene) {
+
+            return scene;
+
+});
+
+        engine.runRenderLoop(function () {
+                scene.render();
+        });
+        // Watch for browser/canvas resize events
+        window.addEventListener("resize", function () {
+                engine.resize();
+        });
+	</script>
+
+   </body>
+
+</html>

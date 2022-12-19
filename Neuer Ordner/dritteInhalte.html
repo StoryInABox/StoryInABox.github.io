@@ -1,0 +1,2274 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Noto+Sans">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Space+Mono|Muli">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <style>
+
+
+@font-face {
+  font-family: "Helvetica45";
+  src:  url('/Fonts/HelveticaNeueLTStd-Lt.otf') format('opentype');
+        
+}
+
+@font-face {
+  font-family: "Helvetica75";
+  src:  url('/Fonts/HelveticaNeueLTStd-Blk.otf') format('opentype');
+       
+}
+/*--------------------------------------------------------------------------------------------------*/
+/*------------BODYSTUFF---------------*/
+/*--------------------------------------------------------------------------------------------------*/
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    
+    margin: 0;
+    overflow: auto;
+    transition: 2s overflow 2s ;
+    font-family: Muli, sans-serif;
+    
+    display: flex;
+    justify-content: center;
+    background-color: rgb(31, 48, 65)
+}
+.MainPage{
+
+
+
+    display: flex;
+    margin: 0;
+    padding: 0%;
+   
+    height: auto;
+  width: 100%;
+box-shadow: inset 0px 0px 100px 0px #ccc;
+    background-color: rgb(250 250 250);  
+max-width: 1500px;
+  
+}
+::-webkit-scrollbar {
+ display: none;
+}
+
+.progress-container {
+    
+left: 0;
+  width: .3em;
+  height: 100%;
+  background: transparent;
+  position: fixed;
+  left: 0%;
+  transform: translate(-50%, 0%);
+z-index: 1;
+}
+
+.progress-bar {
+  height: 0%;
+  background: black;
+  width: 100%;
+}
+/*--------------------------------------------------------------------------------------------------*/
+/*------------TYPO---------------*/
+/*--------------------------------------------------------------------------------------------------*/
+p{
+    margin: 0;
+    font-family: Muli, sans-serif;
+}
+
+.textstyle{
+    
+    font-size: 1.05em;
+    line-height: 1.3;
+    color: #444;
+    margin-top: 1em;
+    margin-bottom: 1em;
+text-align:justify;
+font-weight: normal;
+
+}
+a{
+
+    font-size: small;
+    font-weight: bold;
+    text-decoration: none;
+    color: red;
+    
+}
+
+span{
+
+    font-weight: bold;
+    font-size: large;
+}
+
+h1{
+    font-family:Arial, Helvetica, sans-serif;    
+    font-size:1.8em ;
+    padding-left: 5vw;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    margin-top: 4vw;
+    margin-bottom: 0vw;
+    font-weight:750;
+    
+    
+    background-color: white;
+  
+}
+h2{
+    font-weight: lighter;
+    font-family:Arial, Helvetica, sans-serif; 
+    
+    margin-top: 0vh;
+    margin-bottom: 0vh;
+    text-align: center;
+   
+}
+h3{
+    
+    font-family:"Helvetica45";    
+    color: black;
+    opacity: 0%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+    text-align: left;
+    font-size:.8em;
+}
+
+h4{
+    font-weight: lighter;
+ 
+    margin-top: 0vh;
+    margin-bottom: 0vh;
+    text-align: left;
+    font-size:1em;
+}
+
+
+
+
+
+/*--------------------------------------------------------------------------------------------------*/
+/*------------Timeline---------------*/
+/*--------------------------------------------------------------------------------------------------*/
+
+.dropdownMenu{
+    display: none;
+
+
+}
+
+.NavArea{
+    
+    box-shadow: 20px 0px 200px 0px lightgray;
+    position: fixed;
+    width: 0vw;
+    height: 100%;
+    background-color: white;
+    display: block;
+    left: 0%;
+    top:0;
+    opacity: 00%;
+    z-index: 0;
+    transition: .5s;
+  
+}
+
+
+
+.Timeline-Container{
+   
+    z-index: 1;
+   display: flex;
+    width:auto;
+    height: auto;
+    padding-right: 2vw;
+    padding-left: 2vw;
+    /*outline-style: solid;*/
+    color: black;
+    background-color: transparent;
+  
+    
+}
+.Timeline{
+    position: relative;
+    width: .1em;
+   
+    height: 100%;
+    left: 50%;
+    background-color: black;
+   
+    transform: translate(-50%,0%);   
+    
+}
+
+
+
+/*--------------------------------------------------------------------------------------------------*/
+/*------------HEADER---------------*/
+/*--------------------------------------------------------------------------------------------------*/
+
+.header{
+
+/*box-shadow: 0px 2px 1px 0px lightgray;*/
+box-shadow: 0px 0px 0px 0px lightgray;
+position:-webkit-sticky;
+position:sticky;
+
+top: 0;
+
+background-color: transparent;
+/*outline-style: solid;*/
+
+z-index: 10;
+
+}
+.header h1{
+    opacity: 100%;
+  
+    transition: .5s;
+}
+
+
+.Dot-Container{
+
+
+}
+
+
+.test{
+  
+    position: absolute; 
+color: black;
+ top: 0;
+ left:-2vw;
+
+ transition:  .5s;
+ pointer-events: none;
+
+ height: fit-content;
+ width: fit-content;
+ 
+ padding-bottom: 1em;
+ padding-top: .5em;
+
+
+}
+
+.material-icons{
+  position: absolute;
+ display: flex;
+ pointer-events: none;
+ margin:auto;
+ top: 0%;
+ transform: translate(-50%,25%);
+ 
+
+}
+
+
+
+.test a{
+ 
+    position: relative;
+    display:flex;
+    pointer-events: all;
+    margin-left: 2vh;
+    
+    color: black;
+
+    
+   opacity: 0%;
+    transition:  .25s opacity 0s;
+    
+ 
+}
+
+.test a.checked{
+   
+   
+   opacity: 100%;  
+  
+ }
+#sheet{
+  color: #555;
+  font-weight:normal;
+    margin-left: 3vh;
+
+}
+
+
+
+
+
+
+
+/*--------------------------------------------------------------------------------------------------*/
+/*------------DoCUMENT-Text---------------*/
+/*--------------------------------------------------------------------------------------------------*/
+.flex-container{
+   
+    flex-direction: column;
+
+display: flex;
+margin: 0;
+padding: 0%;
+left:0%;
+height:auto;
+width: 90%;
+    /*background-color: green;*/  
+}
+
+.Topic {
+    
+    height: fit-content;
+    background-color: white;
+    /*outline-style: solid;*/
+    
+    /*box-shadow: -3px 3px 100px 10px  #eee;*/
+    box-shadow: -2px -2px 0px 0px  black;
+
+    width: 100%;  
+   
+    margin-bottom: 10vh;
+    /*scroll-snap-align: start;*/
+ 
+
+  }
+
+.container {
+    
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-top: 10em;
+  margin-left: 5vw;
+  margin-right: 5vw;
+  padding: 0;
+  
+  
+
+  
+}
+
+
+
+.Content{  
+   
+   margin: 0;
+     padding-right: 0vw;
+     padding-left: 0vw;
+     padding-bottom: 5vw;
+     padding-top: 0vw;
+     min-width: fit-content; /*CHECKIT*/
+     height: fit-content;
+     
+    
+     
+ }
+ .Content::after {
+    
+     content: "";
+     clear: both;
+     display: table;
+ }
+
+/*-------DROPDOWNINFO---------*/
+summary::-webkit-details-marker {
+ display: none;
+}
+
+summary {
+ list-style: none;
+}
+details p {
+    margin-left: 5vw;
+    margin-right: 5vw;
+    opacity: 0%;
+   transition: 2s;/*WHY IS IT NOT WORKING????*/
+   
+}
+details[open] p {  
+         
+    opacity: 100%;
+    
+}
+
+details svg { 
+
+    transition: all 0.3s ease;
+}
+details[open] svg {
+    transform: rotate(90deg);
+}
+
+
+
+/*--------------------------------------------------------------------------------------------------*/
+/*------------Content-3D---------------*/
+/*--------------------------------------------------------------------------------------------------*/
+
+ .Content-Container{
+     float: right;
+     flex-direction: column;
+     display: flex;
+     max-width: 25%;
+     min-width: 10em;
+     height: fit-content;
+     margin: 1vw;
+    
+     outline-style: none; 
+  
+}
+
+
+.Content-ContainerHTML{
+    float: right;
+     flex-direction: row;
+     display: flex;
+
+     max-height: 50vh;
+
+     width: 100%;
+
+     outline-style: none; 
+}
+
+
+iframe{
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.Text-Container{
+     display: flex;
+
+     width: 100%;
+  
+     outline-style: solid; 
+     margin: 0;
+    padding: 0;
+     color: white;
+     font-size: 1em;
+    white-space:pre;
+     background-color: #555;
+     max-height: 50vh;
+}
+
+
+
+.Content-ContainerIframe{
+
+    position: relative;
+
+     height: fit-content;
+
+     width: 100%;
+     height: 50vh;
+     
+}
+
+.IframeIframe{
+    position: absolute;
+    width: 100%; 
+    height:100%;
+    margin: 0;
+    padding: 0;
+}
+
+.Text-ContainerIframe{
+    position: absolute;
+    width: 0%;
+    height:100%;
+    left: 100%;
+    color: white;
+    font-size: 1em;
+    white-space:pre;
+    background-color: black;
+    resize: none;
+    opacity: 80%;
+    transition: 1s;
+    margin: 0;
+    padding: 0;
+}
+
+
+.Text-ContainerIframe.checked{
+    left: 0%;
+    width: 100%; 
+    
+}
+
+.showCodeBut{
+    position:relative;
+    margin: 0;
+    height: fit-content;
+    padding: .25vw;
+    color: white;
+    background-color: black;
+    border-radius: 0% 0% .5em .5em;
+    cursor: pointer;
+}
+
+
+.nextbackText{
+    position: relative;
+    color:white;
+    padding: 2vh;
+    top:2vh;
+    background-color: black;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.descript{
+    text-align: right;
+    font-style: italic;
+    font-size: small;
+    margin-top: .5vw;
+    margin-bottom: .5vw;
+    top: 0;
+}
+
+
+
+/*--------------------------------------------------------------------------------------------------*/
+/*------------SLIDES---------------*/
+/*--------------------------------------------------------------------------------------------------*/
+
+
+
+
+/*-------DEVICE---------*/
+/*
+
+  @media only screen and (max-width: 600px) {
+
+   
+    .flex-container {
+        
+    width:96vw;
+    
+  }
+  .Content-Container{
+    flex-direction: column;
+    display: flex;
+    float: left;
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 5vh;
+    margin-top: 2vw;
+    margin-left: 0vw;
+    margin-right: 0vw;
+    
+  }
+
+
+    
+  .MainPage{
+    padding-left: 2vw;
+    padding-right: 0vw;
+    width: auto;
+    
+  }
+  .Topic{
+    box-shadow: none;
+  }
+  .Timeline-Container{
+    display: none;
+  }
+ 
+
+  .dropdownMenu{
+    cursor: pointer;
+    width: 5vh;
+    height: 5vh;  
+
+    position: fixed;
+    display: flex;
+    right: 1vh;
+    top: 1vh;
+ z-index: 10;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.material-symbols-outlined{
+    margin: 1vh;
+    color: black;
+}
+.NavArea{
+
+ 
+}
+
+
+.test{
+    opacity: 0%;
+}
+.test a{
+    
+    
+}
+.material-icons{
+    
+    scale: .5;
+    
+}
+  
+}
+
+*/
+
+
+.grid_middle{
+    display: none;
+    position: absolute;
+    height: 2px;
+    top:50%;
+    width: 100%;
+    background-color: red;
+
+    transform: translate(0%,-50%);
+}
+    .grid_padding{
+    display: none;
+    position: absolute;
+    height: 100%;
+    top:0%;
+    left:12vw;
+    width: 2px;
+    background-color: red;
+
+
+    transform: translate(-50%,0%);
+    }
+
+
+
+        </style>
+    </head>
+<body onload="setTimestamps()" onresize="resize()">
+
+<div class="grid_middle"></div>
+<div class="grid_padding"></div>
+
+
+<div class="progress-container">
+    <div class="progress-bar" id="myBar"></div>
+</div>  
+<div class="MainPage">
+   
+    
+    <div class="Timeline-Container" id="Timeline-Container">
+        <div class="Timeline"></div>
+        
+    </div>
+    <div class="flex-container" id="flex-container">
+        <div class="Topic">
+            
+            <div class="Content-ContainerIframe" id="3DCode">
+                <iframe class="IframeIframe" value="3Dimbrows.txt"></iframe>
+                <textarea class="Text-ContainerIframe"></textarea>
+            </div>
+        </div>
+<!--//////////////////////////////////////////////////////////////////////////////////-->        
+        <div class="Topic">
+            <div class="header">
+                <div class="Dot-Container">
+                    <div class="test">
+                        <i class="material-icons">fiber_manual_record</i>
+                    </div>
+                </div>
+                <h1>Intro</h1>
+            </div>
+            <div class="container">
+                <div class="Content">
+                    
+                    <div class="Content-Container" style="margin-bottom: 4vw; margin-left: 4vw;;">
+                      
+                        <img src="Bilder/face.png" alt="">
+                       
+                    </div>
+                    <h3>Michel Dreyer, 5.Semester MM|VR-Design</h3>
+                   
+                    
+                    
+                    
+                    <p class="textstyle">
+                        Seit einiger Zeit beschäftige ich mich intensiver mit dem Thema 3D-Modelle 
+                        im Browser. Was ursprünglich nur als Programmierumgebung für ein komplexes 
+                        Gestalten-Projekt angedacht war, fasziniert mich bis heute. 3D-Modelle im 
+                        Browser bieten den enormen Vorteil, das sie von Haus aus auf allen Geräten 
+                        und Betriebssystemen jederzeit und überall betrachtet werden können. Damit ist 
+                        das lästige Exportieren für einzelne Betriebssysteme und Geräte überfällig. Den 
+                        meisten von uns werden schon einmal 3D-Inhalte im World Wide Web begegnet sein. 
+                        Egal ob es sich dabei um Produktviewer von namhaften Möbel-Herstellern, 
+                        dreidimensionale Karten oder kleine Spiele handelt in der Regel nutzen alle diese 
+                        Anwendungen WebGL als Grundlage zur Darstellung von dreidimensionalen Inhalten.
+                    </p>  
+                
+                
+                </div>
+                
+            </div>
+        </div>
+
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->  
+        <div class="Topic">
+            <div class="header">
+                <div class="Dot-Container">
+                    <div class="test">
+                        <i class="material-icons">fiber_manual_record</i>
+                    </div>
+                </div>
+                <h1>Was ist WebGL?</h1>
+            </div>
+            <div class="container">
+                <div class="Content">
+                    <h3>Die Qual der Wahl</h3>
+                    
+
+                        <p class="textstyle">
+                            WebGL (Web Graphics Library) ist eine Javascript-Programmierschnittstelle, 
+                            mit deren Hilfe 3D-Inhalte beschleunigt im Browser dargestellt werden können. 
+                            Kurz gesagt WebGl ist eine API (Application Programming Interface).</p>
+
+                        <details>
+                            <summary>
+                            <svg width="10" height="10">
+                                <polyline points="0,10 10,5 0,0" fill="none" stroke="black" />
+                            </svg>
+                            <span class="textstyle"><b>Was ist eine API?</b></span>
+                            </summary>
+                            <p class="textstyle">
+                                Eine API ist Code, welcher es ermöglicht, Anwendungen miteinander zu 
+                                kommunizieren. API‘s dienen dazu, verschiedene Plattformen und Datensätze 
+                                miteinander zu verbinden und diese über eine einheitliche Sprache 
+                                anzusprechen. Eine API ist somit eine Art Übersetzer. APIs gibt es schon 
+                                so lange, wie es Computer gibt, allerdings haben sie seit dem Jahr 2000 
+                                an Bedeutung gewonnen, als Onlinehandelsplattformen wie Ebay und Amazon 
+                                sie einsetzten, um ihre Websites zu optimieren. 
+                            </p>
+                        </details>
+                        
+                        
+                        <p class="textstyle">
+                            Also WebGL fungiert als Übersetzer, damit dreidimensionale Inhalte 
+                            problemlos auf jedem Gerät und Betriebssystem dargestellt werden können. 
+                            Heutzutage ist WebGL in fast allen Web-Browsern standardmäßig enthalten.
+                            Kopf hinter WebGL ist die Non-Profit Vereinigung „Khronos-Gruppe“. 
+                            Dieser Zusammenschluss aus über 150 branchenführenden Unternehmen im Bereich 
+                            Grafik hat es sich zur Aufgabe gemacht, industrielle Standards bei der 
+                            Darstellung von digitalen Inhalten zu schaffen. Dafür stehen sie im stetigen 
+                            Austausch untereinander und mit weiteren großen Unternehmen wie Microsoft, 
+                            Apple, Google, Nvidia, Intel etc. Die Khronos-Gruppe ist neben WebGL auch 
+                            für andere APIs wie OpenGL (Open Graphics Library) oder das 3D-Format .gltf 
+                            (Graphics Library Transmission Format, seit 2015). </p>
+                        
+                    
+                
+                </div>
+              
+            </div>
+        </div>
+
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->  
+        <div class="Topic">
+            <div class="header">
+                <div class="Dot-Container">
+                    <div class="test">
+                        <i class="material-icons">fiber_manual_record</i>
+                    </div>
+                </div>
+                <h1>Frameworks</h1>
+            </div>
+            <div class="container">
+                <div class="Content" >
+                    <h3>Der große Alrounder</h3>
+                    
+                    <p class="textstyle">
+                        Man könnte jetzt also einfach WebGL lernen und damit seine 3D-Inhalte ins 
+                        Internet bringen. Da WebGL aber sehr unhandlich ist, gibt es für dreidimensionale 
+                        Anwendungen diverse Frameworks.</p>
+                    <details>
+                        <summary>
+                        <svg width="10" height="10">
+                            <polyline points="0,10 10,5 0,0" fill="none" stroke="black" />
+                        </svg>
+                        <span class="textstyle"><b>Was ist ein Framework?</b></span>
+                        </summary>
+                        <p class="textstyle">
+                            Ein Framework ist kein eigenständiges Programm, sondern ein Hilfskonstrukt, 
+                            welches einem die Arbeit mit einer bestimmten Software vereinfacht. Man spart 
+                            sich also Code, Zeit und Nerven, wenn man ein Framework nutzt.
+                        </p>
+                    </details>
+
+                        <p class="textstyle">
+                        Um den Prozess noch mal zu verdeutlichen, hilft vielleicht diese Grafik:</p>
+                        <div class="Content-Container" style="max-width:100%; margin-top: 4vw;">
+                      
+                            <img  src="Bilder/Graafik0.png" alt="">
+                           
+                        </div>
+                        
+                        <p class="textstyle">
+                        Wie sich auf der eben dargestellt Grafik unschwer erkennen lässt, gibt es mehr 
+                        als nur ein Framework. 
+                        Auf Wikipedia gibt es hierzu folgende Liste:
+                        </p>  
+                        <div class="Content-Container" style="max-width:100%; margin-top: 4vw;">
+                      
+                            <img  src="Bilder/wikilist_2.png" alt="">
+                           
+                        </div>
+                        <p class="textstyle">
+                            Ich hab mir die Mühe gemacht, alle Frameworks anzuschauen und musste aber 
+                            nach kurzer Recherche feststellen, dass ein großer Teil der aufgelisteten 
+                            Frameworks veraltet oder kostenpflichtig sind. Daher werde ich mich weiteren 
+                            Verlauf dieser Dokumentation auf folgende beschränken: 
+                            </p> 
+                            <ul>
+                                <li>A-Frame.js</li>
+                                <li>Three.js</li>
+                                <li>Babylon.js</li>
+                                <li>Unity</li>
+                                <li>Verge3D</li>
+                            </ul>
+                            <p class="textstyle">
+                                Grundlegend lassen sich die Frameworks für WebGL in zwei Gruppen gliedern:
+                                </p> 
+                                <ul>
+                                    <li>Frameworks mit grafischer Benutzeroberfläche</li>
+                                    <li>Frameworks, die in Code geschrieben werden</li>
+                                </ul>
+                        <div class="Content-Container" style="max-width:100%;">
+                      
+                            <img  src="Bilder/Graafik1_3.png" alt="">
+                           
+                        </div>
+                        <p class="textstyle">
+                            Allerdings haben einige der codebasierten Frameworks einen Online-Editor und 
+                            somit auch ein Graphical User Interface.
+                            </p> 
+
+                        <div class="Content-Container" style="max-width:100%;">
+                      
+                            <img  src="Bilder/Graafik3_2.png" alt="">
+                           
+                        </div>
+ 
+
+                </div>
+            </div>
+        </div>
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->  
+        <div class="Topic">
+            <div class="header">
+                <div class="Dot-Container">
+                    <div class="test">
+                        <i class="material-icons">fiber_manual_record</i>
+                    </div>
+                </div>
+                <h1>HTML Basics</h1>
+            </div>
+            <div class="container">
+                <div class="Content" >
+                    <h3>Html</h3>
+                    <p class="textstyle">
+                        Bevor wir uns gleich dem Codeschreiben etwas genauer widmen, klären wir noch 
+                        mal kurz die Basics im Bereich HTML. Denn egal welches Framework wir nutzen am 
+                        Ende wird unsere Anwendung in Form einer HTML-Datei vorliegen.
+
+                        
+                        
+                       
+                        
+                         
+                        </p>
+                        <p class="textstyle">Also nochmal zur Wiederholung: HTML, CSS, Javascript was war das?</p>
+                        <p class="textstyle">Eine .html-Datei (Hypertext Markup Language) ist die 
+                            Grundlage einer Website. Es ist eine reine Textdatei, in welcher die Elemente, 
+                            die Struktur, die Funktionsweise und das Aussehen einer Website definiert ist. 
+                            Oft gibt es zusätzlich noch .css-Dateien (Cascading Style Sheet) und 
+                            .js-Dateien (Javascript), wobei man diese auch direkt in die .html-Datei 
+                            integrieren kann. CSS benötigt man für das Aussehen und Javascript für die 
+                            Funktionsweise einer Website. </p>
+                        <p class="textstyle"> Innerhalb eines HTML-Dokuments finden sich zwei Bereiche: 
+                            der Head- und der Body-Teil. </p>
+                        <p class="textstyle">Im Head-Teil werden grundlegende Dinge initialisiert: Titel 
+                            der Seite, zu importierende Schriftarten und Skripte sowie das CSS-Dokument 
+                            oder direkt der CSS-Code.</p>
+                        <p class="textstyle">Im Body befinden sich die eigentlichen Inhalte der Website: 
+                            Buttons, Bilder, Text usw.</p>
+                        <p class="textstyle">Scripte können entweder in den Header oder den Body 
+                            geschrieben werden, je nachdem, wo sie ausgeführt werden sollen.
+                        </p>
+                        <p class="textstyle">Zur Verdeutlichung eine einfache Beispielwebsite:</p>
+                        <div class="Content-ContainerHTML"  id="3DCode">
+                            <iframe></iframe>
+                            <textarea class="Text-Container"  onchange="update3d()" autocomplete="off"> 
+
+
+    <!--!!!!!!!   PROBIERT HERUM DIESES FENSTER IST RESPONSIVE   !!!!!!-->
+
+
+    <!--komentar--><!--AUSKOMMENTIEREN IN HTML--> 
+        
+    &lt;html&gt;
+
+    <!--SO BEGINNT EIN HTML-CODE -->
+
+        &lt;head&gt; 
+        
+        <!--HIER WERDEN SCRIPTE;FONTS .js-, .css-DATEIEN ETC VERKNÜPFT-->
+
+            &lt;style&gt;  
+
+            /*komentar*/ /*AUSKOMMENTIEREN IN CSS & JS*/
+            /*MAN KANN CSS AUCH DIREKT IN DIESEN ABSCHNITT SCHREIBEN*/
+
+                p{
+                    color: #ade;
+                } 
+
+                .foto{
+                    width:300px;
+                    height:auto;
+                }
+
+            &lt;/style&gt;
+            
+        &lt;/head&gt;
+        &lt;body&gt; 
+        
+            &lt;img class="foto" src="Bilder/face.png" alt=""&gt;
+
+            &lt;h1 style="color: red;"&gt;My First Heading &lt;/h1&gt;
+            
+            &lt;p&gt;My first paragraph. &lt;/p&gt;
+
+            &lt;script&gt;  
+            
+            <!--MAN KANN JAVASCRIPT AUCH DIREKT IN DIESEN ABSCHNITT SCHREIBEN-->
+
+            &lt;/script&gt;
+        &lt;/body&gt;
+    &lt;/html&gt;
+                            </textarea>
+                            
+                           
+                        </div>
+
+    	                <p class="textstyle">
+                        Das Fenster ist so angelegt das man selber einzelne Werte ersetzen kann und 
+                        herumexperimentieren kann. Ihr könnt ja mal versuchen die Farbe oder den Inhalt des Textes zu ändern.
+                    </p>  
+                       
+
+
+
+                </div>
+            </div>
+        </div>
+<!--//////////////////////////////////////////////////////////////////////////////////-->          
+        <div class="Topic">
+            <div class="header">
+                <div class="Dot-Container">
+                    <div class="test">
+                        <i class="material-icons">fiber_manual_record</i>
+                    </div>
+                </div>
+                <h1>A-frame</h1>
+            </div>
+            <div class="container">
+                <div class="Content">
+                    <h3>Der kleine Alrounder</h3>
+                    <p class="textstyle"> Genug der Theorie. Kommen wir nun zu den Frameworks im Einzelnen. 
+                        Fangen wir zunächst mit den codebasierten Frameworks an. 
+                        Codebasiert heißt, wir schreiben unsere Anwendung in HTML, CSS und Javascript.</p>
+                        <p class="textstyle"> Starten wir mit A-Frame. </p>
+                        <p class="textstyle">
+                        A-Frame wird seit 2017 von Don McCurdy entwickelt. A-Frame ist das Einfachste der 
+                        codebasierten Frameworks. Da es prinzipiell erst mal kein JavaScript braucht. Wer 
+                        nicht gerne Code schreibt, ist hier richtig. </p>
+                        <p class="textstyle">
+                        A-Frame wurde mit einem Schwerpunkt auf VR- und XR-Anwendungen entwickelt. 
+                        Wenn man sich die Beispielszene anschaut, sieht man, dass alles direkt im Body 
+                        geschrieben wird und kein Script Teil benötigt wird. Dieser wird automatisch 
+                        generiert.  </p>  
+                   
+
+ 
+
+                    
+                    <div class="Content-ContainerHTML" id="3DCode">
+                        <iframe style="width:60%"></iframe>
+                        <textarea class="Text-Container" onchange="update3d()" autocomplete="off">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script src="https://aframe.io/releases/1.3.0/aframe.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        <a-scene>
+        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+        <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+        <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+        <a-sky color="#ECECEC"></a-sky>
+        </a-scene>
+    &lt;/body&gt;
+&lt;/html&gt;
+                        </textarea>
+                        
+                     
+                    </div>
+                  
+                
+                </div>
+                <div class="Content">
+                    <h3>Datei Import</h3>
+                    <p class="textstyle">
+                        Der große Vorteil von A-Frame ist mit Sicherheit die Größe. 
+                        Mit gerade mal 12 Zeilen lässt sich ein eigenes 3D-Modell fürs Internet 
+                        aufbereiten, mit der Möglichkeit, sich das Ganze auf dem Smartphone in VR 
+                        anzuschauen. Das schafft kein anderes Framework! 
+                    </p>
+
+                    <div class="Content-ContainerHTML" id="3DCode">
+                        <iframe style="width:60%"></iframe>
+                        <textarea class="Text-Container" onchange="update3d()" autocomplete="off">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script src="https://aframe.io/releases/1.3.0/aframe.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        <a-scene gltf-model="dracoDecoderPath: https://threejs.org/examples/js/libs/draco/gltf/draco_decoder.js;">
+            <a-entity gltf-model="/3Dmodel/Suzanne.gltf"  position="0 0 0"></a-entity>
+            <a-entity camera wasd-controls look-controls position="0 0 5"></a-entity> 
+        </a-scene>
+    &lt;/body&gt;
+&lt;/html&gt;
+                        </textarea>
+                        
+                     
+                    </div>
+                    <p class="textstyle">
+                        Allerdings muss man aber dazu sagen, dass A-Frame kein eigenständiges Framework 
+                        ist, da es auf Three.js basiert. Somit ist A-Frame ein Framework im Framework. 
+                        Und hier ist auch der Hacken an der Sache. Es lassen sich zwar superschnell 
+                        3D-Modelle in Netz bringen, wenn man aber komplexe Projekte hat, kommt man 
+                        früher oder später an den Punkt, dass man auf Three.js zurückgreifen muss. 
+                        Siehe das Beispiel auf der nächsten Seite.
+                    </p> 
+                  
+                    
+                    
+                </div>
+
+                <div class="Content">
+                    <h3>Datei Import</h3>
+                    <p class="textstyle">
+                        Da A-Frame z. B. standardmäßig keine Orbit-Controls bietet, müssen diese vorher 
+                        aus Three.js importiert werden. Auch das beleuchten mit HDRI‘s benötigt 
+                        zusätzliche Scripte. Alles Probleme, für die es Lösungen gibt. Allerdings mildern 
+                        diese Einschränkungen und Weitere nicht genannte den Charme von A-Frame. Weshalb 
+                        ich bisher immer direkt auf Three.js zurückgegriffen habe.
+                    </p>
+
+                    <div class="Content-ContainerIframe" id="3DCode">
+                        <iframe class="IframeIframe" value="A-Frame_click_v2.txt"></iframe>
+                        <textarea class="Text-ContainerIframe"></textarea>
+                    </div>
+
+                   
+                    
+                    
+                </div>
+            </div>
+        </div>
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->  
+        <div class="Topic">
+            <div class="header">
+                <div class="Dot-Container">
+                    <div class="test">
+                        <i class="material-icons">fiber_manual_record</i>
+                    </div>
+                </div>
+                <h1>Three.js</h1>
+            </div>
+            <div class="container">
+                <div class="Content">
+                    <h3>Der kleine Alrounder</h3>
+                    <p class="textstyle"> Wo wir gerade von Three.js sprechen. 
+                        Three.js gibt es seit 2010 und wurde von Mr.doob entwickelt.</p>
+                        <p class="textstyle">Unter den hier vorgestellten Frameworks ist Three.js der 
+                            Community-Liebling. Zu keinem anderen Framework lassen sich mehr Einträge im 
+                            Internet finden. Das erleichtert einem den Einstieg enorm, da es auf jede 
+                            Frage online die passende Antwort gibt.
+                        </p>
+                        
+                    
+                            
+                    
+                    <div class="Content-ContainerHTML" id="3DCode">
+                        <iframe style="width:80%"></iframe>
+                        <textarea class="Text-Container" onchange="update3d()" autocomplete="off">
+        &lt;!DOCTYPE html&gt;
+        &lt;html&gt;
+            &lt;head&gt;
+                &lt;meta charset="utf-8"&gt;
+                &lt;title&gt;My first three.js app &lt;/title&gt;
+                &lt;script src="https://threejs.org/build/three.js"&gt; &lt;/script&gt;
+                &lt;style&gt;
+                    body { 
+                        margin: 0; 
+                        overflow: hidden;
+                    }
+                    .three-Container{
+                        width: 100%;
+                        height: 100vh;
+                    }
+
+                &lt;/style&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                <div id="container"></div>
+                &lt;script&gt;
+
+                    const container = document.getElementById( 'container' );
+
+                    const scene = new THREE.Scene();
+                    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+                    const renderer = new THREE.WebGLRenderer( { antialias: true, alpha:true} );
+                    renderer.setPixelRatio( window.devicePixelRatio );
+                    renderer.setSize( window.innerWidth, window.innerHeight );
+                    container.appendChild( renderer.domElement );
+
+
+                    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
+                    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+                    const cube = new THREE.Mesh( geometry, material );
+                    scene.add( cube );
+
+                    camera.position.z = 5;
+
+                    function animate() {
+                        requestAnimationFrame( animate );
+
+                        cube.rotation.x += 0.01;
+                        cube.rotation.y += 0.01;
+
+                        renderer.render( scene, camera );
+                    };
+
+                    animate();
+                    
+                &lt;/script&gt;
+            &lt;/body&gt;
+        &lt;/html&gt;
+                        </textarea>
+                        
+                    
+                    </div>
+                    <p class="textstyle">Was das Handling angeht, sieht es bei Three.js im Vergleich 
+                        zu A-Frame etwas anders aus. Hier wird ausschließlich mit Javascript gecodet. 
+                        Für diesen recht Simplen, sich drehenden grünen Würfel braucht es bereits 
+                        über 50 Zeilen Code </p>  
+                    <p class="textstyle"><b>Auch Hier könnt ihr die Szene selber 
+                            anpassen</b></p>
+                
+                </div>
+                <div class="Content">
+                    <h3>Datei Import</h3>
+                    <p class="textstyle">
+                        Das liegt an der Art, wie Three.js aufgebaut ist. Zu Beginn werden wie bei 
+                        A-Frame im Head-Teil das Framework und die benötigten Komponenten geladen. 
+                        Ähnlich wie beim HTML-Dokuments gibt es bei Three.js im Script zwei Teile bzw. 
+                        zwei Grundfunktionen. Eine Init-Funktion und eine Render- oder Animate-Funktion. 
+                    </p>
+                    
+                    <div class="Content-ContainerHTML" id="3DCode">
+                        <iframe style="width:80%"></iframe>
+                        <textarea class="Text-Container" onchange="update3d()" autocomplete="off">
+
+            &lt;!DOCTYPE html&gt;
+            &lt;html lang="en"&gt;
+                &lt;head&gt;
+                    &lt;title&gt;three.js webgl - GLTFloader&lt;/title&gt;
+                    &lt;meta charset="utf-8"&gt;
+                    &lt;meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"&gt;
+                    &lt;script src="https://threejs.org/build/three.js"&gt;&lt;/script&gt;
+                    &lt;script src="https://threejs.org/examples/js/loaders/GLTFLoader.js"&gt;&lt;/script&gt;
+                    &lt;script src="https://threejs.org/examples/js/loaders/DRACOLoader.js"&gt;&lt;/script&gt;
+                    &lt;script src="https://threejs.org/examples/js/loaders/RGBELoader.js"&gt;&lt;/script&gt;
+                    &lt;script src="https://threejs.org/examples/js/controls/OrbitControls.js"&gt;&lt;/script&gt;
+                    &lt;style&gt;
+                        body { 
+                            margin: 0; 
+                            overflow: hidden;
+                        }
+                        .three-Container{
+                            width: 100vh;
+                            height: 100vh;
+                        }
+
+                    &lt;/style&gt;
+                &lt;/head&gt;
+
+                &lt;body&gt;
+                    &lt;script&gt;
+
+                        
+
+                        let camera, scene, renderer;
+
+                        init();
+                        render();
+
+                        function init() {
+
+                            const container = document.createElement( 'div' );
+                            document.body.appendChild( container );
+
+                            camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.25, 20 );
+                            camera.position.set( - 1.8, 0.6, 8 );
+
+                            scene = new THREE.Scene();
+
+                            renderer = new THREE.WebGLRenderer( { antialias: true } );
+                            renderer.setPixelRatio( window.devicePixelRatio );
+                            renderer.setSize( window.innerWidth, window.innerHeight );
+                            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+                            renderer.toneMappingExposure = 1;
+                            renderer.outputEncoding = THREE.sRGBEncoding;
+                            container.appendChild( renderer.domElement );
+                            
+                            RGBE = new THREE.RGBELoader()
+                                .setPath( 'Textures/' )
+                                .load( 'alps_field_1k.hdr', function ( texture ) {
+
+                                    texture.mapping = THREE.EquirectangularReflectionMapping;
+
+                                    scene.background = new THREE.Color( 0x00000 );;
+                                    scene.environment = texture;
+
+                                    render();
+
+                                    // model
+
+                                    const loader = new THREE.GLTFLoader().setPath( '3dmodel/' );
+                                    loader.load( 'Suzanne.gltf', function ( gltf ) {
+
+                                        scene.add( gltf.scene );
+
+                                        render();
+
+                                    } );
+
+                                } );
+
+                                    
+                            const controls = new THREE.OrbitControls( camera, renderer.domElement );
+                            controls.addEventListener( 'change', render ); // use if there is no animation loop
+                            controls.minDistance = 2;
+                            controls.maxDistance = 10;
+                            controls.target.set( 0, 0, - 0.2 );
+                            controls.update();
+
+                            window.addEventListener( 'resize', onWindowResize );
+
+                        }
+
+                        function onWindowResize() {
+
+                            camera.aspect = window.innerWidth / window.innerHeight;
+                            camera.updateProjectionMatrix();
+
+                            renderer.setSize( window.innerWidth, window.innerHeight );
+
+                            render();
+
+                        }
+
+                        //
+
+                        function render() {
+
+                            renderer.render( scene, camera );
+
+                        }
+
+                    &lt;/script&gt;
+
+                &lt;/body&gt;
+            &lt;/html&gt;
+                </textarea>
+                        
+                    
+                    </div>
+                    <p class="textstyle">Im Init-Teil werden alle Komponenten erstellt. Dazu gehören 
+                        zwingend der WebGLRender, eine Kamera, eine Szene und idealerweise ein 3D-Objekt. 
+                        Außer Kamera und Renderer werden alle Objekte der Szene hinzugefügt, sodass im 
+                        Anschluss in der Render-Funktion der Renderer den Befehl erhält, Kamera und Szene 
+                        zu rendern „renderer.render( scene, camera );“. Bei Animationen wir zusätzlich 
+                        noch folgender Befehl genutzt „requestAnimationFrame( animate );“, durch welchen 
+                        in diesem Fall die Animate-Funktion kontinuierlich ausgeführt wird. 
+                    </p>
+                    
+                    
+                </div>
+
+                <div class="Content">
+                    <h3>Datei Import</h3>
+
+
+                    <div class="Content-ContainerIframe" id="3DCode">
+                        <iframe class="IframeIframe" value="Three_click_v2.txt"></iframe>
+                        <textarea class="Text-ContainerIframe"></textarea>
+                    </div>
+
+                
+                    <p class="textstyle">
+                        Das klingt erst mal alles kompliziert, gilt aber für fast alle Anwendungen 
+                        mit Three.js. Das ist allerdings auch der Knackpunkt an Three.js, da immer 
+                        alles bis ins kleinste definiert werden muss wird bei komplexeren Szenen ein 
+                        Script schnell ein paar Hundert Zeilen lang. Das Gute auf der anderen Seite 
+                        ist, dass man alles wirklich alles ohne Einschränkungen umsetzten kann. Hier 
+                        lohnt sich ein Blick auf die Beispiele und die umfangreiche Dokumentation. 
+                        Man kann praktisch jedes 3D-Format importieren, hat diverse Postprocessing-
+                        Effekte, Raycasting, Physics, etc. sodass sich mit Three.js theoretisch auch 
+                        Spiele umsetzten lassen.
+                    </p> 
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->  
+<div class="Topic">
+    <div class="header">
+        <div class="Dot-Container">
+            <div class="test">
+                <i class="material-icons">fiber_manual_record</i>
+            </div>
+        </div>
+        <h1>Babylon.js</h1>
+    </div>
+    <div class="container">
+        <div class="Content">
+            <h3>Der kleine Alrounder</h3>
+            <p class="textstyle">Kommen wir zum letzten codebasierten Framework. Babylon.js! </p>  
+            <p class="textstyle">Babylon.js gibt es seit 2013 und wurde von David Catuhe, 
+                einem Microsoft-Mitarbeiter, entwickelt.
+            </p>  
+            <p class="textstyle">Das Besondere an Babylon.js ist, dass man hier in zwei 
+                Programmiersprachen coden kann. Ursprünglich wurde Babylon.js für Typescript 
+                entwickelt und wurde dann für Javascript aufgearbeitet. Javascript hat unter 
+                Programmierern einen eher schlechten Ruf, da es nicht so strikten Regeln folgt 
+                wie andere Programiersprachen und daher etwas chaotisch bis willkürlich sein kann. 
+                Typescript ist eng mit Javascript verwandt und wurde von Microsoft genau dafür 
+                entwickelt, um die Mängel von Javascript zu kompensieren.
+            </p>    
+             
+       
+                
+            
+
+
+
+            
+            <div class="Content-ContainerHTML" id="3DCode">
+                <iframe style="width:80%"></iframe>
+                <textarea class="Text-Container" onchange="update3d()" autocomplete="off">
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+
+    &lt;head&gt;
+        &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;
+        &lt;title&gt;Babylon Template&lt;/title&gt;
+
+        &lt;style&gt;
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+        &lt;/style&gt;
+
+        &lt;script src="https://cdn.babylonjs.com/babylon.js"&gt;&lt;/script&gt;
+
+    &lt;/head&gt;
+
+    &lt;body&gt;
+
+    &lt;canvas id="renderCanvas"&gt;&lt;/canvas&gt;
+
+    &lt;script&gt;
+        const canvas = document.getElementById("renderCanvas"); // Get the canvas element
+        const engine = new BABYLON.Engine(canvas, true); // Generate the BABYLON 3D engine
+        const createScene = function () {
+            // Creates a basic Babylon Scene object
+            const scene = new BABYLON.Scene(engine);
+            // Creates and positions a free camera
+            const camera = new BABYLON.FreeCamera("camera1", 
+                new BABYLON.Vector3(0, 5, -10), scene);
+            // Targets the camera to scene origin
+            camera.setTarget(BABYLON.Vector3.Zero());
+            // This attaches the camera to the canvas
+            camera.attachControl(canvas, true);
+            // Creates a light, aiming 0,1,0 - to the sky
+            const light = new BABYLON.HemisphericLight("light", 
+                new BABYLON.Vector3(0, 1, 0), scene);
+            // Dim the light a small amount - 0 to 1
+            light.intensity = 0.7;
+            // Built-in 'sphere' shape.
+            const sphere = BABYLON.MeshBuilder.CreateSphere("sphere", 
+                {diameter: 2, segments: 32}, scene);
+            // Move the sphere upward 1/2 its height
+            sphere.position.y = 1;
+            // Built-in 'ground' shape.
+            const ground = BABYLON.MeshBuilder.CreateGround("ground", 
+                {width: 6, height: 6}, scene);
+            return scene;
+        };
+        const scene = createScene(); //Call the createScene function
+        // Register a render loop to repeatedly render the scene
+        engine.runRenderLoop(function () {
+                scene.render();
+        });
+        // Watch for browser/canvas resize events
+        window.addEventListener("resize", function () {
+                engine.resize();
+        });
+    &lt;/script&gt;
+
+    &lt;/body&gt;
+
+&lt;/html&gt;
+                </textarea>
+                
+            
+            </div>
+            <p class="textstyle">Ansonsten ähnelt Babylon.js, Three.js in vielen Punkten. Vom Code-Umfang 
+                der Beispielszene liegen wir hier auch bei ca. 50 Zeilen </p> 
+        
+        </div>
+        <div class="Content">
+            <h3>Datei Import</h3>
+
+            <div class="Content-ContainerHTML" id="3DCode">
+                <iframe style="width:80%"></iframe>
+                <textarea class="Text-Container" onchange="update3d()" autocomplete="off">
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+
+    &lt;head&gt;
+        &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;
+        &lt;title&gt;Babylon Template&lt;/title&gt;
+
+        &lt;style&gt;
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+        &lt;/style&gt;
+        &lt;script src="https://cdn.babylonjs.com/babylon.js"&gt;&lt;/script&gt;
+        &lt;script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"&gt;&lt;/script&gt;
+    &lt;/head&gt;
+
+    &lt;body&gt;
+
+    &lt;canvas id="renderCanvas"&gt;&lt;/canvas&gt;
+
+    &lt;script&gt;
+        const canvas = document.getElementById("renderCanvas"); 
+        const engine = new BABYLON.Engine(canvas, true); 
+            const scene = new BABYLON.Scene(engine);
+            var camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 10, 
+                new BABYLON.Vector3(0, 0, 0), scene);            
+            camera.setPosition(new BABYLON.Vector3(0, 0, 10));
+            camera.attachControl(canvas, true);
+            const light = new BABYLON.HemisphericLight("light", 
+                new BABYLON.Vector3(0, 1, 0), scene);
+            light.intensity = 0.7;
+            const createScene = BABYLON.SceneLoader.Append("3Dmodel/", "Suzanne.gltf", scene, function (scene) {
+
+            return scene;
+
+});
+
+        engine.runRenderLoop(function () {
+                scene.render();
+        });
+        // Watch for browser/canvas resize events
+        window.addEventListener("resize", function () {
+                engine.resize();
+        });
+    &lt;/script&gt;
+
+    &lt;/body&gt;
+
+&lt;/html&gt;
+        </textarea>
+                
+            
+            </div>
+
+            <p class="textstyle">
+                Wie bei Three.js werden auch hier erst Renderer, Szene, Kamera etc. erstellt und dann 
+                anschließend gerendert. Der Unterschied zu Three.js ist allerdings die Funktionsweise 
+                von Init- und Render-Funktion und das alles insgesamt etwas kompakter und smarter 
+                angelegt ist. Zusätzlich verfügt Babylon.js über einen Online-Editor und den Node-
+                Material-Editor (ähnlich dem Node-Material Editor bei Unity). 
+            </p>
+            
+        </div>
+
+        <div class="Content">
+            <h3>Datei Import</h3>
+
+            <div class="Content-ContainerIframe" id="3DCode">
+                <iframe class="IframeIframe" value="Babylon_click_v2.txt"></iframe>
+                <textarea class="Text-ContainerIframe"></textarea>
+            </div>
+
+        
+            <p class="textstyle">
+                Dennoch fällt einem der Einstieg in Babylon.js etwas schwerer. Das mag zum einen an der 
+                gewöhnungsbedürftigen Dokumentation liegen, aber vor allem an der kleineren Community. 
+                Trotz allem ist Babylon auf lange Sicht das wohl das stabilere und ausgereiftere 
+                Framework. Da durch den verkürzten Code selbst komplexere Szenen seltener über die 
+                Hundert-Zeilen-Grenze kommen.
+            </p> 
+
+            
+        </div>
+    </div>
+</div>
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->  
+<div class="Topic">
+    <div class="header">
+        <div class="Dot-Container">
+            <div class="test">
+                <i class="material-icons">fiber_manual_record</i>
+            </div>
+        </div>
+        <h1>Unity</h1>
+    </div>
+    <div class="container">
+        
+        <div class="Content">
+            <h3>Datei Import</h3>
+            <p class="textstyle">
+                Neben Frameworks in denen direkt HTML-Code geschrieben wird gibt es auch noch andere 
+                Möglichkeiten seine 3D-Modelle ins Internet zu bringen. Eine der einfachsten Lösungen 
+                gibt es mit Unity. Hier gibt es zwei Varianten:</p> 
+
+                <p class="textstyle">Variante 1:</p>
+            <div  style="max-width:100%; height: fit-content;">
+                <video controls width="100%">
+                    <source src="videos/Unity_Var1.mp4" type="video/mp4">
+                </video>
+            </div>
+
+        
+            
+
+
+            
+
+            
+        </div>
+        <div class="Content">
+            <h3>Datei Import</h3>
+
+            <p class="textstyle">Variante 2:</p>
+            <div  style="max-width:100%; height: fit-content;">
+                <video controls width="100%">
+                    <source src="videos/Unity_Var2.mp4" type="video/mp4">
+                </video>
+            </div>
+
+        
+
+
+            
+        </div>
+
+        <div class="Content">
+            <h3>Datei Import</h3>
+
+            <div style="max-width:100%; height: fit-content;">
+                <iframe src="/testexport/index.html" style=" height:60vh; width: 100%;"></iframe>
+                
+            </div>
+
+        
+            <p class="textstyle">
+                Das schöne an WebGL mit Unity ist das ihr theoretisch jede Anwendung jedes Spiel 
+                mit wenigen Klicks fit fürs Internet machen könnt. Das Nervige auf der anderen Seite ist: 
+                Es ist Unity d.h. Unity ist launisch und so solltet ihr euch möglichst zu früh überlegen 
+                ob ihr eure Anwendung fürs Web entwickeln wollt. Da beim umstellen auf WebGL nicht 
+                alles 1:1 umgeschrieben werden kann. Des Weiteren kann man zwar auch noch nachträglich 
+                Anpassungen direkt an der Html-Datei machen, allerdings kann es sein das ihr euch damit 
+                die Anwendung zerschießt. Insgesamt ist dieser Weg eine Ideale Möglichkeit bei sehr 
+                komplexen Anwendungen.
+            </p> 
+
+            
+        </div>
+
+    </div>
+</div>
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->          
+<div class="Topic">
+    <div class="header">
+        <div class="Dot-Container">
+            <div class="test">
+                <i class="material-icons">fiber_manual_record</i>
+            </div>
+        </div>
+        <h1>Verge3D</h1>
+    </div>
+    <div class="container">
+        
+        <div class="Content">
+            <h3>Datei Import</h3>
+            <p class="textstyle">
+                Warum Unity wenn es doch Blender gibt?</p>
+                <p class="textstyle">Natürlich gibt es auch für Blender eine Möglichkeit 3D-Szenen direkt ins Internet zu bringen. Das geht allerdings nur über ein Add-On und dieses heist Verge3D.
+                </p>
+
+
+             
+            <div  style="max-width:100%; height: fit-content;">
+                <video controls width="100%">
+                    <source src="videos/Verge3D.mp4" type="video/mp4">
+                </video>
+            </div>
+            
+        </div>
+
+
+        <div class="Content">
+            <h3>Datei Import</h3>
+
+            <div style="max-width:100%; height: fit-content;">
+                <iframe src="NewFile/NewFile.html" style=" height:60vh; width: 100%;"></iframe>
+                
+            </div>
+
+        
+            <p class="textstyle">
+                Was am Anfang aussieht wie das GUI zu Lego-Mindstorms entpuppt sich schnell als 
+                sehr mächtiges Tool, welches gerade den nicht informatik-affinen Menschen einen 
+                erleichterten Einstieg bieten kann. Unter allen vorgestellten Frameworks ist dies 
+                das mit der geringsten Hemmschwelle und dank Farbcode gerade bei kleinen Anwendungen 
+                wahrscheinlich eines der übersichtlichsten. mit mehr unter der Haube als man zunächst 
+                denkt. 
+            </p> 
+
+            
+        </div>
+
+    </div>
+</div>     
+
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->          
+<div class="Topic">
+    <div class="header">
+        <div class="Dot-Container">
+            <div class="test">
+                <i class="material-icons">fiber_manual_record</i>
+            </div>
+        </div>
+        <h1>Überblick</h1>
+    </div>
+    <div class="container">
+        
+        <div class="Content">
+            <h3>Datei Import</h3>
+
+
+
+             
+                <div class="Content-Container" style="max-width:100%; margin-top: 4vw;">
+                      
+                    <img  src="Bilder/uebersicht_3.png" alt="">
+                   
+                </div>
+            
+        </div>
+
+
+
+    </div>
+</div>     
+
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->          
+<div class="Topic">
+    <div class="header">
+        <div class="Dot-Container">
+            <div class="test">
+                <i class="material-icons">fiber_manual_record</i>
+            </div>
+        </div>
+        <h1>Fazit</h1>
+    </div>
+    <div class="container">
+        
+        <div class="Content">
+            <h3>Datei Import</h3>
+            <p class="textstyle">
+                Insgesamt muss man sagen, die Welt der WebGL Frameworks ist recht vielfältig und es 
+                sollte für jeden was dabei sein. Überrascht haben mich besonders die kleineren Vertreter
+                 wie A-Frame und Verge3D da sie doch einiges mehr können, als man zunächst vermutet. 
+            </p>
+                <p class="textstyle">
+                Wenn ich jetzt eine Empfehlung für das beste Framework aussprechen müsste, würde ich 
+                wahrscheinlich Babylon.js sagen, da es im Bereich WebGL das stabilste und ausgereifteste 
+                Framework ist, welches zugleich noch sehr kompakt ist. 
+            </p>
+                <p class="textstyle">
+                Allerdings korreliert die Wahl des Frameworks stark mit der Art der Anwendung. Somit 
+                lautet meine Empfehlung wie folgt.
+
+            </p>
+
+                <ul>
+                    <li>Bei kleinen VR-/XR-Anwendungen: A-Frame.</li>
+                    <li>Als Einsteiger: Verge3D, A-Frame oder Three.js (je nach Code-Affinität und Anwendung).</li>
+                    <li>Bei sehr großen, komplexen Anwendungen: Unity.</li>
+                    <li>Als Visualisierung ergibt sich folgende Grafik:</li>
+                </ul>
+
+                <p class="textstyle">
+                    Als Visualisierung ergibt sich folgende Grafik:
+                </p>
+                <div class="Content-Container" style="max-width:100%; margin-top: 4vw;">
+                      
+                    <img  src="Bilder/Grafik5.png" alt="">
+                   
+                </div>
+            
+        </div>
+
+
+
+    </div>
+</div>    
+
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->          
+<div class="Topic">
+    <div class="header">
+        <div class="Dot-Container">
+            <div class="test">
+                <i class="material-icons">fiber_manual_record</i>
+            </div>
+        </div>
+        <h1>Nachtrag</h1>
+    </div>
+    <div class="container">
+        
+        <div class="Content">
+            <h3>Datei Import</h3>
+            <p class="textstyle">
+                Neben den hier genannten Frameworks gibt es noch ein paar weitere, welche ich nicht ungenannt lassen möchte:
+
+            </p>
+
+
+
+                <ul>
+                    <li> Play Canvas: Eine komplette Gameengine im Browser (teilweise kostenpflichtig)</li>
+                    <li>Sketchfab: Ein Framework für einen Produktviewer, der es in 
+                        sich hat. (definitiv kostenpflichtig)</li>     
+                </ul>
+                <p class="textstyle">
+                    Auch ein Blick auf die Entwickler hinter den Frameworks lohnt sich. Bei meinen Recherchen bin ich ständig auf Einträge und Kommentare dieser Personen gestoßen:
+            </p>
+                <ul>
+                    <li>Don McCurdy: A-Frame</li>
+                    <li>Mr.doob: Three.js</li>
+                    <li>Jerome & Alexandra Etienne: Alles zum Thema WebAR auf Youtube und Github.</li>
+                </ul>
+
+
+            
+        </div>
+
+
+
+    </div>
+</div>    
+
+
+<!--//////////////////////////////////////////////////////////////////////////////////-->          
+
+        
+        
+
+        
+        
+       
+    </div>     
+</div>
+<div class="NavArea"></div>
+<button class="dropdownMenu" onpointerdown="NavButtonpressed()"><span class="material-symbols-outlined">menu</span></button>
+
+<script>
+let NAVTOGGLE = false;
+let phonedetected = false;
+
+let mediaQuery = window.matchMedia('(max-width: 600px)');
+
+document.addEventListener('mousemove', (event) => {
+	//console.log(`Mouse X: ${event.clientX/window.innerWidth*100}, Mouse Y: ${event.clientY/window.innerHeight*100}`);
+    
+    if (mediaQuery.matches){
+        console.log("PhoneScreen detectet")
+        
+    }
+
+    else{
+       
+        if(event.clientX/window.innerWidth*100<25 && NAVTOGGLE == false){
+                Timeline_Collapse();
+                NAVTOGGLE=true;
+            }
+        if(event.clientX/window.innerWidth*100>25 && NAVTOGGLE == true){
+            Timeline_Expand();
+            NAVTOGGLE=false;
+        }
+    }       
+});
+
+    let topiccount = document.getElementsByClassName("header").length;
+    let posPoint = (-document.getElementsByClassName("Timeline")[0].getBoundingClientRect().x-(document.getElementsByClassName("Timeline")[0].getBoundingClientRect().width/2))/window.innerWidth*100;
+    let combinedHeight = 0;
+    let combinedWidth = 0;
+ 
+
+    
+    function setTimestamps(){
+
+
+        let CodeElemtClickID = 0;
+        for(let y=0;y<document.getElementsByClassName("Content-ContainerHTML").length;y++){
+
+            if(document.getElementsByClassName("Content-ContainerHTML")[y].id == "3DCode"){
+                
+            let CodeElemt = document.getElementsByClassName("Content-ContainerHTML")[y];
+            let dreiDContent = CodeElemt.getElementsByTagName("iframe")[0];
+            let TextContent = CodeElemt.getElementsByClassName("Text-Container")[0];
+            
+            TextContent.style.height = (TextContent.scrollHeight)+"px";
+            CodeElemt.id = "3DCode"+CodeElemtClickID+""
+            TextContent.setAttribute("onchange", "update3d("+CodeElemtClickID+")" );
+  
+            CodeElemtClickID++;
+           
+            dreiDContent.contentWindow.document.open()
+            dreiDContent.contentWindow.document.writeln(
+                TextContent.value
+            )
+            dreiDContent.contentWindow.document.close()
+            
+           }  
+        }
+        
+        for(let y=0;y<document.getElementsByClassName("Content-ContainerIframe").length;y++){
+            if(document.getElementsByClassName("Content-ContainerIframe")[y].id == "3DCode"){
+                
+                let CodeElemt = document.getElementsByClassName("Content-ContainerIframe")[y];
+                let dreiDContent = CodeElemt.getElementsByTagName("iframe")[0];
+                let TextContent = CodeElemt.getElementsByClassName("Text-ContainerIframe")[0];
+
+                TextContent.style.height = (TextContent.scrollHeight)+"px";
+                CodeElemt.id = "Iframe3DCode"+CodeElemtClickID+""
+                TextContent.setAttribute("onchange", "update3d("+CodeElemtClickID+")" );
+              
+                CodeElemtClickID++;
+                
+                let buttoncreate = document.createElement("button");
+                buttoncreate.classList.add("showCodeBut");
+                buttoncreate.innerHTML="Show Code";
+                buttoncreate.setAttribute("onclick","toggletext(val="+CodeElemt.id+")")
+                CodeElemt.appendChild(buttoncreate);
+
+                let xmlhttp=new XMLHttpRequest();
+                xmlhttp.onreadystatechange=function()
+                {
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                    {
+                        TextContent.value = xmlhttp.responseText;
+                        dreiDContent.contentWindow.document.open()
+                        dreiDContent.contentWindow.document.writeln(TextContent.value)
+                        dreiDContent.contentWindow.document.close()
+                    }
+                }
+                console.log(dreiDContent.getAttribute("value"))
+                xmlhttp.open("GET",""+dreiDContent.getAttribute("value")+"",true);
+                xmlhttp.send();   
+               } 
+        }
+
+
+
+        if (mediaQuery.matches){
+        console.log("PhoneScreen detectet")
+            phonedetected=true;
+        }
+        else{
+            phonedetected=false;
+        }        
+        //console.log(-document.getElementsByClassName("Timeline")[0].getBoundingClientRect().x-document.getElementsByClassName("Timeline")[0].getBoundingClientRect().width)
+       
+        //console.log(posPoint)
+        document.getElementsByClassName("progress-container")[0].style.left=""-posPoint+"vw"
+        //document.getElementsByClassName("progress-container")[0].style.left=""+20+"vw";
+        
+        //console.log(posPoint)
+        for (let i=0;i<topiccount; i++){
+            //console.log(document.getElementsByClassName("header")[i].getElementsByTagName("p")[0])
+            let topicID = document.getElementsByClassName("header")[i];
+            topicID.id ="topicid"+i+""
+            //console.log(i)
+            let navLink=document.getElementsByClassName("header")[i].getElementsByTagName("h1")[0];
+
+
+            let NAVtopicname=document.createElement("a")
+            NAVtopicname.href = "#topicid"+i+""
+            NAVtopicname.innerHTML = ""+navLink.innerHTML+"";
+            NAVtopicname.setAttribute("onclick", "linkclicked()" );
+   
+
+            
+           
+            let points = document.getElementsByClassName("test")[i];
+            let sheetcount= document.getElementsByClassName("header")[i].parentElement.getElementsByClassName("Content").length
+            //console.log(sheetcount)
+            //points.style.paddingLeft=""-posPoint+"vw";
+            points.appendChild(NAVtopicname);
+
+            
+
+
+            //console.log( navLink.innerHTML)
+
+            for (let s=0; s<sheetcount; s++){
+                let sheets =topicID.parentElement.getElementsByTagName("h3")[s] 
+              
+                let sheetID = document.getElementsByClassName("header")[i].parentElement.getElementsByTagName("h3")[s];
+                
+                sheetID.id ="sheetid"+i+"_"+s+""
+                let NAVsheetname=document.createElement("a");
+                NAVsheetname.href = "#sheetid"+i+"_"+s+""
+                
+                NAVsheetname.innerHTML = ""+sheets.innerHTML+"";
+                NAVsheetname.setAttribute("onclick", "linkclicked()" );
+                NAVsheetname.id ="sheet"
+                points.appendChild(NAVsheetname);
+
+                if (s>0){
+                    let nextbutEl = topicID.parentElement.getElementsByClassName("Content")[s-1]
+                    let backbutEl = topicID.parentElement.getElementsByClassName("Content")[s]
+
+                    let nextbutID = topicID.parentElement.getElementsByTagName("h3")[s]
+                    let backbutID = topicID.parentElement.getElementsByTagName("h3")[s-1]
+              
+                    nextbut = document.createElement("a");
+                    nextbut.innerHTML = "Hier gehts Weiter"
+                    nextbut.classList = "nextbackText"
+                    nextbut.style.right = "0%"
+                    nextbut.setAttribute("href","#"+nextbutID.id+"")
+                    
+                    nextbut.setAttribute("onclick","linkclicked(test="+nextbutID.id+")");
+                    nextbutEl.appendChild(nextbut)
+                    nextbut.after(nextbutEl.lastElementChild)
+
+                    backbut = document.createElement("a");
+                    backbut.innerHTML = "Hier gehts zurück"
+                    backbut.classList = "nextbackText"
+                    backbut.style.left = "0%"
+                    backbut.setAttribute("href","#"+backbutID.id+"")
+                    backbut.setAttribute("onclick","linkclicked(test="+backbutID.id+")");
+                    backbutEl.appendChild(backbut)
+                    backbut.after(backbutEl.lastElementChild)
+
+                    //CodeElemt.insertBefore(dreiDContent,TextContent)
+                    //<a style="text-align:center;"href="#sheetid4.1">Hier gehts Weiter</a>
+                    //console.log(topicID.parentElement.getElementsByTagName("h3")[s-1]) 
+                    //console.log(backbutEl.id)
+                    //console.log(topicID.parentElement.getElementsByTagName("h3")[s]) 
+                }
+                
+
+
+            }
+
+            
+
+            
+      
+             
+            
+           
+
+            //points.style.left = ""+posPoint+"vw"
+            //points.style.left = "-2vw"
+            combinedHeight = combinedHeight+points.getBoundingClientRect().height;
+            combinedWidth = (combinedHeight+points.getBoundingClientRect().width)/topiccount;
+               
+           
+
+        }
+
+
+        document.getElementsByClassName("NavArea")[0].style.width=""+combinedWidth+"px";
+        document.getElementsByClassName("NavArea")[0].style.paddingLeft=""+(posPoint*-1)+"vw"; 
+        document.getElementsByClassName("NavArea")[0].style.paddingRight=""+(posPoint*-1)+"vw"; 
+        document.getElementsByClassName("NavArea")[0].style.left=""-combinedWidth-((posPoint*-1)*window.innerWidth/100)+"px";
+        
+
+        if (phonedetected ==true){
+            document.getElementsByClassName("NavArea")[0].style.width=""+combinedWidth*2+"px";
+            document.getElementsByClassName("NavArea")[0].style.paddingLeft=""+(posPoint*-2)+"vw"; 
+            document.getElementsByClassName("NavArea")[0].style.paddingRight=""+(posPoint*-2)+"vw";
+            document.getElementsByClassName("NavArea")[0].style.left=""-combinedWidth*2+"px";
+        }  
+    }
+    
+
+    
+function Timeline_Collapse(){
+    console.log("enter")
+
+    let offval =50;
+    let offsetty = 0;
+
+    
+    
+    document.body.style.overflow="hidden";
+    for (let i=0; i<topiccount; i++){
+        let points = document.getElementsByClassName("test")[i];     
+        //console.log(i) 
+
+        let sheetcount= document.getElementsByClassName("header")[i].parentElement.getElementsByClassName("Content").length
+        
+        let center = (window.innerHeight-combinedHeight)/2;
+        for (let s=0; s<sheetcount+1; s++){
+            
+            points.getElementsByTagName("a")[s].classList.add("checked");
+            //console.log(points.getElementsByTagName("a")[s])
+        }
+        //console.log(topiccount)
+        //let center = window.innerHeight-
+        //points.style.top =""-points.getBoundingClientRect().top+(points.getBoundingClientRect().height/1.5)+(window.innerHeight/2)+offsetty-((topiccount*points.getBoundingClientRect().height)/2)+"px";
+        points.style.top =""-points.getBoundingClientRect().top+(points.offsetTop)+offsetty+center+"px";
+
+        offsetty =  points.getBoundingClientRect().height+offsetty;
+        //points.children[1].classList.add("checked");
+        
+        document.getElementsByClassName("header")[i].getElementsByTagName("h1")[0].style.opacity = "5%";
+
+
+
+        	//console.log(points)
+
+          if (phonedetected ==true){
+            points.style.opacity="100%" 
+            document.getElementsByClassName("header")[i].getElementsByTagName("h1")[0].style.opacity = "0%";
+          }  
+           
+        //document.getElementsByClassName("NavArea")[0].style.left=""-points.getBoundingClientRect().width/2-(posPoint*window.innerWidth/100)+"px";
+        document.getElementsByClassName("NavArea")[0].style.left=""+0+"vw";
+        
+        document.getElementsByClassName("NavArea")[0].style.boxShadow = "20px 0px 200px 0px lightgrey"
+        document.getElementsByClassName("NavArea")[0].style.opacity = "100%"
+        //console.log(points.children[1])
+
+    }  
+    //document.getElementsByClassName("a")[0].classList.toggle("checked")
+    
+//document.getElementsByClassName("NavArea")[0].style.left = "0vw"
+
+}
+
+function Timeline_Expand(){
+    console.log("exit")
+    
+    for (let i=0; i<topiccount; i++){
+    let points = document.getElementsByClassName("test")[i];
+    points.style.top="0%";
+   
+    //points.children[1].classList.remove("checked");
+
+    document.getElementsByClassName("header")[i].getElementsByTagName("h1")[0].style.opacity = "100%";
+
+    let sheetcount= document.getElementsByClassName("header")[i].parentElement.getElementsByClassName("Content").length
+
+        for (let s=0; s<sheetcount+1; s++){
+            points.getElementsByTagName("a")[s].classList.remove("checked");
+            //console.log(points.getElementsByTagName("a")[s])
+        }
+        
+        if (phonedetected ==true){
+            points.style.opacity="0%"
+            document.getElementsByClassName("NavArea")[0].style.left=""-combinedWidth*2+"px";
+        }  
+    
+    
+    }
+
+        document.getElementsByClassName("NavArea")[0].style.left=""-combinedWidth-((posPoint*-1)*window.innerWidth/100)+"px";    
+        document.getElementsByClassName("NavArea")[0].style.boxShadow = "0px 0px 0px 0px lightgrey"
+        document.getElementsByClassName("NavArea")[0].style.opacity = "0%"
+
+//document.getElementsByClassName("NavArea")[0].style.left = "-100%"
+
+
+    //document.getElementsByClassName("a")[0].classList.toggle("checked")
+
+    setTimeout(function() {
+    document.body.style.overflow="auto";
+
+    console.log("Good Night!");
+    }, 500);
+   
+}
+
+
+function linkclicked(test){
+
+    //console.log("test")
+    Timeline_Expand();
+
+
+
+    if (mediaQuery.matches){
+        NavState= false;
+        console.log("PhoneScreen detectet")
+        document.getElementsByClassName("NavArea")[0].classList.toggle("checked")
+    }
+}
+
+let NavState = false;
+function NavButtonpressed(){
+
+    if (NavState== true){
+        Timeline_Expand();
+    }
+    if (NavState== false){
+        Timeline_Collapse();
+    }
+    NavState = !NavState;
+
+}
+
+window.onscroll = function() {scrolled()};
+
+function scrolled() {
+  var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  //console.log(winScroll)
+  var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  //console.log(height)
+  var scrolled = (winScroll / height) * 100;
+  //console.log(scrolled)
+  document.getElementById("myBar").style.height = scrolled + "%";
+}
+
+
+
+
+function resize(){
+    setTimeout(function() {
+        
+    posPoint = (-document.getElementsByClassName("Timeline")[0].getBoundingClientRect().x-(document.getElementsByClassName("Timeline")[0].getBoundingClientRect().width/2))/window.innerWidth*100;
+    document.getElementsByClassName("progress-container")[0].style.left=""-posPoint+"vw"
+    console.log("Good Night!");
+    }, 500);
+   
+}
+
+function update3d(CodeElemtClickID){
+
+    let CodeElemt = document.getElementById("3DCode"+CodeElemtClickID+"");
+    let dreiDContent = CodeElemt.getElementsByTagName("iframe")[0];
+
+    let TextContent = CodeElemt.getElementsByClassName("Text-Container")[0];
+
+    let newwidth = dreiDContent.style.width
+    dreiDContent.parentElement.removeChild(dreiDContent);
+    dreiDContent = document.createElement("iframe");
+    dreiDContent.style.width = ""+newwidth+"";
+
+    CodeElemt.insertBefore(dreiDContent,TextContent)
+    
+    dreiDContent.contentWindow.document.open()
+    dreiDContent.contentWindow.document.write(TextContent.value)
+    dreiDContent.contentWindow.document.close()
+}
+
+function toggletext(val){
+    console.log(val.getElementsByClassName("showCodeBut")[0])
+    val.getElementsByClassName("Text-ContainerIframe")[0].classList.toggle("checked")
+    
+    if(val.getElementsByClassName("Text-ContainerIframe")[0].classList[1] == "checked"){
+        val.getElementsByClassName("showCodeBut")[0].innerHTML = "Hide Code"
+    }
+    else {
+        val.getElementsByClassName("showCodeBut")[0].innerHTML = "Show Code"
+    }
+    
+}
+
+</script>
+</body>
+</html>
