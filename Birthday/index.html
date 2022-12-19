@@ -144,12 +144,12 @@
 				
 				
 
-
+				
 				new RGBELoader()
 					.setDataType( THREE.UnsignedByteType )
 					.setPath( 'textures/' )
 					.load( 'brown_photostudio_01_1k.hdr', function ( texture ) {
-
+						//"https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_08_1k.hdr"
 						const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
 
 						//scene.background = envMap;
@@ -201,7 +201,7 @@
 					//music.play = true
 				};
 
-				const loader = new GLTFLoader(loadingStautus).setPath( 'models/' );
+				const loader = new GLTFLoader(loadingStautus).setPath( 'https://storyinabox.github.io/Birthday/models' );
 				loader.load( 'Till_pose_final.gltf', async function ( gltf ) {
                     gltf.scene.position.set( 0, 0, 0 );
                     gltf.scene.scale.set( .25, .25, .25 );
